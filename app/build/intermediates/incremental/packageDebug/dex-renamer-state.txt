@@ -1,0 +1,7 @@
+#Sat Oct 29 17:37:58 PDT 2016
+base.0=/home/qi/programs/Go2go/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_435c86b1bdbf644d72185f6c3493e2ad962d8f15
+renamed.1=classes2.dex
+renamed.0=classes.dex
+file.1=/home/qi/programs/Go2go/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_6e1639e73fb02b6f2cefda2d20739409c86f633f/classes.dex
+base.1=/home/qi/programs/Go2go/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_6e1639e73fb02b6f2cefda2d20739409c86f633f
+file.0=/home/qi/programs/Go2go/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_435c86b1bdbf644d72185f6c3493e2ad962d8f15/classes.dex

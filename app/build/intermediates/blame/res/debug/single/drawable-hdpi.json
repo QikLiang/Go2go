@@ -1,0 +1,14 @@
+[
+    {
+        "merged": "/home/qi/programs/Go2go/app/build/intermediates/res/merged/debug/drawable-hdpi/ic_launcher.png",
+        "source": "/home/qi/programs/Go2go/app/src/main/res/drawable-hdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/home/qi/programs/Go2go/app/build/intermediates/res/merged/debug/drawable-hdpi/ic_action_search.png",
+        "source": "/home/qi/programs/Go2go/app/src/main/res/drawable-hdpi/ic_action_search.png"
+    },
+    {
+        "merged": "/home/qi/programs/Go2go/app/build/intermediates/res/merged/debug/drawable-hdpi/purple_delete_button.png",
+        "source": "/home/qi/programs/Go2go/app/src/main/res/drawable-hdpi/purple_delete_button.png"
+    }
+]
