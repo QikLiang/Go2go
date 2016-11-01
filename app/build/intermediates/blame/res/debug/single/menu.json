@@ -1,10 +1,14 @@
 [
     {
-        "merged": "D:\\workspace\\Go2go\\app\\build\\intermediates\\res\\merged\\debug\\menu\\game_main.xml",
-        "source": "D:\\workspace\\Go2go\\app\\src\\main\\res\\menu\\game_main.xml"
+        "merged": "/home/qi/programs/Go2go/app/build/intermediates/res/merged/debug/menu/game_main.xml",
+        "source": "/home/qi/programs/Go2go/app/src/main/res/menu/game_main.xml"
     },
     {
-        "merged": "D:\\home\\qi\\programs\\Go2go\\app\\build\\intermediates\\res\\merged\\debug\\menu\\game_main.xml",
-        "source": "D:\\home\\qi\\programs\\Go2go\\app\\src\\main\\res\\menu\\game_main.xml"
+        "merged": "/home/qi/programs/Go2go/D:\\workspace\\Go2go\\app\\build\\intermediates\\res\\merged\\debug\\menu\\game_main.xml",
+        "source": "/home/qi/programs/Go2go/D:\\workspace\\Go2go\\app\\src\\main\\res\\menu\\game_main.xml"
+    },
+    {
+        "merged": "/home/qi/programs/Go2go/D:\\home\\qi\\programs\\Go2go\\app\\build\\intermediates\\res\\merged\\debug\\menu\\game_main.xml",
+        "source": "/home/qi/programs/Go2go/D:\\home\\qi\\programs\\Go2go\\app\\src\\main\\res\\menu\\game_main.xml"
     }
 ]

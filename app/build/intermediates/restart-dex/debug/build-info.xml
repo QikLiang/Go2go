@@ -5,37 +5,49 @@
     density="xhdpi"
     format="8"
     plugin-version="2.2.2"
-    timestamp="6033189086120"
+    timestamp="84604465155345"
     token="6494878393931459387"
     verifier="COLD_SWAP_REQUESTED" >
 
     <task
         name="javac"
-        duration="288" />
+        duration="444" />
     <task
         name="instant-run-dex"
         duration="0" />
     <task
         name="instant-run-transform"
-        duration="11" />
+        duration="20" />
     <task
         name="verifier"
-        duration="0" />
+        duration="1" />
 
+    <artifact
+        location="/home/qi/programs/Go2go/app/build/intermediates/instant-run-resources/resources-debug.ir.ap_"
+        type="RESOURCES" />
+    <artifact
+        location="/home/qi/programs/Go2go/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_7/classes.dex"
+        type="DEX" />
     <artifact
         location="/home/qi/programs/Go2go/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_9/classes.dex"
         type="DEX" />
 
     <build
-        timestamp="4987930868473"
+        timestamp="83734867683634"
         verifier="FULL_BUILD_REQUESTED" >
         <artifact
             location="/home/qi/programs/Go2go/app/build/outputs/apk/app-debug.apk"
             type="MAIN" />
     </build>
     <build
-        timestamp="6033189086120"
+        timestamp="84604465155345"
         verifier="COLD_SWAP_REQUESTED" >
+        <artifact
+            location="/home/qi/programs/Go2go/app/build/intermediates/instant-run-resources/resources-debug.ir.ap_"
+            type="RESOURCES" />
+        <artifact
+            location="/home/qi/programs/Go2go/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_7/classes.dex"
+            type="DEX" />
         <artifact
             location="/home/qi/programs/Go2go/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_9/classes.dex"
             type="DEX" />

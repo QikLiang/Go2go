@@ -1,4 +1,4 @@
-#Sat Oct 29 17:37:58 PDT 2016
+#Tue Nov 01 00:23:12 PDT 2016
 base.0=/home/qi/programs/Go2go/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_435c86b1bdbf644d72185f6c3493e2ad962d8f15
 renamed.1=classes2.dex
 renamed.0=classes.dex
