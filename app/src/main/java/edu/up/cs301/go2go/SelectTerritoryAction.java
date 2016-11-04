@@ -16,14 +16,7 @@ public class SelectTerritoryAction extends GameAction {
      */
     public SelectTerritoryAction(GamePlayer player, int initProposal[][]) {
         super(player);
-        proposal = new int[initProposal.length][];
-        for(int i=0; i<initProposal.length; i++){
-            proposal[i] = new int[initProposal[i].length];
-            for(int j=0; j<initProposal[i].length; j++){
-                //deep copy
-                proposal[i][j] = initProposal[i][j];
-            }
-        }
+        proposal = GoGameState.boardDeepCopy(initProposal);
     }
 
     /**
@@ -31,14 +24,6 @@ public class SelectTerritoryAction extends GameAction {
      * @return
      */
     public int[][] getProposal(){
-        int temp[][] = new int[proposal.length][];
-        for(int i=0; i<proposal.length; i++){
-            temp[i] = new int[proposal[i].length];
-            for(int j=0; j<proposal[i].length; j++){
-                //deep copy
-                temp[i][j] = proposal[i][j];
-            }
-        }
-        return temp;
+        return GoGameState.boardDeepCopy(proposal);
     }
 }
