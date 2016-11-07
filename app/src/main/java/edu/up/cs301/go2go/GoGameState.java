@@ -129,6 +129,16 @@ public class GoGameState extends GameState {
         return boardDeepCopy(territoryProposal);
     }
 
+    /* SETTERS */
+
+    public void setTerritoryProposal(int proposal[][]){
+        this.territoryProposal = boardDeepCopy(proposal);
+    }
+
+    public void setStage(int stage){
+        this.stage = stage;
+    }
+
     /* helper methods */
 
     /**
@@ -150,5 +160,9 @@ public class GoGameState extends GameState {
             }
         }
         return temp;
+    }
+
+    public void incrementPasses(){
+        turnsPassed++;
     }
 }

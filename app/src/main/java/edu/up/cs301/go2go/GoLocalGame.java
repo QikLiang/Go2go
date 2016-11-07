@@ -59,6 +59,47 @@ public class GoLocalGame extends LocalGame {
             }
         }
 
+        if(action instanceof PassAction){
+            //reject if not in right state of game
+            if(officialState.getStage() != GoGameState.MAKE_MOVE_STAGE){
+                return false;
+            }
+            officialState.changeTurn();
+            officialState.incrementPasses();
+            return true;
+        }
+
+        if(action instanceof SelectTerritoryAction){
+            //both players must first pass before a proposal can be made
+            if(officialState.getTurnsPassed() < 2){
+                return false;
+            }
+
+            SelectTerritoryAction proposal = (SelectTerritoryAction) action;
+            //reject if proposal is empty
+            if(proposal.getProposal() == null){
+                return false;
+            }
+
+            officialState.changeTurn();
+            officialState.setTerritoryProposal(proposal.getProposal());
+            return true;
+        }
+
+        if(action instanceof AgreeTerritoryAction){
+            //reject if not in right state of game
+            if(officialState.getStage() != GoGameState.SELECT_TERRITORY_STAGE){
+                return false;
+            }
+
+            boolean agreement = ((AgreeTerritoryAction) action).getAgreement();
+            gameEnded = agreement;
+            if(!agreement){
+                officialState.setStage(GoGameState.MAKE_MOVE_STAGE);
+            }
+            return true;
+        }
+
         //if it gets to the end without matching any actions, something is wrong
         return false;
     }
