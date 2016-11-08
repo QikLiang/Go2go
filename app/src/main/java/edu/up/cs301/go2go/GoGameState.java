@@ -32,6 +32,7 @@ public class GoGameState extends GameState {
     private int turn;//which player's turn it is
     private int board [][];//representation of the board
     private int territoryProposal[][];//representation of the most recent proposal
+    
 
     /* METHODS FOR INTERACTING WITH GAME STATE */
 
@@ -46,7 +47,7 @@ public class GoGameState extends GameState {
     //None of this method is tested yet
     public boolean isLeagalMove(int player, int moveX, int moveY){
         //add check for Kos
-        
+        //The idea is to create a hashtable with numbers for the move number, and a boolean area to save each board state history
         
         //check if a piece is there
         if(board[moveX][moveY]!=0){return false;}
@@ -100,6 +101,7 @@ public class GoGameState extends GameState {
         if(newboard[moveX][moveY]==player){
          return false;   
         }
+        
         return true;
     }
 
@@ -107,7 +109,7 @@ public class GoGameState extends GameState {
      * alternate whose turn it is to move.
      */
     public void changeTurn(){
-
+        turn=1-turn;
     }
 
     /**
