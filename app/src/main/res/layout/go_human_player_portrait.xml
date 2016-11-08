@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:weightSum="1">
 
-    <SurfaceView
+    <AnimationSurface
         android:layout_width="match_parent"
         android:layout_height="666dp"
         android:id="@+id/gameBoardView"
