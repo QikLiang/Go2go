@@ -45,17 +45,20 @@ public class GoGameState extends GameState {
      */
     //None of this method is tested yet
     public boolean isLeagalMove(int player, int moveX, int moveY){
+        //add check for Kos
+        
+        
         //check if a piece is there
         if(board[moveX][moveY]!=0){return false;}
-        
+        //if the move was not on the board, return false
+        if(moveX<0 || moveX>=board.length || moveY<0 || moveY>=board[0].length){return false;}
         //check if you're committing suicide
-        //The way this is set up, it must be the last check in this method
         try{if(board[moveX+1][moveY]==0){return true;}}catch(Exception e){}
         try{if(board[moveX][moveY+1]==0){return true;}}catch(Exception e){}
         try{if(board[moveX-1][moveY]==0){return true;}}catch(Exception e){}
         try{if(board[moveX][moveY-1]==0){return true;}}catch(Exception e){}
         //checking more complicated suicide
-        //basically does updateboard on a sample board and checks is the piece gets killed
+        //basically does updateboard on a sample board and checks if the piece gets killed
         int[][] newboard = new int[board.length][board[0].length];
         for(int i=0;i<board.length;i++){
          for(int j=0;j<board[0].length;j++){
@@ -65,35 +68,36 @@ public class GoGameState extends GameState {
         newboard[moveX][moveY]=player;
         boolean changing = true;
         
+        //decides if tiles are safe
         for(int i=0;i<board.length;i++){
-         outterloop:
-         for(int j=0;j<board[0].length;j++){
-          try{if(newboard[i+1][j]==0){changing=false; break outterloop;}}catch(Exception e){}
-          try{if(newboard[i][j+1]==0){changing=false; break outterloop;}}catch(Exception e){}
-          try{if(newboard[i-1][j]==0){changing=false; break outterloop;}}catch(Exception e){}
-          try{if(newboard[i][j-1]==0){changing=false; break outterloop;}}catch(Exception e){}
-             if(changing)
-             {newboard[i][j]=4;}
-         }
-         changing=true;
+           outterloop:
+           for(int j=0;j<board[0].length;j++){
+               changing=true;
+               try{if(newboard[i+1][j]==0){changing=false; break outterloop;}}catch(Exception e){}
+               try{if(newboard[i][j+1]==0){changing=false; break outterloop;}}catch(Exception e){}
+               try{if(newboard[i-1][j]==0){changing=false; break outterloop;}}catch(Exception e){}
+               try{if(newboard[i][j-1]==0){changing=false; break outterloop;}}catch(Exception e){}
+               if(!changing){newboard[i][j]=4;}
+           }
         }
         changing=true;
         
+        //checks if an entire group is in danger, or if they touch a safe tile
         while(changing){
             for(int i=0;i<board.length;i++){
                 for(int j=0;j<board[0].length;j++){
                     changing=false;
-                     if(newboard[i][j]==4){
-                           try{if(newboard[i+1][j]==player){changing=true; newboard[i][j]=player;}}catch(Exception e){}
-                           try{if(newboard[i][j+1]==player){changing=true; newboard[i][j]=player;}}catch(Exception e){}
-                           try{if(newboard[i-1][j]==player){changing=true; newboard[i][j]=player;}}catch(Exception e){}
-                           try{if(newboard[i][j-1]==player){changing=true; newboard[i][j]=player;}}catch(Exception e){} 
+                     if(newboard[i][j]==player){
+                           try{if(newboard[i+1][j]==4){changing=true; newboard[i][j]=4;}}catch(Exception e){}
+                           try{if(newboard[i][j+1]==4){changing=true; newboard[i][j]=4;}}catch(Exception e){}
+                           try{if(newboard[i-1][j]==4){changing=true; newboard[i][j]=4;}}catch(Exception e){}
+                           try{if(newboard[i][j-1]==4){changing=true; newboard[i][j]=4;}}catch(Exception e){} 
                      }
                 }
             }
         }
-        
-        if(newboard[moveX][moveY]!=player){
+        //if the newboard spot didn't get changed to a 4, it's gonna get killed, thus, they were committing suicide
+        if(newboard[moveX][moveY]==player){
          return false;   
         }
         return true;
