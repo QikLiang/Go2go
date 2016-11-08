@@ -1,7 +1,7 @@
-#Tue Nov 01 00:23:12 PDT 2016
-base.0=/home/qi/programs/Go2go/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_435c86b1bdbf644d72185f6c3493e2ad962d8f15
-renamed.1=classes2.dex
-renamed.0=classes.dex
-file.1=/home/qi/programs/Go2go/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_6e1639e73fb02b6f2cefda2d20739409c86f633f/classes.dex
-base.1=/home/qi/programs/Go2go/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_6e1639e73fb02b6f2cefda2d20739409c86f633f
-file.0=/home/qi/programs/Go2go/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_435c86b1bdbf644d72185f6c3493e2ad962d8f15/classes.dex
+#Mon Nov 07 21:05:23 PST 2016
+base.0=D\:\\workspace\\Go2go\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\instant-run-bootstrap_e780a640065cb38f3ce7193b6a8910c13666bfb2
+renamed.1=classes.dex
+renamed.0=classes2.dex
+file.1=D\:\\workspace\\Go2go\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\instant-run_6f0a1e6f923fd1046cfaefd88e1a93c68e8960fe\\classes.dex
+base.1=D\:\\workspace\\Go2go\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\instant-run_6f0a1e6f923fd1046cfaefd88e1a93c68e8960fe
+file.0=D\:\\workspace\\Go2go\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\instant-run-bootstrap_e780a640065cb38f3ce7193b6a8910c13666bfb2\\classes.dex

@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/top_gui_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="1">
+
+    <SurfaceView
+        android:layout_width="match_parent"
+        android:layout_height="666dp"
+        android:id="@+id/gameBoardView"
+        android:background="@android:color/holo_orange_dark"
+        android:clickable="true" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="235dp"
+            android:layout_height="match_parent"
+            android:background="@color/green"
+            android:weightSum="1">
+
+            <TextView
+                android:text="PlayerScore"
+                android:layout_width="match_parent"
+                android:layout_height="67dp"
+                android:id="@+id/playerScore"
+                android:textAllCaps="false"
+                android:textSize="30sp"
+                android:layout_weight="0.13" />
+
+            <TextView
+                android:text="stones placed"
+                android:layout_width="match_parent"
+                android:layout_height="51dp"
+                android:id="@+id/stonesPlacedText"
+                android:textSize="30sp"
+                android:layout_weight="0.35" />
+
+            <TextView
+                android:text="stones captured"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/stonesCapturedText"
+                android:textSize="25sp"
+                android:layout_weight="0.46" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="285dp"
+            android:layout_height="match_parent"
+            android:background="@color/blue">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="147dp"
+                android:layout_height="match_parent">
+
+                <Button
+                    android:text="Pass"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/passButton"
+                    android:layout_weight="1" />
+
+                <Button
+                    android:text="Resign"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:id="@+id/resignButton" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <Button
+                    android:text="offer draw"
+                    android:layout_width="match_parent"
+                    android:layout_height="95dp"
+                    android:id="@+id/drawButton"
+                    android:layout_weight="0.03" />
+
+                <Button
+                    android:text="select territory"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/territorySelectButton"
+                    android:layout_weight="0.10" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/red">
+
+            <TextView
+                android:text="enemy score"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/enemyScoreText"
+                android:layout_weight="0.42"
+                android:textSize="25sp" />
+
+            <TextView
+                android:text="stones placed"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/enemyStonesPlacedText"
+                android:layout_weight="0.57"
+                android:textSize="25sp" />
+
+            <TextView
+                android:text="stones captured"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/enemyStonesCaptured"
+                android:layout_weight="0.70"
+                android:textSize="25sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

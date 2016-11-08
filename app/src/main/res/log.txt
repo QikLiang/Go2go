@@ -1,0 +1,3 @@
+11/7/2016
+http://stackoverflow.com/questions/3674933/find-out-if-android-device-is-portrait-or-landscape-for-normal-usage
+assisted with finding orientation of device and applying appropriate layout

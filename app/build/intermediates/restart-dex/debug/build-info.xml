@@ -1,55 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <instant-run
-    abi="arm64-v8a,armeabi-v7a,armeabi"
-    api-level="24"
+    abi="x86"
+    api-level="23"
     density="xhdpi"
     format="8"
     plugin-version="2.2.2"
-    timestamp="84604465155345"
-    token="6494878393931459387"
+    timestamp="20070667823433"
+    token="4049269817524850178"
     verifier="COLD_SWAP_REQUESTED" >
 
     <task
         name="javac"
-        duration="444" />
+        duration="786" />
     <task
         name="instant-run-dex"
         duration="0" />
     <task
         name="instant-run-transform"
-        duration="20" />
+        duration="32" />
     <task
         name="verifier"
-        duration="1" />
+        duration="2" />
 
     <artifact
-        location="/home/qi/programs/Go2go/app/build/intermediates/instant-run-resources/resources-debug.ir.ap_"
+        location="D:\workspace\Go2go\app\build\intermediates\instant-run-resources\resources-debug.ir.ap_"
         type="RESOURCES" />
     <artifact
-        location="/home/qi/programs/Go2go/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_7/classes.dex"
-        type="DEX" />
-    <artifact
-        location="/home/qi/programs/Go2go/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_9/classes.dex"
+        location="D:\workspace\Go2go\app\build\intermediates\transforms\dex\debug\folders\1000\5\slice_1\classes.dex"
         type="DEX" />
 
     <build
-        timestamp="83734867683634"
+        timestamp="16220387041737"
         verifier="FULL_BUILD_REQUESTED" >
         <artifact
-            location="/home/qi/programs/Go2go/app/build/outputs/apk/app-debug.apk"
+            location="D:\workspace\Go2go\app\build\outputs\apk\app-debug.apk"
             type="MAIN" />
     </build>
     <build
-        timestamp="84604465155345"
+        timestamp="19341986093533"
         verifier="COLD_SWAP_REQUESTED" >
         <artifact
-            location="/home/qi/programs/Go2go/app/build/intermediates/instant-run-resources/resources-debug.ir.ap_"
+            location="D:\workspace\Go2go\app\build\intermediates\transforms\dex\debug\folders\1000\5\slice_3\classes.dex"
+            type="DEX" />
+    </build>
+    <build
+        timestamp="20070667823433"
+        verifier="COLD_SWAP_REQUESTED" >
+        <artifact
+            location="D:\workspace\Go2go\app\build\intermediates\instant-run-resources\resources-debug.ir.ap_"
             type="RESOURCES" />
         <artifact
-            location="/home/qi/programs/Go2go/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_7/classes.dex"
-            type="DEX" />
-        <artifact
-            location="/home/qi/programs/Go2go/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_9/classes.dex"
+            location="D:\workspace\Go2go\app\build\intermediates\transforms\dex\debug\folders\1000\5\slice_1\classes.dex"
             type="DEX" />
     </build>
 

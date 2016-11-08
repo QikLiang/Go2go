@@ -56,9 +56,9 @@ public class GoGameState extends GameState {
         try{if(board[moveX][moveY-1]==0){return true;}}catch(Exception e){}
         //checking more complicated suicide
         //basically does updateboard on a sample board and checks is the piece gets killed
-        int newboard[][] = int[board.length][board[].length];
+        int[][] newboard = new int[board.length][board[0].length];
         for(int i=0;i<board.length;i++){
-         for(int j=0;j<board[].length;j++){
+         for(int j=0;j<board[0].length;j++){
           newboard[i][j] = board[i][j];   
          }
         }
@@ -67,20 +67,21 @@ public class GoGameState extends GameState {
         
         for(int i=0;i<board.length;i++){
          outterloop:
-         for(int j=0;j<board[].length;j++){
+         for(int j=0;j<board[0].length;j++){
           try{if(newboard[i+1][j]==0){changing=false; break outterloop;}}catch(Exception e){}
           try{if(newboard[i][j+1]==0){changing=false; break outterloop;}}catch(Exception e){}
           try{if(newboard[i-1][j]==0){changing=false; break outterloop;}}catch(Exception e){}
-          try{if(newboard[i][j-1]==0){changing=false; break outterloop;}}catch(Exception e){} 
+          try{if(newboard[i][j-1]==0){changing=false; break outterloop;}}catch(Exception e){}
+             if(changing)
+             {newboard[i][j]=4;}
          }
-         if(changing){newboard[i][j]=4;}
          changing=true;
         }
         changing=true;
         
         while(changing){
             for(int i=0;i<board.length;i++){
-                for(int j=0;j<board[].length;j++){
+                for(int j=0;j<board[0].length;j++){
                     changing=false;
                      if(newboard[i][j]==4){
                            try{if(newboard[i+1][j]==player){changing=true; newboard[i][j]=player;}}catch(Exception e){}

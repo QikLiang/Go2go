@@ -99,6 +99,8 @@ View.OnClickListener {
 	 */
 	public abstract GameConfig createDefaultConfig();
 
+	public abstract void onCreate();
+
 	/**
 	 * createLocalGame
 	 * 

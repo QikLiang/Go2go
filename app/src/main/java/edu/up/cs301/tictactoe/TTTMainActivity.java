@@ -78,6 +78,11 @@ public class TTTMainActivity extends GameMainActivity {
 		
 	}//createDefaultConfig
 
+	public void onCreate()
+	{
+
+	}
+
 
 	/**
 	 * createLocalGame

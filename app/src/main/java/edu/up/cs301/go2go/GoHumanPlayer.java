@@ -22,7 +22,7 @@ public class GoHumanPlayer extends GameHumanPlayer {
     }
 
     public void setAsGui(GameMainActivity activity) {
-        activity.setContentView(R.layout.go_human_player);
+        activity.setContentView(R.layout.go_human_player_portrait);
     }
 
     @Override
