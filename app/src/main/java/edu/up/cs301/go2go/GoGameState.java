@@ -43,8 +43,59 @@ public class GoGameState extends GameState {
      * @param moveY the move's y coordinate
      * @return true if move is legal, false otherwise
      */
+    //None of this method is tested yet
     public boolean isLeagalMove(int player, int moveX, int moveY){
-        return false;
+        //check if a piece is there
+        if(board[moveX][moveY]!=0){return false;}
+        
+        //check if you're committing suicide
+        //The way this is set up, it must be the last check in this method
+        try{if(board[moveX+1][moveY]==0){return true;}}catch(Exception e){}
+        try{if(board[moveX][moveY+1]==0){return true;}}catch(Exception e){}
+        try{if(board[moveX-1][moveY]==0){return true;}}catch(Exception e){}
+        try{if(board[moveX][moveY-1]==0){return true;}}catch(Exception e){}
+        //checking more complicated suicide
+        //basically does updateboard on a sample board and checks is the piece gets killed
+        int newboard[][] = int[board.length][board[].length];
+        for(int i=0;i<board.length;i++){
+         for(int j=0;j<board[].length;j++){
+          newboard[i][j] = board[i][j];   
+         }
+        }
+        newboard[moveX][moveY]=player;
+        boolean changing = true;
+        
+        for(int i=0;i<board.length;i++){
+         outterloop:
+         for(int j=0;j<board[].length;j++){
+          try{if(newboard[i+1][j]==0){changing=false; break outterloop;}}catch(Exception e){}
+          try{if(newboard[i][j+1]==0){changing=false; break outterloop;}}catch(Exception e){}
+          try{if(newboard[i-1][j]==0){changing=false; break outterloop;}}catch(Exception e){}
+          try{if(newboard[i][j-1]==0){changing=false; break outterloop;}}catch(Exception e){} 
+         }
+         if(changing){newboard[i][j]=4;}
+         changing=true;
+        }
+        changing=true;
+        
+        while(changing){
+            for(int i=0;i<board.length;i++){
+                for(int j=0;j<board[].length;j++){
+                    changing=false;
+                     if(newboard[i][j]==4){
+                           try{if(newboard[i+1][j]==player){changing=true; newboard[i][j]=player;}}catch(Exception e){}
+                           try{if(newboard[i][j+1]==player){changing=true; newboard[i][j]=player;}}catch(Exception e){}
+                           try{if(newboard[i-1][j]==player){changing=true; newboard[i][j]=player;}}catch(Exception e){}
+                           try{if(newboard[i][j-1]==player){changing=true; newboard[i][j]=player;}}catch(Exception e){} 
+                     }
+                }
+            }
+        }
+        
+        if(newboard[moveX][moveY]!=player){
+         return false;   
+        }
+        return true;
     }
 
     /**
