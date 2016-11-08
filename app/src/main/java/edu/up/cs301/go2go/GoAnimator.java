@@ -8,12 +8,12 @@ import android.view.MotionEvent;
 import edu.up.cs301.animation.Animator;
 
 /**
- * Created by dukeo_000 on 11/7/2016.
+ * Created by Jenkin Schibel on 11/7/2016.
  */
 
 public class GoAnimator implements Animator {
     public int interval() {
-        return 0;
+        return 30;
     }
 
     public void tick(Canvas c)
@@ -35,5 +35,14 @@ public class GoAnimator implements Animator {
 
     public boolean doQuit() {return false;}
 
-    public void onTouch(MotionEvent event) {}
+    public void onTouch(MotionEvent event)
+    {
+        if(event.getAction == MotionEvent.ACTION_DOWN)
+        {
+            int x = event.getX();
+            int y = event.getY();
+            
+            //TODO: possibly implementing make move stuff here
+        }
+    }
 }
