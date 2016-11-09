@@ -6,9 +6,12 @@ import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.view.SurfaceView;
 import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import edu.up.cs301.animation.AnimationSurface;
 import edu.up.cs301.game.GameMainActivity;
 import edu.up.cs301.game.GamePlayer;
 import edu.up.cs301.game.LocalGame;
@@ -19,9 +22,8 @@ import edu.up.cs301.game.config.GamePlayerType;
 public class GoMainActivity extends GameMainActivity implements View.OnClickListener {
 
 
-	private static int[] buttonID = {R.id.passButton,R.id.drawButton,R.id.territorySelectButton,R.id.resignButton};
-	private static int[] textViewID = {R.id.playerScoreText,R.id.stonesCapturedText,R.id.stonesPlacedText,R.id.enemyScoreText
-	,R.id.enemyStonesCaptured,R.id.enemyStonesPlacedText};
+	Button pass,draw,resign,territory;
+	TextView playerScore,playerStonesPlaced,playerStonesCaptured,enemyScore,enemyStonesPlaced,nemyStonesCaptured;
 	private SurfaceView GoSurfaceView;
 
 	public static final int PORT_NUMBER = 5213;
@@ -63,10 +65,56 @@ public class GoMainActivity extends GameMainActivity implements View.OnClickList
 		return defaultConfig;
     }
 
+	/**
+	 * games onCreate Method
+	 */
 	public void onCreate() {
-			setContentView(R.layout.go_human_player_portrait);
-		GoSurfaceView = (SurfaceView) findViewById(R.id.gameBoardView);
+		setContentView(R.layout.go_human_player_portrait);
 
+		GoSurfaceView = (SurfaceView) findViewById(R.id.gameBoardView);
+		GoSurfaceView.setOnClickListener(this);
+
+		pass = (Button) findViewById(R.id.passButton);
+		pass.setOnClickListener(this);
+		draw = (Button) findViewById(R.id.drawButton);
+		draw.setOnClickListener(this);
+		territory = (Button) findViewById(R.id.territorySelectButton);
+		territory.setOnClickListener(this);
+		resign = (Button) findViewById(R.id.resignButton);
+		resign.setOnClickListener(this);
+
+		TextView playerScore = (TextView) findViewById(R.id.playerScoreText);
+		TextView playerStonesPlaced = (TextView) findViewById(R.id.stonesPlacedText);
+		TextView playerStonesCaptured = (TextView) findViewById(R.id.stonesCapturedText);
+		TextView enemyScore = (TextView) findViewById(R.id.enemyScoreText);
+		TextView enemyStonesPlaced = (TextView) findViewById(R.id.enemyStonesPlacedText);
+		TextView enemyStonesCaptured = (TextView) findViewById(R.id.enemyStonesCaptured);
+
+	}
+
+
+	public void onClick(View v)
+	{
+		if(v == pass)
+		{
+
+		}
+		if(v == draw)
+		{
+
+		}
+		if(v == resign)
+		{
+
+		}
+		if(v == territory)
+		{
+
+		}
+		if(v == GoSurfaceView)
+		{
+
+		}
 	}
 
 	@Override
