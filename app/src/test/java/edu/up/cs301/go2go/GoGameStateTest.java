@@ -31,18 +31,17 @@ public class GoGameStateTest {
     }
 
     @Test
-    public void testSetGame() throws Exception {
-
-    }
-
-    @Test
-    public void testGetStage() throws Exception {
-
+    public void testSetGetStage() throws Exception {
+        GoGameState state = new GoGameState();
+        state.setStage(GoGameState.MAKE_MOVE_STAGE);
+        assertTrue("get stage", state.getStage() == GoGameState.MAKE_MOVE_STAGE);
     }
 
     @Test
     public void testGetTurnsPassed() throws Exception {
-
+        GoGameState state = new GoGameState();
+        state.incrementPasses();
+        assertTrue("get turns passed", state.getTurnsPassed() == 1);
     }
 
     @Test
@@ -57,27 +56,38 @@ public class GoGameStateTest {
 
     @Test
     public void testGetTurn() throws Exception {
-
+        GoGameState state = new GoGameState();
+        assertTrue("get turn", state.getTurn()==0);
+        state.changeTurn();
+        assertTrue("get turn", state.getTurn()==1);
     }
 
     @Test
     public void testGetBoard() throws Exception {
-
+        GoGameState state = new GoGameState();
+        int board[][] = state.getBoard();
+        for(int i=0; i<board.length; i++){
+            for(int j=0; j<board[i].length; j++){
+                assertTrue("empty board", board[i][j]==0);
+            }
+        }
     }
 
     @Test
-    public void testGetTerritoryProposal() throws Exception {
-
-    }
-
-    @Test
-    public void testSetTerritoryProposal() throws Exception {
-
-    }
-
-    @Test
-    public void testSetStage() throws Exception {
-
+    public void testSetGetTerritoryProposal() throws Exception {
+        GoGameState state = new GoGameState();
+        int board[][] = state.getTerritoryProposal();
+        assertTrue("initial proposal", state.getTerritoryProposal()==null);
+        int array[][] ={{1,0,1,1,0,1,1,1,0},{-1,0,-1,-1,0,-1,-1,0,-1},
+        {-1,0,-1,-1,0,-1,-1,0,0},{0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0},
+        {1,0,1,0,1,0,1,0,1},{1,0,1,0,0,1,0,1,1},{0,1,0,1,1,0,1,1,1},{0,1,1,1,0,0,0,0,0}};
+        state.setTerritoryProposal(array);
+        board = state.getTerritoryProposal();
+        for(int i=0; i<board.length; i++){
+            for(int j=0; j<board[i].length; j++){
+                assertTrue("empty board", board[i][j]==array[i][j]);
+            }
+        }
     }
 
     @Test

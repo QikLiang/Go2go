@@ -142,6 +142,9 @@ public class GoGameState extends GameState {
         blackCaptures = 0;
         turn = 0;
         board = new int[boardSize][boardSize];
+        for(int i=0; i<boardSize; i++){
+            board[i] = new int[boardSize];
+        }
         territoryProposal = null;
     }
 
