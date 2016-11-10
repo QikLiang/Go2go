@@ -2,5 +2,9 @@
     {
         "merged": "D:\\workspace\\Go2go\\app\\build\\intermediates\\res\\merged\\debug\\menu\\game_main.xml",
         "source": "D:\\workspace\\Go2go\\app\\src\\main\\res\\menu\\game_main.xml"
+    },
+    {
+        "merged": "C:\\Users\\symmes19\\AndroidStudioProjects\\Go2go\\app\\build\\intermediates\\res\\merged\\debug\\menu\\game_main.xml",
+        "source": "C:\\Users\\symmes19\\AndroidStudioProjects\\Go2go\\app\\src\\main\\res\\menu\\game_main.xml"
     }
 ]

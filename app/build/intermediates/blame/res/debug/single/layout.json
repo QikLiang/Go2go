@@ -4,6 +4,26 @@
         "source": "D:\\workspace\\Go2go\\app\\src\\main\\res\\layout\\game_config_main.xml"
     },
     {
+        "merged": "C:\\Users\\symmes19\\AndroidStudioProjects\\Go2go\\app\\build\\intermediates\\res\\merged\\debug\\layout\\game_player_list_row.xml",
+        "source": "C:\\Users\\symmes19\\AndroidStudioProjects\\Go2go\\app\\src\\main\\res\\layout\\game_player_list_row.xml"
+    },
+    {
+        "merged": "C:\\Users\\symmes19\\AndroidStudioProjects\\Go2go\\app\\build\\intermediates\\res\\merged\\debug\\layout\\ttt_human_player1_flipped.xml",
+        "source": "C:\\Users\\symmes19\\AndroidStudioProjects\\Go2go\\app\\src\\main\\res\\layout\\ttt_human_player1_flipped.xml"
+    },
+    {
+        "merged": "C:\\Users\\symmes19\\AndroidStudioProjects\\Go2go\\app\\build\\intermediates\\res\\merged\\debug\\layout\\game_remote_tab.xml",
+        "source": "C:\\Users\\symmes19\\AndroidStudioProjects\\Go2go\\app\\src\\main\\res\\layout\\game_remote_tab.xml"
+    },
+    {
+        "merged": "C:\\Users\\symmes19\\AndroidStudioProjects\\Go2go\\app\\build\\intermediates\\res\\merged\\debug\\layout\\go_human_player_landscape.xml",
+        "source": "C:\\Users\\symmes19\\AndroidStudioProjects\\Go2go\\app\\src\\main\\res\\layout\\go_human_player_landscape.xml"
+    },
+    {
+        "merged": "C:\\Users\\symmes19\\AndroidStudioProjects\\Go2go\\app\\build\\intermediates\\res\\merged\\debug\\layout\\go_human_player_portrait.xml",
+        "source": "C:\\Users\\symmes19\\AndroidStudioProjects\\Go2go\\app\\src\\main\\res\\layout\\go_human_player_portrait.xml"
+    },
+    {
         "merged": "D:\\workspace\\Go2go\\app\\build\\intermediates\\res\\merged\\debug\\layout\\ttt_human_player1.xml",
         "source": "D:\\workspace\\Go2go\\app\\src\\main\\res\\layout\\ttt_human_player1.xml"
     },
@@ -14,6 +34,10 @@
     {
         "merged": "D:\\workspace\\Go2go\\app\\build\\intermediates\\res\\merged\\debug\\layout\\game_config_tabhost.xml",
         "source": "D:\\workspace\\Go2go\\app\\src\\main\\res\\layout\\game_config_tabhost.xml"
+    },
+    {
+        "merged": "C:\\Users\\symmes19\\AndroidStudioProjects\\Go2go\\app\\build\\intermediates\\res\\merged\\debug\\layout\\ttt_human_player2.xml",
+        "source": "C:\\Users\\symmes19\\AndroidStudioProjects\\Go2go\\app\\src\\main\\res\\layout\\ttt_human_player2.xml"
     },
     {
         "merged": "D:\\workspace\\Go2go\\app\\build\\intermediates\\res\\merged\\debug\\layout\\game_remote_tab.xml",
@@ -36,11 +60,31 @@
         "source": "D:\\workspace\\Go2go\\app\\src\\main\\res\\layout\\ttt_human_player2.xml"
     },
     {
+        "merged": "C:\\Users\\symmes19\\AndroidStudioProjects\\Go2go\\app\\build\\intermediates\\res\\merged\\debug\\layout\\game_local_tab.xml",
+        "source": "C:\\Users\\symmes19\\AndroidStudioProjects\\Go2go\\app\\src\\main\\res\\layout\\game_local_tab.xml"
+    },
+    {
         "merged": "D:\\workspace\\Go2go\\app\\build\\intermediates\\res\\merged\\debug\\layout\\game_player_list_row.xml",
         "source": "D:\\workspace\\Go2go\\app\\src\\main\\res\\layout\\game_player_list_row.xml"
     },
     {
+        "merged": "C:\\Users\\symmes19\\AndroidStudioProjects\\Go2go\\app\\build\\intermediates\\res\\merged\\debug\\layout\\game_no_gui.xml",
+        "source": "C:\\Users\\symmes19\\AndroidStudioProjects\\Go2go\\app\\src\\main\\res\\layout\\game_no_gui.xml"
+    },
+    {
+        "merged": "C:\\Users\\symmes19\\AndroidStudioProjects\\Go2go\\app\\build\\intermediates\\res\\merged\\debug\\layout\\game_config_tabhost.xml",
+        "source": "C:\\Users\\symmes19\\AndroidStudioProjects\\Go2go\\app\\src\\main\\res\\layout\\game_config_tabhost.xml"
+    },
+    {
+        "merged": "C:\\Users\\symmes19\\AndroidStudioProjects\\Go2go\\app\\build\\intermediates\\res\\merged\\debug\\layout\\game_config_main.xml",
+        "source": "C:\\Users\\symmes19\\AndroidStudioProjects\\Go2go\\app\\src\\main\\res\\layout\\game_config_main.xml"
+    },
+    {
         "merged": "D:\\workspace\\Go2go\\app\\build\\intermediates\\res\\merged\\debug\\layout\\go_human_player_portrait.xml",
         "source": "D:\\workspace\\Go2go\\app\\src\\main\\res\\layout\\go_human_player_portrait.xml"
+    },
+    {
+        "merged": "C:\\Users\\symmes19\\AndroidStudioProjects\\Go2go\\app\\build\\intermediates\\res\\merged\\debug\\layout\\ttt_human_player1.xml",
+        "source": "C:\\Users\\symmes19\\AndroidStudioProjects\\Go2go\\app\\src\\main\\res\\layout\\ttt_human_player1.xml"
     }
 ]

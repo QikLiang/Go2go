@@ -19,20 +19,21 @@ public class GoComputerPlayer1 extends GameComputerPlayer {
     //obvious start to this method copied from Qi's simple computer player
     protected void receiveInfo(GameInfo info) {
         //returns if there's incorrect input
-        if(! (info instanceof GoGameState) ){
+        if (!(info instanceof GoGameState)) {
             return;
         }
         GoGameState state = (GoGameState) info;
         //returns if it's not the computer's turn
-        if(state.getTurn()!=playerNum){
+        if (state.getTurn() != playerNum) {
             return;
         }
         //Determines the move if it's time in the game to place a stone
-        if(state.getStage() == GoGameState.MAKE_MOVE_STAGE){
-            for(int i=0;i<GoGameState.boardSize; i++){
-                for(int j=0;j<GoGameState.boardSize; j++){
-                    
+        if (state.getStage() == GoGameState.MAKE_MOVE_STAGE) {
+            for (int i = 0; i < GoGameState.boardSize; i++) {
+                for (int j = 0; j < GoGameState.boardSize; j++) {
+
                 }
             }
         }
     }
+}
