@@ -18,11 +18,8 @@ public class GoLocalGame extends LocalGame {
     }
 
     @Override
-    protected boolean canMove(int playerIdx) {//not completely done
-        if(officialState.getTurn() == playerIdx)
-            return true;
-        else
-            return false;
+    protected boolean canMove(int playerIdx) {
+        return false;
     }
 
     @Override

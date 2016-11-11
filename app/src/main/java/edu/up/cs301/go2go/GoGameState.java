@@ -30,7 +30,7 @@ public class GoGameState extends GameState {
     private int whiteCaptures;//number of white pieces captured
     private int blackCaptures;//number of black pieces captured
     private int turn;//which player's turn it is
-    public int board [][];//representation of the board
+    private int board [][];//representation of the board
     private int territoryProposal[][];//representation of the most recent proposal
     
 
@@ -142,9 +142,6 @@ public class GoGameState extends GameState {
         blackCaptures = 0;
         turn = 0;
         board = new int[boardSize][boardSize];
-        for(int i=0; i<boardSize; i++){
-            board[i] = new int[boardSize];
-        }
         territoryProposal = null;
     }
 

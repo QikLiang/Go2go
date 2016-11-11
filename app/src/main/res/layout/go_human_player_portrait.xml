@@ -7,12 +7,11 @@
     android:orientation="vertical"
     android:weightSum="1">
 
-    <AnimationSurface
+    <SurfaceView
         android:layout_width="match_parent"
-        android:layout_height="666dp"
-        android:id="@+id/gameBoardView"
-        android:background="@android:color/holo_orange_dark"
-        android:clickable="true" />
+        android:layout_height="705dp"
+        android:id="@+id/boardView"
+        android:background="@android:color/holo_orange_dark" />
 
     <LinearLayout
         android:orientation="horizontal"

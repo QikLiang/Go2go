@@ -32,7 +32,7 @@ public final class R {
     public static final class id {
         public static final int addPlayerButton=0x7f09000d;
         public static final int backButton3=0x7f090043;
-        public static final int boardView=0x7f090024;
+        public static final int boardView=0x7f090023;
         public static final int button10=0x7f090031;
         public static final int button11=0x7f090034;
         public static final int button12=0x7f090037;
@@ -76,7 +76,7 @@ public final class R {
         public static final int playGameButton=0x7f090002;
         public static final int playerNameEditText=0x7f09000f;
         public static final int playerNameHeadingText=0x7f09000b;
-        public static final int playerScore=0x7f090023;
+        public static final int playerScore=0x7f090024;
         public static final int playerScoreText=0x7f090019;
         public static final int playerTypeHeadingText=0x7f09000c;
         public static final int playerTypeSpinner=0x7f090010;

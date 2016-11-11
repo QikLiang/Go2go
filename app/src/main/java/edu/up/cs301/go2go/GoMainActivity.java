@@ -23,7 +23,7 @@ public class GoMainActivity extends GameMainActivity implements View.OnClickList
 
 
 	Button pass,draw,resign,territory;
-	TextView playerScore,playerStonesPlaced,playerStonesCaptured,enemyScore,enemyStonesPlaced,nemyStonesCaptured;
+	Button[] buttons = {pass,draw,resign,territory};
 	private SurfaceView GoSurfaceView;
 
 	public static final int PORT_NUMBER = 5213;
@@ -75,13 +75,9 @@ public class GoMainActivity extends GameMainActivity implements View.OnClickList
 		GoSurfaceView.setOnClickListener(this);
 
 		pass = (Button) findViewById(R.id.passButton);
-		pass.setOnClickListener(this);
 		draw = (Button) findViewById(R.id.drawButton);
-		draw.setOnClickListener(this);
 		territory = (Button) findViewById(R.id.territorySelectButton);
-		territory.setOnClickListener(this);
 		resign = (Button) findViewById(R.id.resignButton);
-		resign.setOnClickListener(this);
 
 		TextView playerScore = (TextView) findViewById(R.id.playerScoreText);
 		TextView playerStonesPlaced = (TextView) findViewById(R.id.stonesPlacedText);
@@ -90,11 +86,17 @@ public class GoMainActivity extends GameMainActivity implements View.OnClickList
 		TextView enemyStonesPlaced = (TextView) findViewById(R.id.enemyStonesPlacedText);
 		TextView enemyStonesCaptured = (TextView) findViewById(R.id.enemyStonesCaptured);
 
+		for(Button b: buttons)
+		{
+			b.setOnClickListener(this);
+		}
 	}
 
 
 	public void onClick(View v)
 	{
+		super.onClick(v);
+
 		if(v == pass)
 		{
 
@@ -113,7 +115,7 @@ public class GoMainActivity extends GameMainActivity implements View.OnClickList
 		}
 		if(v == GoSurfaceView)
 		{
-
+			
 		}
 	}
 
