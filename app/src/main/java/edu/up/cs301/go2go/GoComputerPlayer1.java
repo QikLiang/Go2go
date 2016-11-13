@@ -48,6 +48,47 @@ public class GoComputerPlayer1 extends GameComputerPlayer {
                 return;
             }
 
+            //make a list of all possible board positions after current turn
+            ArrayList<GoGameState> boards = new ArrayList<GoGameState>();
+            ArrayList<PutPieceAction> moves = new ArrayList<PutPieceAction>();
+            //for each position on the board
+            for(int i=0; i<GoGameState.boardSize; i++){
+                for(int j=0; j<GoGameState.boardSize; j++){
+                    //make a copy of board
+                    GoGameState temp = new GoGameState(state);
+                    //if the move is possible
+                    if(temp.updateBoard(state.getTurn(), i, j)){
+                        boards.add(temp);
+                    }
+                }
+            }
+
+            //if no move is legal, pass
+            if(boards.size()==0){
+                game.sendAction(new PassAction(this));
+                return;
+            }
+
+            //select the best (least favorable to opponent) move and play it
+            double score = evauateScore(boards.get(0), maxDepth);
+            int index = 0;
+            int moveX = moves.get(0).getX();
+            int moveY = moves.get(0).getY();
+            for(int i=1; i<boards.size(); i++){
+                if(score>evauateScore(boards.get(i), maxDepth)){
+                    index = i;
+                    moveX = moves.get(i).getX();
+                    moveY = moves.get(i).getY();
+                }
+            }
+
+            game.sendAction(new PutPieceAction(this, moveX, moveY));
+            return;
+        }
+
+        //always agree to other player's proposal
+        if(state.getStage() == GoGameState.SELECT_TERRITORY_STAGE){
+            game.sendAction(new AgreeTerritoryAction(this, true));
         }
     }
 
