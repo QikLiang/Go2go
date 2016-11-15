@@ -1,9 +1,7 @@
 package edu.up.cs301.go2go;
 
-import android.app.Activity;
-import android.content.res.Configuration;
-import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.SurfaceView;
 import android.view.View;
 import android.widget.Button;
@@ -11,7 +9,6 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import edu.up.cs301.animation.AnimationSurface;
 import edu.up.cs301.game.GameMainActivity;
 import edu.up.cs301.game.GamePlayer;
 import edu.up.cs301.game.LocalGame;
@@ -19,12 +16,12 @@ import edu.up.cs301.game.R;
 import edu.up.cs301.game.config.GameConfig;
 import edu.up.cs301.game.config.GamePlayerType;
 
-public class GoMainActivity extends GameMainActivity implements View.OnClickListener {
+public class GoMainActivity extends GameMainActivity implements View.OnClickListener,View.OnTouchListener {
 
 
 	Button pass,draw,resign,territory;
 	Button[] buttons = {pass,draw,resign,territory};
-	private SurfaceView GoSurfaceView;
+	public GoSurfaceView goSurfaceView;
 
 	public static final int PORT_NUMBER = 5213;
 
@@ -69,10 +66,11 @@ public class GoMainActivity extends GameMainActivity implements View.OnClickList
 	 * games onCreate Method
 	 */
 	public void onCreate() {
-		setContentView(R.layout.go_human_player_portrait);
 
-		GoSurfaceView = (SurfaceView) findViewById(R.id.gameBoardView);
-		GoSurfaceView.setOnClickListener(this);
+
+		goSurfaceView = (GoSurfaceView)findViewById(R.id.boardView);
+		goSurfaceView.setOnTouchListener(this);
+		setContentView(R.layout.go_human_player);
 
 		pass = (Button) findViewById(R.id.passButton);
 		draw = (Button) findViewById(R.id.drawButton);
@@ -96,7 +94,6 @@ public class GoMainActivity extends GameMainActivity implements View.OnClickList
 	public void onClick(View v)
 	{
 		super.onClick(v);
-
 		if(v == pass)
 		{
 
@@ -113,10 +110,18 @@ public class GoMainActivity extends GameMainActivity implements View.OnClickList
 		{
 
 		}
-		if(v == GoSurfaceView)
+	}
+	public boolean onTouch(View v, MotionEvent mo)
+	{
+		int x = (int)mo.getX();
+		int y = (int)mo.getY();
+		int action = mo.getAction();
+		if (action == MotionEvent.ACTION_DOWN || action == MotionEvent.ACTION_MOVE)
 		{
-			
+
 		}
+		goSurfaceView.invalidate();
+		return true;
 	}
 
 	@Override

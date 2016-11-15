@@ -7,11 +7,12 @@
     android:orientation="vertical"
     android:weightSum="1">
 
-    <SurfaceView
+    <edu.up.cs301.go2go.GoSurfaceView
         android:layout_width="match_parent"
-        android:layout_height="705dp"
+        android:layout_height="460dp"
         android:id="@+id/boardView"
-        android:background="@android:color/holo_orange_dark" />
+        android:background="?android:attr/windowContentOverlay"
+        android:clickable="true" />
 
     <LinearLayout
         android:orientation="horizontal"
@@ -29,7 +30,7 @@
                 android:text="PlayerScore"
                 android:layout_width="match_parent"
                 android:layout_height="67dp"
-                android:id="@+id/playerScore"
+                android:id="@+id/playerScoreText"
                 android:textAllCaps="false"
                 android:textSize="30sp"
                 android:layout_weight="0.13" />
@@ -54,13 +55,13 @@
 
         <LinearLayout
             android:orientation="horizontal"
-            android:layout_width="285dp"
+            android:layout_width="445dp"
             android:layout_height="match_parent"
             android:background="@color/blue">
 
             <LinearLayout
                 android:orientation="vertical"
-                android:layout_width="147dp"
+                android:layout_width="220dp"
                 android:layout_height="match_parent">
 
                 <Button
@@ -68,13 +69,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/passButton"
-                    android:layout_weight="1" />
+                    android:layout_weight="0.90" />
 
                 <Button
                     android:text="Resign"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_weight="0.45"
                     android:id="@+id/resignButton" />
             </LinearLayout>
 
