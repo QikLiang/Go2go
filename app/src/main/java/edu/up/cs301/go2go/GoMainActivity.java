@@ -16,12 +16,13 @@ import edu.up.cs301.game.R;
 import edu.up.cs301.game.config.GameConfig;
 import edu.up.cs301.game.config.GamePlayerType;
 
-public class GoMainActivity extends GameMainActivity implements View.OnClickListener,View.OnTouchListener {
+public class GoMainActivity extends GameMainActivity{
 
 
-	Button pass,draw,resign,territory;
-	Button[] buttons = {pass,draw,resign,territory};
-	public GoSurfaceView goSurfaceView;
+//	public Button pass,draw,resign,territory;
+//	public Button[] buttons = {pass,draw,resign,territory};
+//	public TextView playerScore,playerStonesPlaced,playerStonesCaptured,enemyScore,enemyStonesPlaced,enemyStonesCaptured;
+//	public GoSurfaceView goSurfaceView;
 
 	public static final int PORT_NUMBER = 5213;
 
@@ -60,72 +61,72 @@ public class GoMainActivity extends GameMainActivity implements View.OnClickList
 
 		//done!
 		return defaultConfig;
-    }
+	}
 
 	/**
 	 * games onCreate Method
 	 */
 	public void onCreate() {
-
-
-		goSurfaceView = (GoSurfaceView)findViewById(R.id.boardView);
-		goSurfaceView.setOnTouchListener(this);
-		setContentView(R.layout.go_human_player);
-
-		pass = (Button) findViewById(R.id.passButton);
-		draw = (Button) findViewById(R.id.drawButton);
-		territory = (Button) findViewById(R.id.territorySelectButton);
-		resign = (Button) findViewById(R.id.resignButton);
-
-		TextView playerScore = (TextView) findViewById(R.id.playerScoreText);
-		TextView playerStonesPlaced = (TextView) findViewById(R.id.stonesPlacedText);
-		TextView playerStonesCaptured = (TextView) findViewById(R.id.stonesCapturedText);
-		TextView enemyScore = (TextView) findViewById(R.id.enemyScoreText);
-		TextView enemyStonesPlaced = (TextView) findViewById(R.id.enemyStonesPlacedText);
-		TextView enemyStonesCaptured = (TextView) findViewById(R.id.enemyStonesCaptured);
-
-		for(Button b: buttons)
-		{
-			b.setOnClickListener(this);
-		}
-	}
-
-
-	public void onClick(View v)
-	{
-		super.onClick(v);
-		if(v == pass)
-		{
-
-		}
-		if(v == draw)
-		{
-
-		}
-		if(v == resign)
-		{
-
-		}
-		if(v == territory)
-		{
-
-		}
-	}
-	public boolean onTouch(View v, MotionEvent mo)
-	{
-		int x = (int)mo.getX();
-		int y = (int)mo.getY();
-		int action = mo.getAction();
-		if (action == MotionEvent.ACTION_DOWN || action == MotionEvent.ACTION_MOVE)
-		{
-
-		}
-		goSurfaceView.invalidate();
-		return true;
+//
+//
+//		goSurfaceView = (GoSurfaceView)findViewById(R.id.boardView);
+//
+//		pass = (Button) findViewById(R.id.passButton);
+//		draw = (Button) findViewById(R.id.drawButton);
+//		territory = (Button) findViewById(R.id.territorySelectButton);
+//		resign = (Button) findViewById(R.id.resignButton);
+//
+//		playerScore = (TextView) findViewById(R.id.playerScoreText);
+//		playerStonesPlaced = (TextView) findViewById(R.id.stonesPlacedText);
+//		playerStonesCaptured = (TextView) findViewById(R.id.stonesCapturedText);
+//		enemyScore = (TextView) findViewById(R.id.enemyScoreText);
+//		enemyStonesPlaced = (TextView) findViewById(R.id.enemyStonesPlacedText);
+//		enemyStonesCaptured = (TextView) findViewById(R.id.enemyStonesCaptured);
+//
+//		for(Button b: buttons)
+//		{
+//			b.setOnClickListener(this);
+//		}
+//	}
+//
+//
+//	public void onClick(View v)
+//	{
+//		super.onClick(v);
+//		if(v == pass)
+//		{
+//
+//		}
+//		if(v == draw)
+//		{
+//
+//		}
+//		if(v == resign)
+//		{
+//
+//		}
+//		if(v == territory)
+//		{
+//
+//		}
+//	}
+//	public boolean onTouch(View v, MotionEvent mo)
+//	{
+//		int x = (int)mo.getX();
+//		int y = (int)mo.getY();
+//		int action = mo.getAction();
+//		if (action == MotionEvent.ACTION_DOWN || action == MotionEvent.ACTION_MOVE)
+//		{
+//
+//		}
+//		goSurfaceView.invalidate();
+//		return true;
+//	}
 	}
 
 	@Override
-    public LocalGame createLocalGame() {
-        return new GoLocalGame();
-    }
+	public LocalGame createLocalGame()
+	{
+		return new GoLocalGame();
+	}
 }

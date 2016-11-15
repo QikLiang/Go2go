@@ -18,6 +18,11 @@ public class GoSurfaceView extends SurfaceView
         super(context);
         init(context);
     }
+    public GoSurfaceView(Context context, AttributeSet attrs)
+    {
+        super(context,attrs);
+        init(context);
+    }
     public GoSurfaceView(Context context, AttributeSet attrs,int defStyleAttr)
     {
         super(context,attrs,defStyleAttr);
