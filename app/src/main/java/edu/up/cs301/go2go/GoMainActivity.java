@@ -18,12 +18,6 @@ import edu.up.cs301.game.config.GamePlayerType;
 
 public class GoMainActivity extends GameMainActivity{
 
-
-//	public Button pass,draw,resign,territory;
-//	public Button[] buttons = {pass,draw,resign,territory};
-//	public TextView playerScore,playerStonesPlaced,playerStonesCaptured,enemyScore,enemyStonesPlaced,enemyStonesCaptured;
-//	public GoSurfaceView goSurfaceView;
-
 	public static final int PORT_NUMBER = 5213;
 
 	/**
@@ -67,61 +61,8 @@ public class GoMainActivity extends GameMainActivity{
 	 * games onCreate Method
 	 */
 	public void onCreate() {
-//
-//
-//		goSurfaceView = (GoSurfaceView)findViewById(R.id.boardView);
-//
-//		pass = (Button) findViewById(R.id.passButton);
-//		draw = (Button) findViewById(R.id.drawButton);
-//		territory = (Button) findViewById(R.id.territorySelectButton);
-//		resign = (Button) findViewById(R.id.resignButton);
-//
-//		playerScore = (TextView) findViewById(R.id.playerScoreText);
-//		playerStonesPlaced = (TextView) findViewById(R.id.stonesPlacedText);
-//		playerStonesCaptured = (TextView) findViewById(R.id.stonesCapturedText);
-//		enemyScore = (TextView) findViewById(R.id.enemyScoreText);
-//		enemyStonesPlaced = (TextView) findViewById(R.id.enemyStonesPlacedText);
-//		enemyStonesCaptured = (TextView) findViewById(R.id.enemyStonesCaptured);
-//
-//		for(Button b: buttons)
-//		{
-//			b.setOnClickListener(this);
-//		}
-//	}
-//
-//
-//	public void onClick(View v)
-//	{
-//		super.onClick(v);
-//		if(v == pass)
-//		{
-//
-//		}
-//		if(v == draw)
-//		{
-//
-//		}
-//		if(v == resign)
-//		{
-//
-//		}
-//		if(v == territory)
-//		{
-//
-//		}
-//	}
-//	public boolean onTouch(View v, MotionEvent mo)
-//	{
-//		int x = (int)mo.getX();
-//		int y = (int)mo.getY();
-//		int action = mo.getAction();
-//		if (action == MotionEvent.ACTION_DOWN || action == MotionEvent.ACTION_MOVE)
-//		{
-//
-//		}
-//		goSurfaceView.invalidate();
-//		return true;
-//	}
+
+
 	}
 
 	@Override

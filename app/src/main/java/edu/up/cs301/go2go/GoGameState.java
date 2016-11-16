@@ -1,13 +1,19 @@
 package edu.up.cs301.go2go;
 
+import android.util.Log;
+import android.view.SurfaceView;
+
 import edu.up.cs301.game.Game;
+import edu.up.cs301.game.GamePlayer;
+import edu.up.cs301.game.actionMsg.GameAction;
 import edu.up.cs301.game.infoMsg.GameState;
 
 /**
  * Created by qi on 10/29/16.
  */
 
-public class GoGameState extends GameState {
+public class GoGameState extends GameState
+{
     /* STATIC CONSTANTS */
     //for stage of game
     public static final int MAKE_MOVE_STAGE = 0;
@@ -122,6 +128,8 @@ public class GoGameState extends GameState {
      * @return true if updated successfully
      */
     public boolean updateBoard(int player, int moveX, int moveY){
+        Log.i("update board","made it in");
+        GoSurfaceView.setBoard(board);
         return false;
     }
 
@@ -223,4 +231,5 @@ public class GoGameState extends GameState {
     public void incrementPasses(){
         turnsPassed++;
     }
+
 }
