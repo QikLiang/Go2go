@@ -54,9 +54,9 @@ public class GoGameState extends GameState
     public boolean isLeagalMove(int player, int moveX, int moveY){
         //add check for Kos
         //The idea is to create a hashtable with numbers for the move number, and a boolean area to save each board state history
-        
+        int piece[] = {BLACK, WHITE};
         //check if a piece is there
-        try{if(board[moveX][moveY]!=0){return false;}}catch (Exception e){return false;}
+        try{if(board[moveX][moveY]!=EMPTY){return false;}}catch (Exception e){return false;}
         //if the move was not on the board, return false
         if(moveX<0 || moveX>=board.length || moveY<0 || moveY>=board[0].length){return false;}
         //check if you're committing suicide
@@ -72,7 +72,7 @@ public class GoGameState extends GameState
           newboard[i][j] = board[i][j];   
          }
         }
-        newboard[moveX][moveY]=player;
+        newboard[moveX][moveY]=piece[player];
         boolean changing = true;
         
         //decides if tiles are safe
@@ -94,7 +94,7 @@ public class GoGameState extends GameState
             for(int i=0;i<board.length;i++){
                 for(int j=0;j<board[0].length;j++){
                     changing=false;
-                     if(newboard[i][j]==player){
+                     if(newboard[i][j]==piece[player]){
                            try{if(newboard[i+1][j]==4){changing=true; newboard[i][j]=4;}}catch(Exception e){}
                            try{if(newboard[i][j+1]==4){changing=true; newboard[i][j]=4;}}catch(Exception e){}
                            try{if(newboard[i-1][j]==4){changing=true; newboard[i][j]=4;}}catch(Exception e){}
@@ -104,7 +104,7 @@ public class GoGameState extends GameState
             }
         }
         //if the newboard spot didn't get changed to a 4, it's gonna get killed, thus, they were committing suicide
-        if(newboard[moveX][moveY]==player){
+        if(newboard[moveX][moveY]==piece[player]){
          return false;   
         }
         
@@ -133,6 +133,52 @@ public class GoGameState extends GameState
         int piece[] = {BLACK, WHITE};
         if(isLeagalMove(player, moveX, moveY)){
             board[moveX][moveY]= piece[player];
+            
+            //this section deletes surrounded tiles
+            //the number 4 will be used for 'in danger' tiles
+            boolean danger;
+            for(int i=0;i<board.length;i++){
+                for(int j=0;j<board[0].length;j++){
+                    danger=true;
+                    if(board[i][j]==-piece[player]{
+                        try{if(board[i+1][j]==EMPTY){danger=false;}}catch(Exception e){}
+                        try{if(board[i-1][j]==EMPTY){danger=false;}}catch(Exception e){}
+                        try{if(board[i][j+1]==EMPTY){danger=false;}}catch(Exception e){}
+                        try{if(board[i][j-1]==EMPTY){danger=false;}}catch(Exception e){}
+                        if(danger){board[i][j]=4};
+                    }
+                }
+            }
+            boolean changing=true;
+            while(changing){
+                changing=false;
+                for(int i=0;i<board.length;i++){
+                   for(int j=0;j<board[0].length;j++){
+                      if(board[i][j]==4){
+                            try{if(board[i+1][j]==-piece[player]){changing=true; board[i+1][j]=-piece[player];}}catch(Exception e){}
+                            try{if(board[i-1][j]==-piece[player]){changing=true; board[i-1][j]=-piece[player];}}catch(Exception e){}
+                            try{if(board[i][j+1]==-piece[player]){changing=true; board[i][j+1]=-piece[player];}}catch(Exception e){}
+                            try{if(board[i][j-1]==-piece[player]){changing=true; board[i][j-1]=-piece[player];}}catch(Exception e){}
+                            if(danger){board[i][j]=4;}
+                        }
+                     }
+                 }
+            }
+            for(int i=0;i<board.length;i++){ //For loop to remove surrounded tiles, and add points
+                for(int j=0;j<board[0].length;j++){
+                    if(board[i][j]==4){
+                        if(-piece[player]==WHITE){
+                            whiteCaptures++;
+                        }
+                        if(-piece[player]==BLACK){
+                            blackCaptures++;
+                        }
+                        board[i][j]=EMPTY;
+                    }
+                }
+            }
+            //the 'in danger' section surrounded by these comments is not tested
+            
             GoSurfaceView.setBoard(board);
             return true;
         }
