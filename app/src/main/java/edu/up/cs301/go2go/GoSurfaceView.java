@@ -91,19 +91,19 @@ public class GoSurfaceView extends SurfaceView
         {
             for(int k = 0; k < goBoard[0].length; k++)
             {
-                float nextX = (float)(goBoardHeigth*(i/8));
+                float nextX = (float)(goBoardWidth*(i/8));
                 float nextY = (float)(goBoardHeigth*(k/8));
                 if(goBoard[i][k] == GoGameState.WHITE)
                 {
                     p.setColor(Color.WHITE);
                     p.setStyle(Paint.Style.FILL);
-                    c.drawCircle(nextX,nextY,15,p);
+                    c.drawCircle(nextX,nextY,30,p);
                 }
                 else if(goBoard[i][k] == GoGameState.BLACK)
                 {
                     p.setColor(Color.BLACK);
                     p.setStyle(Paint.Style.FILL);
-                    c.drawCircle(nextX,nextY,15,p);
+                    c.drawCircle(nextX,nextY,30,p);
                 }
                 else
                 {
