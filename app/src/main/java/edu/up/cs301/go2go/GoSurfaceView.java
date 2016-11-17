@@ -1,9 +1,6 @@
 package edu.up.cs301.go2go;
 
 import android.content.Context;
-import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -11,7 +8,7 @@ import android.util.AttributeSet;
 import android.view.SurfaceView;
 
 /**
- * Created by dukeo_000 on 11/14/2016.
+ * Created by Jenkin Schibel on 11/14/2016.
  */
 
 public class GoSurfaceView extends SurfaceView
@@ -43,13 +40,12 @@ public class GoSurfaceView extends SurfaceView
         setWillNotDraw(false);
         setBackgroundColor(Color.YELLOW);
         goBoard = new int[9][9];
-        for(int i=0; i < 9; i++)
-        {
-            for(int k=0; k < 9; k++)
-            {
-                goBoard[i][k] = 0;
-            }
-        }
+
+    }
+
+    public void getBoard(int[][] newBoard)
+    {
+        goBoard = newBoard;
     }
 
     public static void setBoard(int[][] board)
@@ -72,6 +68,7 @@ public class GoSurfaceView extends SurfaceView
         double goBoardWidth = goEndX-goStartX;
         double goBoardHeigth = goEndY-goStartY;
 
+
         for(float i=0; i<=8; i++)//draws horizontal lines
         {
             float nextLine = (float)(goBoardHeigth*(i/8));
@@ -83,6 +80,13 @@ public class GoSurfaceView extends SurfaceView
             c.drawLine((float)goStartX+nextLine,(float)goStartY,(float)goStartX+nextLine,(float)goEndY,p);
         }
 
+        for(int i=0; i < 9; i++)
+        {
+            for(int k=0; k < 9; k++)
+            {
+                goBoard[i][k] = GoGameState.WHITE;
+            }
+        }
         for(int i = 0; i < goBoard.length;i++)
         {
             for(int k = 0; k < goBoard[0].length; k++)
@@ -109,10 +113,5 @@ public class GoSurfaceView extends SurfaceView
 
             }
         }
-
-
-
-
-
     }
 }

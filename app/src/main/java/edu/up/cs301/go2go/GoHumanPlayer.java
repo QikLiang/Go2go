@@ -27,6 +27,7 @@ public class GoHumanPlayer extends GameHumanPlayer implements View.OnTouchListen
 
     GoSurfaceView surfaceView;
     Activity theActivity;
+    GoGameState state;
     public Button pass,draw,resign,territory;
     public TextView playerScore,playerStonesPlaced,playerStonesCaptured,enemyScore,enemyStonesPlaced,enemyStonesCaptured;
 
@@ -80,8 +81,7 @@ public class GoHumanPlayer extends GameHumanPlayer implements View.OnTouchListen
             // if we do not have a TTTState, ignore
             return;
         else {
-//            surfaceView.setState((GoGameState)info);
-            surfaceView.invalidate();
+            state = (GoGameState) info;
             Log.i("human player", "receiving");
         }
     }
@@ -101,9 +101,14 @@ public class GoHumanPlayer extends GameHumanPlayer implements View.OnTouchListen
         int xPos = (int)((x/width)*9);
         int yPos = (int)((y/height)*9);
         PutPieceAction action = new PutPieceAction(this,xPos,yPos);
-        game.sendAction(action);
+        if(!state.isLeagalMove(playerNum,xPos,yPos)) {
+            game.sendAction(action);
+        }
+        else{}
+
+//        surfaceView.getBoard(state.getBoard());//gets the board for the
         surfaceView.invalidate();
-        return false;
+        return true;
     }
 
 	public void onClick(View v)
