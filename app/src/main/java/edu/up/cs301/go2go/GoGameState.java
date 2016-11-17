@@ -56,7 +56,7 @@ public class GoGameState extends GameState
         //The idea is to create a hashtable with numbers for the move number, and a boolean area to save each board state history
         
         //check if a piece is there
-        if(board[moveX][moveY]!=0){return false;}
+        try{if(board[moveX][moveY]!=0){return false;}}catch (Exception e){return false;}
         //if the move was not on the board, return false
         if(moveX<0 || moveX>=board.length || moveY<0 || moveY>=board[0].length){return false;}
         //check if you're committing suicide
@@ -138,6 +138,7 @@ public class GoGameState extends GameState
         }
 
         GoSurfaceView.setBoard(board);
+//        GoSurfaceView.setBoard(board);
         return false;
     }
 
