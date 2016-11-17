@@ -92,11 +92,11 @@ public class GoHumanPlayer extends GameHumanPlayer implements View.OnTouchListen
         double height = GoSurfaceView.cHeight;
         double x = (double)event.getX();
         double y = (double)event.getY();
-        if(event.getAction() != MotionEvent.ACTION_UP)
+        /*if(event.getAction() != MotionEvent.ACTION_UP)
         {
             v.invalidate();
             return true;
-        }
+        }*/
 
         int xPos = (int)((x/width)*9);
         int yPos = (int)((y/height)*9);

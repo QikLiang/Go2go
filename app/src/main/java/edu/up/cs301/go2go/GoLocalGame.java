@@ -1,5 +1,7 @@
 package edu.up.cs301.go2go;
 
+import android.util.Log;
+
 import edu.up.cs301.game.GamePlayer;
 import edu.up.cs301.game.LocalGame;
 import edu.up.cs301.game.actionMsg.GameAction;
@@ -19,7 +21,7 @@ public class GoLocalGame extends LocalGame {
 
     @Override
     protected boolean canMove(int playerIdx) {
-        return false;
+        return officialState.getTurn()==playerIdx;
     }
 
     @Override
@@ -45,6 +47,7 @@ public class GoLocalGame extends LocalGame {
             }
 
             PutPieceAction move = (PutPieceAction) action;
+            Log.i("Put Piece", ""+getPlayerIdx(move.getPlayer())+","+move.getX()+","+move.getY());
             //if move is legal
             if(officialState.isLeagalMove(getPlayerIdx(action.getPlayer()),
                     move.getX(), move.getY())){
@@ -64,6 +67,7 @@ public class GoLocalGame extends LocalGame {
             if(officialState.getStage() != GoGameState.MAKE_MOVE_STAGE){
                 return false;
             }
+            Log.i("Pass", ""+getPlayerIdx(((PassAction) action).getPlayer()));
             officialState.changeTurn();
             officialState.incrementPasses();
             return true;
@@ -81,6 +85,7 @@ public class GoLocalGame extends LocalGame {
                 return false;
             }
 
+            Log.i("Select Territory", ""+getPlayerIdx(proposal.getPlayer()));
             officialState.changeTurn();
             officialState.setTerritoryProposal(proposal.getProposal());
             return true;
@@ -93,6 +98,8 @@ public class GoLocalGame extends LocalGame {
             }
 
             boolean agreement = ((AgreeTerritoryAction) action).getAgreement();
+
+            Log.i("agreement", ""+((AgreeTerritoryAction)action).getPlayer()+","+agreement);
             gameEnded = agreement;
             if(!agreement){
                 officialState.setStage(GoGameState.MAKE_MOVE_STAGE);

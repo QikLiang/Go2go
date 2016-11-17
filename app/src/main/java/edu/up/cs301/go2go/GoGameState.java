@@ -129,6 +129,14 @@ public class GoGameState extends GameState
      */
     public boolean updateBoard(int player, int moveX, int moveY){
         Log.i("update board","made it in");
+
+        int piece[] = {BLACK, WHITE};
+        if(isLeagalMove(player, moveX, moveY)){
+            board[moveX][moveY]= piece[player];
+            GoSurfaceView.setBoard(board);
+            return true;
+        }
+
         GoSurfaceView.setBoard(board);
         return false;
     }
@@ -162,7 +170,8 @@ public class GoGameState extends GameState
         whiteCaptures = original.whiteCaptures;
         blackCaptures = original.blackCaptures;
         turn = original.turn;
-        territoryProposal = original.territoryProposal;
+        territoryProposal = boardDeepCopy(original.territoryProposal);
+        board = boardDeepCopy(original.board);
     }
 
     /* GETTERS */
