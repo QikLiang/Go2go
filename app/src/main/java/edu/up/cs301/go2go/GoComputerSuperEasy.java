@@ -45,9 +45,14 @@ public class GoComputerSuperEasy extends GameComputerPlayer {
                     Log.i("AI:","Placed Piece");
                     PutPieceAcion myMove = new PutPieceAction(this,x,y);
                     game.sendAction(myMove);
-                    break;
+                    return;
                 }
             }
+            
+            //if this didn't place a piece
+            Log.i("AI:","Passed");
+            game.sendAction(new PassAction(this));
+            return;
         }
 
         //always agree to other player's proposal
