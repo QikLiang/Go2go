@@ -43,6 +43,7 @@ public class GoLocalGame extends LocalGame {
         if(action instanceof PutPieceAction){
             //reject if not in right state of game
             if(officialState.getStage() != GoGameState.MAKE_MOVE_STAGE){
+                Log.i("Wrong stage", ""+officialState.getStage());
                 return false;
             }
 
@@ -52,12 +53,14 @@ public class GoLocalGame extends LocalGame {
             if(officialState.isLeagalMove(getPlayerIdx(action.getPlayer()),
                     move.getX(), move.getY())){
                 //update board position
-                officialState.updateBoard(getPlayerIdx(action.getPlayer()),
+                boolean moveMade = officialState.updateBoard(getPlayerIdx(action.getPlayer()),
                     move.getX(), move.getY());
                 //switch player
                 officialState.changeTurn();
+                Log.i(moveMade ? "Success":"Failed", ""+getPlayerIdx(move.getPlayer())+","+move.getX()+","+move.getY());
                 return true;
             }else {
+                Log.i("Illegal move", ""+getPlayerIdx(move.getPlayer())+","+move.getX()+","+move.getY());
                 return false;
             }
         }

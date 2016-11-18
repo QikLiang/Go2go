@@ -88,20 +88,20 @@ public class GoHumanPlayer extends GameHumanPlayer implements View.OnTouchListen
 
     public boolean onTouch(View v, MotionEvent event)
     {
+        if(event.getAction() != MotionEvent.ACTION_UP)
+        {
+            v.invalidate();
+            return true;
+        }
+
         double width = GoSurfaceView.cWidth;
         double height = GoSurfaceView.cHeight;
         double x = (double)event.getX();
         double y = (double)event.getY();
-        /*if(event.getAction() != MotionEvent.ACTION_UP)
-        {
-            v.invalidate();
-            return true;
-        }*/
-
         int xPos = (int)((x/width)*9);
         int yPos = (int)((y/height)*9);
         PutPieceAction action = new PutPieceAction(this,xPos,yPos);
-        if(!state.isLeagalMove(playerNum,xPos,yPos)) {
+        if(state.isLeagalMove(playerNum,xPos,yPos)) {
             game.sendAction(action);
         }
         else{}

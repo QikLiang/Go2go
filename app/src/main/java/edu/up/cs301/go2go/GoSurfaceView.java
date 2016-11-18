@@ -51,14 +51,16 @@ public class GoSurfaceView extends SurfaceView
     public static void setBoard(int[][] board)
     {
         goBoard = board;
+
     }
     public void onDraw(Canvas c)
     {
+        super.onDraw(c);
+
         Paint p = new Paint();
         p.setColor(Color.BLACK);
         p.setStrokeWidth(10);
 
-        super.onDraw(c);
         cWidth = c.getWidth();
         cHeight = c.getHeight();
         double goStartX = cWidth*.055555;
@@ -80,19 +82,19 @@ public class GoSurfaceView extends SurfaceView
             c.drawLine((float)goStartX+nextLine,(float)goStartY,(float)goStartX+nextLine,(float)goEndY,p);
         }
 
-        for(int i=0; i < 9; i++)
+        /*for(int i=0; i < 9; i++)
         {
             for(int k=0; k < 9; k++)
             {
                 goBoard[i][k] = GoGameState.WHITE;
             }
-        }
+        }*/
         for(int i = 0; i < goBoard.length;i++)
         {
             for(int k = 0; k < goBoard[0].length; k++)
             {
-                float nextX = (float)(goBoardWidth*(i/8));
-                float nextY = (float)(goBoardHeigth*(k/8));
+                float nextX = (float)(goBoardWidth*i/8);
+                float nextY = (float)(goBoardHeigth*k/8);
                 if(goBoard[i][k] == GoGameState.WHITE)
                 {
                     p.setColor(Color.WHITE);

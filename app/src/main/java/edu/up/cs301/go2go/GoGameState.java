@@ -128,24 +128,22 @@ public class GoGameState extends GameState
      * @return true if updated successfully
      */
     public boolean updateBoard(int player, int moveX, int moveY){
-        Log.i("update board","made it in");
-
         int piece[] = {BLACK, WHITE};
         if(isLeagalMove(player, moveX, moveY)){
             board[moveX][moveY]= piece[player];
             
             //this section deletes surrounded tiles
             //the number 4 will be used for 'in danger' tiles
-            boolean danger;
+            boolean danger=true;
             for(int i=0;i<board.length;i++){
                 for(int j=0;j<board[0].length;j++){
                     danger=true;
-                    if(board[i][j]==-piece[player]{
+                    if(board[i][j]==-piece[player]){
                         try{if(board[i+1][j]==EMPTY){danger=false;}}catch(Exception e){}
                         try{if(board[i-1][j]==EMPTY){danger=false;}}catch(Exception e){}
                         try{if(board[i][j+1]==EMPTY){danger=false;}}catch(Exception e){}
                         try{if(board[i][j-1]==EMPTY){danger=false;}}catch(Exception e){}
-                        if(danger){board[i][j]=4};
+                        if(danger){board[i][j]=4;}
                     }
                 }
             }
@@ -179,11 +177,11 @@ public class GoGameState extends GameState
             }
             //the 'in danger' section surrounded by these comments is not tested
             
-            GoSurfaceView.setBoard(board);
+            GoSurfaceView.setBoard(boardDeepCopy(board));
             return true;
         }
 
-        GoSurfaceView.setBoard(board);
+        GoSurfaceView.setBoard(boardDeepCopy(board));
 //        GoSurfaceView.setBoard(board);
         return false;
     }
