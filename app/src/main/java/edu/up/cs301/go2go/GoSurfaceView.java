@@ -93,8 +93,8 @@ public class GoSurfaceView extends SurfaceView
         {
             for(int k = 0; k < goBoard[0].length; k++)
             {
-                float nextX = (float)(goBoardWidth*i/8);
-                float nextY = (float)(goBoardHeigth*k/8);
+                float nextX = (float)(goBoardWidth*i/8 +goStartX);
+                float nextY = (float)(goBoardHeigth*k/8 +goStartY);
                 if(goBoard[i][k] == GoGameState.WHITE)
                 {
                     p.setColor(Color.WHITE);
