@@ -69,6 +69,7 @@ public class GoSurfaceView extends SurfaceView
         double goEndY = cHeight*.95;
         double goBoardWidth = goEndX-goStartX;
         double goBoardHeigth = goEndY-goStartY;
+        int goPieceSize = (int)(goBoardHeigth/GoGameState.boardSize/2);
 
 
         for(float i=0; i<=8; i++)//draws horizontal lines
@@ -99,13 +100,13 @@ public class GoSurfaceView extends SurfaceView
                 {
                     p.setColor(Color.WHITE);
                     p.setStyle(Paint.Style.FILL);
-                    c.drawCircle(nextX,nextY,30,p);
+                    c.drawCircle(nextX,nextY,goPieceSize,p);
                 }
                 else if(goBoard[i][k] == GoGameState.BLACK)
                 {
                     p.setColor(Color.BLACK);
                     p.setStyle(Paint.Style.FILL);
-                    c.drawCircle(nextX,nextY,30,p);
+                    c.drawCircle(nextX,nextY,goPieceSize,p);
                 }
                 else
                 {
