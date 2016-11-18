@@ -10,7 +10,7 @@ import edu.up.cs301.game.infoMsg.GameInfo;
  */
 
 public class GoComputerSuperEasy extends GameComputerPlayer {
-    public GoComputerPlayer0(String name) {
+    public GoComputerSuperEasy(String name) {
         super(name);
     }
 
