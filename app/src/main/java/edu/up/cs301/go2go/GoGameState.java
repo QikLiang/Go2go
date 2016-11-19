@@ -60,10 +60,9 @@ public class GoGameState extends GameState
         //if the move was not on the board, return false
         if(moveX<0 || moveX>=board.length || moveY<0 || moveY>=board[0].length){return false;}
         //check if you're committing suicide
-        try{if(board[moveX+1][moveY]==0){return true;}}catch(Exception e){}
-        try{if(board[moveX][moveY+1]==0){return true;}}catch(Exception e){}
-        try{if(board[moveX-1][moveY]==0){return true;}}catch(Exception e){}
-        try{if(board[moveX][moveY-1]==0){return true;}}catch(Exception e){}
+        if( isPieceNextTo(EMPTY, board, moveX, moveY) ){
+            return true;
+        }
         //checking more complicated suicide
         //basically does updateboard on a sample board and checks if the piece gets killed
         int[][] newboard = new int[board.length][board[0].length];
@@ -76,15 +75,10 @@ public class GoGameState extends GameState
         boolean changing = true;
         
         //decides if tiles are safe
+        final int SAFE =4;
         for(int i=0;i<board.length;i++){
-           outterloop:
            for(int j=0;j<board[0].length;j++){
-               changing=true;
-               try{if(newboard[i+1][j]==0){changing=false; break outterloop;}}catch(Exception e){}
-               try{if(newboard[i][j+1]==0){changing=false; break outterloop;}}catch(Exception e){}
-               try{if(newboard[i-1][j]==0){changing=false; break outterloop;}}catch(Exception e){}
-               try{if(newboard[i][j-1]==0){changing=false; break outterloop;}}catch(Exception e){}
-               if(!changing){newboard[i][j]=4;}
+               if( isPieceNextTo(EMPTY, board, moveX, moveY) ){newboard[i][j]=SAFE;}
            }
         }
         changing=true;
@@ -95,10 +89,10 @@ public class GoGameState extends GameState
                 for(int j=0;j<board[0].length;j++){
                     changing=false;
                      if(newboard[i][j]==piece[player]){
-                           try{if(newboard[i+1][j]==4){changing=true; newboard[i][j]=4;}}catch(Exception e){}
-                           try{if(newboard[i][j+1]==4){changing=true; newboard[i][j]=4;}}catch(Exception e){}
-                           try{if(newboard[i-1][j]==4){changing=true; newboard[i][j]=4;}}catch(Exception e){}
-                           try{if(newboard[i][j-1]==4){changing=true; newboard[i][j]=4;}}catch(Exception e){} 
+                         if( isPieceNextTo(SAFE, board, moveX, moveY) ){
+                             changing = true;
+                             newboard[i][j]=SAFE;
+                         }
                      }
                 }
             }
@@ -133,17 +127,13 @@ public class GoGameState extends GameState
             board[moveX][moveY]= piece[player];
             
             //this section deletes surrounded tiles
-            //the number 4 will be used for 'in danger' tiles
+            final int INDANGER = 4;
             boolean danger=true;
             for(int i=0;i<board.length;i++){
                 for(int j=0;j<board[0].length;j++){
                     danger=true;
                     if(board[i][j]==-piece[player]){
-                        try{if(board[i+1][j]==EMPTY){danger=false;}}catch(Exception e){}
-                        try{if(board[i-1][j]==EMPTY){danger=false;}}catch(Exception e){}
-                        try{if(board[i][j+1]==EMPTY){danger=false;}}catch(Exception e){}
-                        try{if(board[i][j-1]==EMPTY){danger=false;}}catch(Exception e){}
-                        if(danger){board[i][j]=4;}
+                        if(!isPieceNextTo(EMPTY, board, i, j)){board[i][j]=INDANGER;}
                     }
                 }
             }
@@ -152,19 +142,19 @@ public class GoGameState extends GameState
                 changing=false;
                 for(int i=0;i<board.length;i++){
                    for(int j=0;j<board[0].length;j++){
-                      if(board[i][j]==4){
-                            try{if(board[i+1][j]==-piece[player]){changing=true; board[i+1][j]=-piece[player];}}catch(Exception e){}
-                            try{if(board[i-1][j]==-piece[player]){changing=true; board[i-1][j]=-piece[player];}}catch(Exception e){}
-                            try{if(board[i][j+1]==-piece[player]){changing=true; board[i][j+1]=-piece[player];}}catch(Exception e){}
-                            try{if(board[i][j-1]==-piece[player]){changing=true; board[i][j-1]=-piece[player];}}catch(Exception e){}
-                            if(danger){board[i][j]=4;}
+                      if(board[i][j]==INDANGER){
+
+                          if( isPieceNextTo(-piece[player], board, i, j) ){
+                              changing=true;
+                              board[i][j]=-piece[player];
+                          }
                         }
                      }
                  }
             }
             for(int i=0;i<board.length;i++){ //For loop to remove surrounded tiles, and add points
                 for(int j=0;j<board[0].length;j++){
-                    if(board[i][j]==4){
+                    if(board[i][j]==INDANGER){
                         if(-piece[player]==WHITE){
                             whiteCaptures++;
                         }
@@ -183,6 +173,31 @@ public class GoGameState extends GameState
 
         GoSurfaceView.setBoard(boardDeepCopy(board));
 //        GoSurfaceView.setBoard(board);
+        return false;
+    }
+
+    /**
+     * returns whether a coordinate is next to a certain piece
+     * @param piece the piece to check for in the surrounding
+     * @param board the game board
+     * @param x the coordinate to check the surrounding of
+     * @param y the coordinate to check the surrounding of
+     * @return true if piece exist surrounding coordinate, false otherwise
+     */
+    private static boolean isPieceNextTo( int piece, final int board[][], int x, int y){
+        if(x>0 && board[x-1][y]==piece){
+            return true;
+        }
+        if(y>0 && board[x][y-1]==piece){
+            return true;
+        }
+        if(x<board.length-1 && board[x+1][y]==piece){
+            return true;
+        }
+        if(y<board[0].length-1 && board[x][y+1]==piece){
+            return true;
+        }
+
         return false;
     }
 
