@@ -82,7 +82,8 @@ public class GoHumanPlayer extends GameHumanPlayer implements View.OnTouchListen
             return;
         else {
             state = (GoGameState) info;
-            Log.i("human player", "receiving");
+            GoSurfaceView.setBoard(state.getBoard());
+            surfaceView.postInvalidate();
         }
     }
 

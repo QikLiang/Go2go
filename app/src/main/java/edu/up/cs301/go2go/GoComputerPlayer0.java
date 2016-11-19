@@ -1,5 +1,7 @@
 package edu.up.cs301.go2go;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 
 import edu.up.cs301.game.GameComputerPlayer;
@@ -18,6 +20,7 @@ public class GoComputerPlayer0 extends GameComputerPlayer {
     protected void receiveInfo(GameInfo info) {
         //not the AI's business if it's not a game state
         if(! (info instanceof GoGameState) ){
+            Log.i("AI received message", info.toString());
             return;
         }
 
@@ -26,6 +29,13 @@ public class GoComputerPlayer0 extends GameComputerPlayer {
         //not it's business if it's not its turn
         if(state.getTurn()!=playerNum){
             return;
+        }
+
+        //wait a bit before making a move so that it behaves more user friendly
+        //also makes sure surfaceView has time to update board position
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
         }
 
         if(state.getStage() == GoGameState.MAKE_MOVE_STAGE){

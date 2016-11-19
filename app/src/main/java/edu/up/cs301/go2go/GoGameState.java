@@ -167,11 +167,9 @@ public class GoGameState extends GameState
             }
             //the 'in danger' section surrounded by these comments is not tested
             
-            GoSurfaceView.setBoard(boardDeepCopy(board));
             return true;
         }
 
-        GoSurfaceView.setBoard(boardDeepCopy(board));
 //        GoSurfaceView.setBoard(board);
         return false;
     }
