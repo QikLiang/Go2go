@@ -96,21 +96,28 @@ public class GoSurfaceView extends SurfaceView
             {
                 float nextX = (float)(goBoardWidth*i/8 +goStartX);
                 float nextY = (float)(goBoardHeigth*k/8 +goStartY);
-                if(goBoard[i][k] == GoGameState.WHITE)
-                {
-                    p.setColor(Color.WHITE);
-                    p.setStyle(Paint.Style.FILL);
-                    c.drawCircle(nextX,nextY,goPieceSize,p);
-                }
-                else if(goBoard[i][k] == GoGameState.BLACK)
-                {
-                    p.setColor(Color.BLACK);
-                    p.setStyle(Paint.Style.FILL);
-                    c.drawCircle(nextX,nextY,goPieceSize,p);
-                }
-                else
-                {
-
+                p.setStyle(Paint.Style.FILL);
+                switch (goBoard[i][k]){
+                    case GoGameState.WHITE:
+                        p.setColor(Color.WHITE);
+                        c.drawCircle(nextX,nextY,goPieceSize,p);
+                        break;
+                    case GoGameState.BLACK:
+                        p.setColor(Color.BLACK);
+                        c.drawCircle(nextX,nextY,goPieceSize,p);
+                        break;
+                    case GoGameState.WHITE_CAPTURED:
+                        p.setColor(Color.WHITE);
+                        c.drawCircle(nextX,nextY,goPieceSize,p);
+                        p.setColor(Color.BLACK);
+                        c.drawCircle(nextX,nextY,goPieceSize/3,p);
+                        break;
+                    case GoGameState.BLACK_CPATURED:
+                        p.setColor(Color.BLACK);
+                        c.drawCircle(nextX,nextY,goPieceSize,p);
+                        p.setColor(Color.WHITE);
+                        c.drawCircle(nextX,nextY,goPieceSize/3,p);
+                        break;
                 }
 
 

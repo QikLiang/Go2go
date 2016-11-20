@@ -3,6 +3,8 @@ package edu.up.cs301.go2go;
 import android.util.Log;
 import android.view.SurfaceView;
 
+import java.util.ArrayList;
+
 import edu.up.cs301.game.Game;
 import edu.up.cs301.game.GamePlayer;
 import edu.up.cs301.game.actionMsg.GameAction;
@@ -67,13 +69,13 @@ public class GoGameState extends GameState
         int[][] newboard = boardDeepCopy(board);
         newboard[moveX][moveY]=piece[player];
         
-        ArrayList<int[]> removedPieces = getTaken(newBoard,-piece[player]);
+        ArrayList<int[]> removedPieces = getTaken(newboard,-piece[player]);
         if(removedPieces.size()!=0){
             return true;
         }
         
         //checks for suicide
-        ArrayList<int[]> removedPieces2 = getTaken(newBoard,piece[player]);
+        ArrayList<int[]> removedPieces2 = getTaken(newboard,piece[player]);
         if(removedPieces2.size()!=0){
             return false;
         }
@@ -104,8 +106,8 @@ public class GoGameState extends GameState
             //this section deletes surrounded tiles
             ArrayList<int[]> removedPieces = getTaken(board,-piece[player]);
             for(int i=0;i<removedPieces.size();i++){
-                board[removedPieces[i][0]][removedPieces[i][1]] = EMPTY;
-                if(piece[player]=WHITE){
+                board[removedPieces.get(i)[0]][removedPieces.get(i)[1]] = EMPTY;
+                if(piece[player]==WHITE){
                     blackCaptures++;
                 }
                 else{
@@ -155,13 +157,13 @@ public class GoGameState extends GameState
     //This method gets returns deleted pieces
     //This method is also not tested
     public ArrayList<int[]> getTaken(int[][] boardToCheck, int piecesToCheck){
-        ArrayList<int[]> piecesToDelete = new ArrayList<int[]>;
+        ArrayList<int[]> piecesToDelete = new ArrayList<int[]>();
         int IN_DANGER = 4;
         //Loop determines pieces as in Danger or not
         for(int i=0;i<boardToCheck.length;i++){
             for(int j=0;j<boardToCheck[0].length;j++){
                 if(boardToCheck[i][j]==piecesToCheck){
-                    if(!isPieceNextTo(EMPTY,boardToCheck,i,j){
+                    if(!isPieceNextTo(EMPTY,boardToCheck,i,j)){
                         boardToCheck[i][j]=IN_DANGER;
                     }
                 }
@@ -173,7 +175,7 @@ public class GoGameState extends GameState
             for(int i=0;i<boardToCheck.length;i++){
                 for(int j=0;j<boardToCheck[0].length;j++){
                     if(boardToCheck[i][j]==IN_DANGER){
-                        if(isPieceNextTo(piecesToCheck,boardToCheck,i,j){
+                        if(isPieceNextTo(piecesToCheck,boardToCheck,i,j)){
                             boardToCheck[i][j]=piecesToCheck;
                             changing=true;
                         }
@@ -191,7 +193,7 @@ public class GoGameState extends GameState
                 }
             }
         }
-        return deletePiece;
+        return piecesToDelete;
     }
 
     /* CONSTRUCTORS */

@@ -76,24 +76,30 @@ public class GoHumanPlayer extends GameHumanPlayer implements View.OnTouchListen
 
         if (info instanceof IllegalMoveInfo || info instanceof NotYourTurnInfo) {
             // if the move was out of turn or otherwise illegal, flash the screen
+            flash(Color.rgb(255,0,0), 300);
+            return;
         }
-        else if (!(info instanceof GoGameState))
+        else if (!(info instanceof GoGameState)) {
             // if we do not have a TTTState, ignore
             return;
-        else {
-            state = (GoGameState) info;
-            GoSurfaceView.setBoard(state.getBoard());
-            if(playerNum==0){
-                setCapturedText(state.getBlackCaptures(), enemyStonesCaptured);
-                setCapturedText(state.getWhiteCaptures(), playerStonesCaptured);
-            }else{
-                setCapturedText(state.getWhiteCaptures(), enemyStonesCaptured);
-                setCapturedText(state.getBlackCaptures(), playerStonesCaptured);
-            }
-            enemyStonesCaptured.invalidate();
-            playerStonesCaptured.invalidate();
-            surfaceView.postInvalidate();
         }
+
+        state = (GoGameState) info;
+        if(state.getTurnsPassed()>=2){
+            GoSurfaceView.setBoard(state.getTerritoryProposal());
+        }else{
+            GoSurfaceView.setBoard(state.getBoard());
+        }
+        if(playerNum==0){
+            setCapturedText(state.getBlackCaptures(), enemyStonesCaptured);
+            setCapturedText(state.getWhiteCaptures(), playerStonesCaptured);
+        }else{
+            setCapturedText(state.getWhiteCaptures(), enemyStonesCaptured);
+            setCapturedText(state.getBlackCaptures(), playerStonesCaptured);
+        }
+        enemyStonesCaptured.invalidate();
+        playerStonesCaptured.invalidate();
+        surfaceView.postInvalidate();
     }
 
     private void setCapturedText(int num, TextView text){
@@ -123,12 +129,8 @@ public class GoHumanPlayer extends GameHumanPlayer implements View.OnTouchListen
         int xPos = (int)((x/width)*9);
         int yPos = (int)((y/height)*9);
         PutPieceAction action = new PutPieceAction(this,xPos,yPos);
-        if(state.isLeagalMove(playerNum,xPos,yPos)) {
-            game.sendAction(action);
-        }
-        else{}
+        game.sendAction(action);
 
-//        surfaceView.getBoard(state.getBoard());//gets the board for the
         surfaceView.invalidate();
         return true;
     }
