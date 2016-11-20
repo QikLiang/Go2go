@@ -1,7 +1,7 @@
 [
     {
-        "merged": "/home/qi/programs/Go2go/D:\\workspace\\Go2go\\app\\build\\intermediates\\res\\merged\\debug\\layout\\ttt_human_player2.xml",
-        "source": "/home/qi/programs/Go2go/D:\\workspace\\Go2go\\app\\src\\main\\res\\layout\\ttt_human_player2.xml"
+        "merged": "/home/qi/programs/Go2go2/app/build/intermediates/res/merged/debug/layout/game_no_gui.xml",
+        "source": "/home/qi/programs/Go2go2/app/src/main/res/layout/game_no_gui.xml"
     },
     {
         "merged": "/home/qi/programs/Go2go/app/build/intermediates/res/merged/debug/layout/game_player_list_row.xml",
@@ -12,40 +12,36 @@
         "source": "/home/qi/programs/Go2go/app/src/main/res/layout/game_remote_tab.xml"
     },
     {
-        "merged": "/home/qi/programs/Go2go/D:\\workspace\\Go2go\\app\\build\\intermediates\\res\\merged\\debug\\layout\\game_local_tab.xml",
-        "source": "/home/qi/programs/Go2go/D:\\workspace\\Go2go\\app\\src\\main\\res\\layout\\game_local_tab.xml"
+        "merged": "/home/qi/programs/Go2go2/app/build/intermediates/res/merged/debug/layout/ttt_human_player2.xml",
+        "source": "/home/qi/programs/Go2go2/app/src/main/res/layout/ttt_human_player2.xml"
     },
     {
-        "merged": "/home/qi/programs/Go2go/D:\\workspace\\Go2go\\app\\build\\intermediates\\res\\merged\\debug\\layout\\game_config_tabhost.xml",
-        "source": "/home/qi/programs/Go2go/D:\\workspace\\Go2go\\app\\src\\main\\res\\layout\\game_config_tabhost.xml"
+        "merged": "/home/qi/programs/Go2go2/app/build/intermediates/res/merged/debug/layout/game_config_tabhost.xml",
+        "source": "/home/qi/programs/Go2go2/app/src/main/res/layout/game_config_tabhost.xml"
     },
     {
-        "merged": "/home/qi/programs/Go2go/D:\\workspace\\Go2go\\app\\build\\intermediates\\res\\merged\\debug\\layout\\game_remote_tab.xml",
-        "source": "/home/qi/programs/Go2go/D:\\workspace\\Go2go\\app\\src\\main\\res\\layout\\game_remote_tab.xml"
+        "merged": "/home/qi/programs/Go2go2/app/build/intermediates/res/merged/debug/layout/game_config_main.xml",
+        "source": "/home/qi/programs/Go2go2/app/src/main/res/layout/game_config_main.xml"
     },
     {
-        "merged": "/home/qi/programs/Go2go/D:\\workspace\\Go2go\\app\\build\\intermediates\\res\\merged\\debug\\layout\\ttt_human_player1.xml",
-        "source": "/home/qi/programs/Go2go/D:\\workspace\\Go2go\\app\\src\\main\\res\\layout\\ttt_human_player1.xml"
+        "merged": "/home/qi/programs/Go2go2/app/build/intermediates/res/merged/debug/layout/ttt_human_player1_flipped.xml",
+        "source": "/home/qi/programs/Go2go2/app/src/main/res/layout/ttt_human_player1_flipped.xml"
     },
     {
-        "merged": "/home/qi/programs/Go2go/D:\\workspace\\Go2go\\app\\build\\intermediates\\res\\merged\\debug\\layout\\game_player_list_row.xml",
-        "source": "/home/qi/programs/Go2go/D:\\workspace\\Go2go\\app\\src\\main\\res\\layout\\game_player_list_row.xml"
-    },
-    {
-        "merged": "/home/qi/programs/Go2go/D:\\workspace\\Go2go\\app\\build\\intermediates\\res\\merged\\debug\\layout\\game_no_gui.xml",
-        "source": "/home/qi/programs/Go2go/D:\\workspace\\Go2go\\app\\src\\main\\res\\layout\\game_no_gui.xml"
-    },
-    {
-        "merged": "/home/qi/programs/Go2go/app/build/intermediates/res/merged/debug/layout/game_no_gui.xml",
-        "source": "/home/qi/programs/Go2go/app/src/main/res/layout/game_no_gui.xml"
+        "merged": "/home/qi/programs/Go2go2/app/build/intermediates/res/merged/debug/layout/go_human_player.xml",
+        "source": "/home/qi/programs/Go2go2/app/src/main/res/layout/go_human_player.xml"
     },
     {
         "merged": "/home/qi/programs/Go2go/app/build/intermediates/res/merged/debug/layout/ttt_human_player2.xml",
         "source": "/home/qi/programs/Go2go/app/src/main/res/layout/ttt_human_player2.xml"
     },
     {
-        "merged": "/home/qi/programs/Go2go/D:\\workspace\\Go2go\\app\\build\\intermediates\\res\\merged\\debug\\layout\\ttt_human_player1_flipped.xml",
-        "source": "/home/qi/programs/Go2go/D:\\workspace\\Go2go\\app\\src\\main\\res\\layout\\ttt_human_player1_flipped.xml"
+        "merged": "/home/qi/programs/Go2go/app/build/intermediates/res/merged/debug/layout/game_no_gui.xml",
+        "source": "/home/qi/programs/Go2go/app/src/main/res/layout/game_no_gui.xml"
+    },
+    {
+        "merged": "/home/qi/programs/Go2go2/app/build/intermediates/res/merged/debug/layout/ttt_human_player1.xml",
+        "source": "/home/qi/programs/Go2go2/app/src/main/res/layout/ttt_human_player1.xml"
     },
     {
         "merged": "/home/qi/programs/Go2go/app/build/intermediates/res/merged/debug/layout/game_config_tabhost.xml",
@@ -56,16 +52,16 @@
         "source": "/home/qi/programs/Go2go/app/src/main/res/layout/game_config_main.xml"
     },
     {
+        "merged": "/home/qi/programs/Go2go2/app/build/intermediates/res/merged/debug/layout/game_player_list_row.xml",
+        "source": "/home/qi/programs/Go2go2/app/src/main/res/layout/game_player_list_row.xml"
+    },
+    {
         "merged": "/home/qi/programs/Go2go/app/build/intermediates/res/merged/debug/layout/game_local_tab.xml",
         "source": "/home/qi/programs/Go2go/app/src/main/res/layout/game_local_tab.xml"
     },
     {
         "merged": "/home/qi/programs/Go2go/app/build/intermediates/res/merged/debug/layout/go_human_player.xml",
         "source": "/home/qi/programs/Go2go/app/src/main/res/layout/go_human_player.xml"
-    },
-    {
-        "merged": "/home/qi/programs/Go2go/D:\\workspace\\Go2go\\app\\build\\intermediates\\res\\merged\\debug\\layout\\go_human_player.xml",
-        "source": "/home/qi/programs/Go2go/D:\\workspace\\Go2go\\app\\src\\main\\res\\layout\\go_human_player.xml"
     },
     {
         "merged": "/home/qi/programs/Go2go/app/build/intermediates/res/merged/debug/layout/ttt_human_player1.xml",
@@ -76,7 +72,11 @@
         "source": "/home/qi/programs/Go2go/app/src/main/res/layout/ttt_human_player1_flipped.xml"
     },
     {
-        "merged": "/home/qi/programs/Go2go/D:\\workspace\\Go2go\\app\\build\\intermediates\\res\\merged\\debug\\layout\\game_config_main.xml",
-        "source": "/home/qi/programs/Go2go/D:\\workspace\\Go2go\\app\\src\\main\\res\\layout\\game_config_main.xml"
+        "merged": "/home/qi/programs/Go2go2/app/build/intermediates/res/merged/debug/layout/game_local_tab.xml",
+        "source": "/home/qi/programs/Go2go2/app/src/main/res/layout/game_local_tab.xml"
+    },
+    {
+        "merged": "/home/qi/programs/Go2go2/app/build/intermediates/res/merged/debug/layout/game_remote_tab.xml",
+        "source": "/home/qi/programs/Go2go2/app/src/main/res/layout/game_remote_tab.xml"
     }
 ]

@@ -55,22 +55,17 @@ public class GoGameState extends GameState
         //add check for Kos
         //The idea is to create a hashtable with numbers for the move number, and a boolean area to save each board state history
         int piece[] = {BLACK, WHITE};
-        //check if a piece is there
-        try{if(board[moveX][moveY]!=EMPTY){return false;}}catch (Exception e){return false;}
         //if the move was not on the board, return false
         if(moveX<0 || moveX>=board.length || moveY<0 || moveY>=board[0].length){return false;}
+        //check if a piece is there
+        if(board[moveX][moveY]!=EMPTY){return false;}
         //check if you're committing suicide
         if( isPieceNextTo(EMPTY, board, moveX, moveY) ){
             return true;
         }
         //checking more complicated suicide
         //basically does updateboard on a sample board and checks if the piece gets killed
-        int[][] newboard = new int[board.length][board[0].length];
-        for(int i=0;i<board.length;i++){
-         for(int j=0;j<board[0].length;j++){
-          newboard[i][j] = board[i][j];   
-         }
-        }
+        int[][] newboard = boardDeepCopy(board);
         newboard[moveX][moveY]=piece[player];
         boolean changing = true;
         
@@ -78,7 +73,9 @@ public class GoGameState extends GameState
         final int SAFE =4;
         for(int i=0;i<board.length;i++){
            for(int j=0;j<board[0].length;j++){
-               if( isPieceNextTo(EMPTY, board, moveX, moveY) ){newboard[i][j]=SAFE;}
+               if( newboard[i][j]== piece[player] && isPieceNextTo(EMPTY, newboard, i, j) ){
+                   newboard[i][j]=SAFE;
+               }
            }
         }
         changing=true;
@@ -89,7 +86,7 @@ public class GoGameState extends GameState
                 for(int j=0;j<board[0].length;j++){
                     changing=false;
                      if(newboard[i][j]==piece[player]){
-                         if( isPieceNextTo(SAFE, board, moveX, moveY) ){
+                         if( isPieceNextTo(SAFE, newboard, i, j) ){
                              changing = true;
                              newboard[i][j]=SAFE;
                          }
