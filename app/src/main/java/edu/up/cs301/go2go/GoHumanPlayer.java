@@ -83,8 +83,29 @@ public class GoHumanPlayer extends GameHumanPlayer implements View.OnTouchListen
         else {
             state = (GoGameState) info;
             GoSurfaceView.setBoard(state.getBoard());
+            if(playerNum==0){
+                setCapturedText(state.getBlackCaptures(), enemyStonesCaptured);
+                setCapturedText(state.getWhiteCaptures(), playerStonesCaptured);
+            }else{
+                setCapturedText(state.getWhiteCaptures(), enemyStonesCaptured);
+                setCapturedText(state.getBlackCaptures(), playerStonesCaptured);
+            }
+            enemyStonesCaptured.invalidate();
+            playerStonesCaptured.invalidate();
             surfaceView.postInvalidate();
         }
+    }
+
+    private void setCapturedText(int num, TextView text){
+        if(num==0){
+            text.setText("captured no stones");
+            return;
+        }
+        if(num==1){
+            text.setText("captured 1 stone");
+            return;
+        }
+        text.setText("captured "+num+" stones");
     }
 
     public boolean onTouch(View v, MotionEvent event)
