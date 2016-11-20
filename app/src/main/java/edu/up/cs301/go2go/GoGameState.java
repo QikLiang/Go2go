@@ -63,42 +63,20 @@ public class GoGameState extends GameState
         if( isPieceNextTo(EMPTY, board, moveX, moveY) ){
             return true;
         }
-        //checking more complicated suicide
-        //basically does updateboard on a sample board and checks if the piece gets killed
+        //checking if you took pieces
         int[][] newboard = boardDeepCopy(board);
         newboard[moveX][moveY]=piece[player];
-        boolean changing = true;
         
-        //decides if tiles are safe
-        final int SAFE =4;
-        for(int i=0;i<board.length;i++){
-           for(int j=0;j<board[0].length;j++){
-               if( newboard[i][j]== piece[player] && isPieceNextTo(EMPTY, newboard, i, j) ){
-                   newboard[i][j]=SAFE;
-               }
-           }
-        }
-        changing=true;
-        
-        //checks if an entire group is in danger, or if they touch a safe tile
-        while(changing){
-            for(int i=0;i<board.length;i++){
-                for(int j=0;j<board[0].length;j++){
-                    changing=false;
-                     if(newboard[i][j]==piece[player]){
-                         if( isPieceNextTo(SAFE, newboard, i, j) ){
-                             changing = true;
-                             newboard[i][j]=SAFE;
-                         }
-                     }
-                }
-            }
-        }
-        //if the newboard spot didn't get changed to a 4, it's gonna get killed, thus, they were committing suicide
-        if(newboard[moveX][moveY]==piece[player]){
-         return false;   
+        ArrayList<int[]> removedPieces = getTaken(newBoard,-piece[player]);
+        if(removedPieces.size()!=0){
+            return true;
         }
         
+        //checks for suicide
+        ArrayList<int[]> removedPieces2 = getTaken(newBoard,piece[player]);
+        if(removedPieces2.size()!=0){
+            return false;
+        }
         return true;
     }
 
@@ -124,42 +102,14 @@ public class GoGameState extends GameState
             board[moveX][moveY]= piece[player];
             
             //this section deletes surrounded tiles
-            final int INDANGER = 4;
-            boolean danger=true;
-            for(int i=0;i<board.length;i++){
-                for(int j=0;j<board[0].length;j++){
-                    danger=true;
-                    if(board[i][j]==-piece[player]){
-                        if(!isPieceNextTo(EMPTY, board, i, j)){board[i][j]=INDANGER;}
-                    }
+            ArrayList<int[]> removedPieces = getTaken(board,-piece[player]);
+            for(int i=0;i<removedPieces.size();i++){
+                board[removedPieces[i][0]][removedPieces[i][1]] = EMPTY;
+                if(piece[player]=WHITE){
+                    blackCaptures++;
                 }
-            }
-            boolean changing=true;
-            while(changing){
-                changing=false;
-                for(int i=0;i<board.length;i++){
-                   for(int j=0;j<board[0].length;j++){
-                      if(board[i][j]==INDANGER){
-
-                          if( isPieceNextTo(-piece[player], board, i, j) ){
-                              changing=true;
-                              board[i][j]=-piece[player];
-                          }
-                        }
-                     }
-                 }
-            }
-            for(int i=0;i<board.length;i++){ //For loop to remove surrounded tiles, and add points
-                for(int j=0;j<board[0].length;j++){
-                    if(board[i][j]==INDANGER){
-                        if(-piece[player]==WHITE){
-                            whiteCaptures++;
-                        }
-                        if(-piece[player]==BLACK){
-                            blackCaptures++;
-                        }
-                        board[i][j]=EMPTY;
-                    }
+                else{
+                    whiteCaptures++;
                 }
             }
             //the 'in danger' section surrounded by these comments is not tested
@@ -199,6 +149,49 @@ public class GoGameState extends GameState
     @Override
     public void setGame(Game g) {
         super.setGame(g);
+    }
+    
+    
+    //This method gets returns deleted pieces
+    //This method is also not tested
+    public ArrayList<int[]> getTaken(int[][] boardToCheck, int piecesToCheck){
+        ArrayList<int[]> piecesToDelete = new ArrayList<int[]>;
+        int IN_DANGER = 4;
+        //Loop determines pieces as in Danger or not
+        for(int i=0;i<boardToCheck.length;i++){
+            for(int j=0;j<boardToCheck[0].length;j++){
+                if(boardToCheck[i][j]==piecesToCheck){
+                    if(!isPieceNextTo(EMPTY,boardToCheck,i,j){
+                        boardToCheck[i][j]=IN_DANGER;
+                    }
+                }
+            }
+        }
+        boolean changing = true;
+        while(changing){
+        changing=false;
+            for(int i=0;i<boardToCheck.length;i++){
+                for(int j=0;j<boardToCheck[0].length;j++){
+                    if(boardToCheck[i][j]==IN_DANGER){
+                        if(isPieceNextTo(piecesToCheck,boardToCheck,i,j){
+                            boardToCheck[i][j]=piecesToCheck;
+                            changing=true;
+                        }
+                    }
+                }
+            }
+        }
+        for(int i=0;i<boardToCheck.length;i++){
+            for(int j=0;j<boardToCheck[0].length;j++){
+                if(boardToCheck[i][j]==IN_DANGER){
+                    int[] deletePiece = new int[2];
+                    deletePiece[0]=i;
+                    deletePiece[1]=j;
+                    piecesToDelete.add(deletePiece);
+                }
+            }
+        }
+        return deletePiece;
     }
 
     /* CONSTRUCTORS */
