@@ -84,18 +84,22 @@ public class GoGameState extends GameState
 
     void updateProposal(int x, int y){
         //althernate the color of a spot between blank, black, and white
-        int newColor = (territoryProposal[x][y]+1)%2 -1;
+        int newColor = (territoryProposal[x][y]+2)%3 -1;
         //an array for which spots need to be updated based on the new input
         boolean[][] change = new boolean[boardSize][boardSize];
         change[x][y]=true;//the spot user picked is definite going to change
         boolean flag = true;
         while(flag){
+            flag=false;
             for(int i=0; i<boardSize; i++){
                 for(int j=0; j<boardSize; j++){
                     //mark for change if it is next to a changing piece and it's not already
                     //that color
-                    flag=false;
-                    if(board[i][j]==newColor){
+                    //don't mark for change if it's already marked
+                    if(territoryProposal[i][j]==newColor || change[i][j]){
+                        continue;
+                    }//uncaptured pieces are empty instead of in their own color
+                    if(board[i][j]!=0 && board[i][j]==newColor){
                         continue;
                     }
                     if(i>0 && change[i-1][j] ){
