@@ -306,6 +306,10 @@ public class GoGameState extends GameState
         this.stage = stage;
     }
 
+    /* RESETTER? */
+
+    public void resetTurnsPassed(){ turnsPassed = 0; }
+
     /* helper methods */
 
     /**
@@ -374,12 +378,12 @@ public class GoGameState extends GameState
                         try{
                             Integer[] spot2 = {curr[0] - 1,curr[1]};
                             if(!currSquares.contains(spot2)){
-                                if(suggestion[spot2[0]][spot2[1]] == EMPTY) {
+                                if(suggestion[spot2[0]][spot2[1]] == undecided) {
                                     suggestion[spot2[0]][spot2[1]] = deciding;
                                     currSquares.add(spot2);
-                                } else if (knownColor == undecided){
-                                    knownColor = suggestion[spot2[0]][spot2[1]];
-                                } else if (knownColor != suggestion[spot2[0]][spot2[1]]){
+                                } else if (knownColor == undecided || knownColor == board[spot2[0]][spot2[1]]){
+                                    knownColor = board[spot2[0]][spot2[1]];
+                                } else if (knownColor != board[spot2[0]][spot2[1]]){
                                     knownColor = EMPTY;
                                 }
                             }
@@ -387,12 +391,12 @@ public class GoGameState extends GameState
                         try{
                             Integer[] spot2 = {curr[0] + 1,curr[1]};
                             if(!currSquares.contains(spot2)){
-                                if(suggestion[spot2[0]][spot2[1]] == EMPTY) {
+                                if(suggestion[spot2[0]][spot2[1]] == undecided) {
                                     suggestion[spot2[0]][spot2[1]] = deciding;
                                     currSquares.add(spot2);
-                                } else if (knownColor == undecided){
-                                    knownColor = suggestion[spot2[0]][spot2[1]];
-                                } else if (knownColor != suggestion[spot2[0]][spot2[1]]){
+                                } else if (knownColor == undecided || knownColor == board[spot2[0]][spot2[1]]){
+                                    knownColor = board[spot2[0]][spot2[1]];
+                                } else if (knownColor != board[spot2[0]][spot2[1]]){
                                     knownColor = EMPTY;
                                 }
                             }
@@ -400,12 +404,12 @@ public class GoGameState extends GameState
                         try{
                             Integer[] spot2 = {curr[0],curr[1] - 1};
                             if(!currSquares.contains(spot2)){
-                                if(suggestion[spot2[0]][spot2[1]] == EMPTY) {
+                                if(suggestion[spot2[0]][spot2[1]] == undecided) {
                                     suggestion[spot2[0]][spot2[1]] = deciding;
                                     currSquares.add(spot2);
-                                } else if (knownColor == undecided){
-                                    knownColor = suggestion[spot2[0]][spot2[1]];
-                                } else if (knownColor != suggestion[spot2[0]][spot2[1]]){
+                                } else if (knownColor == undecided || knownColor == board[spot2[0]][spot2[1]]){
+                                    knownColor = board[spot2[0]][spot2[1]];
+                                } else if (knownColor != board[spot2[0]][spot2[1]]){
                                     knownColor = EMPTY;
                                 }
                             }
@@ -413,12 +417,12 @@ public class GoGameState extends GameState
                         try{
                             Integer[] spot2 = {curr[0],curr[1] + 1};
                             if(!currSquares.contains(spot2)){
-                                if(suggestion[spot2[0]][spot2[1]] == EMPTY) {
+                                if(suggestion[spot2[0]][spot2[1]] == undecided) {
                                     suggestion[spot2[0]][spot2[1]] = deciding;
                                     currSquares.add(spot2);
-                                } else if (knownColor == undecided){
-                                    knownColor = suggestion[spot2[0]][spot2[1]];
-                                } else if (knownColor != suggestion[spot2[0]][spot2[1]]){
+                                } else if (knownColor == undecided || knownColor == board[spot2[0]][spot2[1]]){
+                                    knownColor = board[spot2[0]][spot2[1]];
+                                } else if (knownColor != board[spot2[0]][spot2[1]]){
                                     knownColor = EMPTY;
                                 }
                             }
