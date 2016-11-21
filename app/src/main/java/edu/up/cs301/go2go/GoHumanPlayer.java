@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import edu.up.cs301.game.GameHumanPlayer;
 import edu.up.cs301.game.GameMainActivity;
 import edu.up.cs301.game.GamePlayer;
@@ -28,8 +30,8 @@ public class GoHumanPlayer extends GameHumanPlayer implements View.OnTouchListen
     GoSurfaceView surfaceView;
     Activity theActivity;
     GoGameState state;
-    public Button pass,draw,resign,territory;
-    public TextView playerScore,playerStonesPlaced,playerStonesCaptured,enemyScore,enemyStonesPlaced,enemyStonesCaptured;
+    public Button pass,territory;
+    public TextView playerScore,playerStonesCaptured,enemyScore,enemyStonesCaptured,stage;
 
 
     public GoHumanPlayer(String name) {
@@ -51,19 +53,14 @@ public class GoHumanPlayer extends GameHumanPlayer implements View.OnTouchListen
 
         pass = (Button)activity.findViewById(R.id.passButton);
         pass.setOnClickListener(this);
-        draw = (Button)activity.findViewById(R.id.drawButton);
-        draw.setOnClickListener(this);
-        resign = (Button)activity.findViewById(R.id.resignButton);
-        resign.setOnClickListener(this);
         territory = (Button)activity.findViewById(R.id.territorySelectButton);
         territory.setOnClickListener(this);
 
         playerScore = (TextView)activity.findViewById(R.id.playerScoreText);
-        playerStonesPlaced = (TextView)activity.findViewById(R.id.stonesPlacedText);
         playerStonesCaptured = (TextView)activity.findViewById(R.id.stonesCapturedText);
         enemyScore = (TextView)activity.findViewById(R.id.enemyScoreText);
-        enemyStonesPlaced = (TextView)activity.findViewById(R.id.enemyStonesPlacedText);
         enemyStonesCaptured = (TextView)activity.findViewById(R.id.enemyStonesCaptured);
+        stage = (TextView)activity.findViewById(R.id.stageView);
         surfaceView.invalidate();
 
     }
@@ -99,6 +96,25 @@ public class GoHumanPlayer extends GameHumanPlayer implements View.OnTouchListen
         }else{
             setCapturedText(state.getWhiteCaptures(), enemyStonesCaptured);
             setCapturedText(state.getBlackCaptures(), playerStonesCaptured);
+        }
+
+        switch (state.getStage())
+        {
+            case GoGameState.MAKE_MOVE_STAGE:
+                stage.setText("make move stage");
+                pass.setText("Pass");
+                territory.setText("select territory");
+                break;
+            case GoGameState.AGREE_TERRITORY_STAGE:
+                pass.setText("agree");
+                territory.setText("decline");
+                stage.setText("agree territory stage");
+                break;
+            case GoGameState.SELECT_TERRITORY_STAGE:
+                pass.setText("these are");
+                pass.setText("buttons");
+                stage.setText("select territory stage");
+                break;
         }
         enemyStonesCaptured.invalidate();
         playerStonesCaptured.invalidate();
@@ -144,14 +160,6 @@ public class GoHumanPlayer extends GameHumanPlayer implements View.OnTouchListen
 		{
             PassAction action = new PassAction(this);
             game.sendAction(action);
-		}
-		if(v == draw)
-		{
-
-		}
-		if(v == resign)
-		{
-
 		}
 		if(v == territory)
 		{
