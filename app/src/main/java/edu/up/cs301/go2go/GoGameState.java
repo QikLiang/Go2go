@@ -295,11 +295,21 @@ public class GoGameState extends GameState
         turnsPassed++;
     }
 
-
+    /**
+     * creates a suggested territory proposal.
+     *
+     * THIS METHOD IS AS YET UNTESTED AND SHOULD BE TREATED AS POTENTIALLY VERY BUGGY!
+     *
+     * @return suggested array
+     */
     public int[][] getTerritorySuggestion(){
         int[][] suggestion = new int[boardSize][boardSize];
 
         final int undecided = 100;
+        final int deciding = 101;
+        int knownColor;
+        ArrayList<Integer[]> currSquares = new ArrayList<Integer[]>();
+        //int[][][] currSquares = new int[boardSize * boardSize][boardSize][boardSize];
 
         //Initialize the array
         for(int i = 0; i < boardSize; i++){
@@ -316,12 +326,77 @@ public class GoGameState extends GameState
             for(int j = 0; j < boardSize; j++){
                 if(suggestion[i][j] == undecided)
                 {
+                    knownColor = undecided;
+                    Integer[] spot = {i,j};
+                    currSquares.add(spot);
+                    suggestion[i][j] = deciding;
+                    int counter = 0;
+                    while(counter < currSquares.size()){
+                        Integer[] curr = currSquares.get(counter);
+                        try{
+                            Integer[] spot2 = {curr[0] - 1,curr[1]};
+                            if(!currSquares.contains(spot2)){
+                                if(suggestion[spot2[0]][spot2[1]] == EMPTY) {
+                                    suggestion[spot2[0]][spot2[1]] = deciding;
+                                    currSquares.add(spot2);
+                                } else if (knownColor == undecided){
+                                    knownColor = suggestion[spot2[0]][spot2[1]];
+                                } else if (knownColor != suggestion[spot2[0]][spot2[1]]){
+                                    knownColor = EMPTY;
+                                }
+                            }
+                        }catch (ArrayIndexOutOfBoundsException e){}
+                        try{
+                            Integer[] spot2 = {curr[0] + 1,curr[1]};
+                            if(!currSquares.contains(spot2)){
+                                if(suggestion[spot2[0]][spot2[1]] == EMPTY) {
+                                    suggestion[spot2[0]][spot2[1]] = deciding;
+                                    currSquares.add(spot2);
+                                } else if (knownColor == undecided){
+                                    knownColor = suggestion[spot2[0]][spot2[1]];
+                                } else if (knownColor != suggestion[spot2[0]][spot2[1]]){
+                                    knownColor = EMPTY;
+                                }
+                            }
+                        }catch (ArrayIndexOutOfBoundsException e){}
+                        try{
+                            Integer[] spot2 = {curr[0],curr[1] - 1};
+                            if(!currSquares.contains(spot2)){
+                                if(suggestion[spot2[0]][spot2[1]] == EMPTY) {
+                                    suggestion[spot2[0]][spot2[1]] = deciding;
+                                    currSquares.add(spot2);
+                                } else if (knownColor == undecided){
+                                    knownColor = suggestion[spot2[0]][spot2[1]];
+                                } else if (knownColor != suggestion[spot2[0]][spot2[1]]){
+                                    knownColor = EMPTY;
+                                }
+                            }
+                        }catch (ArrayIndexOutOfBoundsException e){}
+                        try{
+                            Integer[] spot2 = {curr[0],curr[1] + 1};
+                            if(!currSquares.contains(spot2)){
+                                if(suggestion[spot2[0]][spot2[1]] == EMPTY) {
+                                    suggestion[spot2[0]][spot2[1]] = deciding;
+                                    currSquares.add(spot2);
+                                } else if (knownColor == undecided){
+                                    knownColor = suggestion[spot2[0]][spot2[1]];
+                                } else if (knownColor != suggestion[spot2[0]][spot2[1]]){
+                                    knownColor = EMPTY;
+                                }
+                            }
+                        }catch (ArrayIndexOutOfBoundsException e){}
 
+                        counter++;
+                    }
+
+                    while(!currSquares.isEmpty()){
+                        Integer[] curr = currSquares.remove(0);
+                        suggestion[curr[0]][curr[1]] = knownColor;
+                    }
                 }
             }
         }
 
         return suggestion;
     }
-
 }
