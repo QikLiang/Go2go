@@ -132,7 +132,7 @@ public class GoSurfaceView extends SurfaceView
                 if (proposal[i][k]>0){
                     p.setColor(Color.BLACK);
                     c.drawCircle(nextX,nextY,goPieceSize/3,p);
-                }else if (proposal[i][k]>0) {
+                }else if (proposal[i][k]<0) {
                     p.setColor(Color.WHITE);
                     c.drawCircle(nextX, nextY, goPieceSize / 3, p);
                 }
