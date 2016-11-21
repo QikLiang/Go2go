@@ -82,8 +82,46 @@ public class GoGameState extends GameState
         return true;
     }
 
-    int [][] getInitTerritory(){
-        return boardDeepCopy(board);
+    void updateProposal(int x, int y){
+        //althernate the color of a spot between blank, black, and white
+        int newColor = (board[x][y]+1)%2 -1;
+        //an array for which spots need to be updated based on the new input
+        boolean[][] change = new boolean[boardSize][boardSize];
+        change[x][y]=true;//the spot user picked is definite going to change
+        boolean flag = true;
+        while(flag){
+            for(int i=0; i<boardSize; i++){
+                for(int j=0; j<boardSize; j++){
+                    //mark for change if it is next to a changing piece and it's not already
+                    //that color
+                    flag=false;
+                    if(board[i][j]==newColor){
+                        continue;
+                    }
+                    if(i>0 && change[i-1][j] ){
+                        flag=true;
+                        change[i][j]=true;
+                    }else if(j>0 && change[i][j-1] ){
+                        flag=true;
+                        change[i][j]=true;
+                    }else if(i<boardSize-1 && change[i+1][j] ){
+                        flag=true;
+                        change[i][j]=true;
+                    }else if(j<boardSize-1 && change[i][j+1] ){
+                        flag=true;
+                        change[i][j]=true;
+                    }
+                }
+            }
+        }
+
+        for(int i=0; i<boardSize; i++) {
+            for (int j = 0; j < boardSize; j++) {
+                if(change[i][j]){
+                    territoryProposal[i][j] = newColor;
+                }
+            }
+        }
     }
 
     /**

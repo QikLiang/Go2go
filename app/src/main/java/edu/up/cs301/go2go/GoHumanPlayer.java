@@ -83,13 +83,12 @@ public class GoHumanPlayer extends GameHumanPlayer implements View.OnTouchListen
 
         state = (GoGameState) info;
         if(state.getTurnsPassed()>=2){
-            if(state.getTurnsPassed()>=2){
-                state.setTerritoryProposal(state.getInitTerritory());
+            if(state.getTerritoryProposal() == null){
+                state.setTerritoryProposal(state.getTerritorySuggestion());
             }
-            GoSurfaceView.setBoard(state.getTerritoryProposal());
-        }else{
-            GoSurfaceView.setBoard(state.getBoard());
+            GoSurfaceView.setProposal(state.getTerritoryProposal());
         }
+        GoSurfaceView.setBoard(state.getBoard());
         if(playerNum==0){
             setCapturedText(state.getBlackCaptures(), enemyStonesCaptured);
             setCapturedText(state.getWhiteCaptures(), playerStonesCaptured);
@@ -147,8 +146,19 @@ public class GoHumanPlayer extends GameHumanPlayer implements View.OnTouchListen
         double y = (double)event.getY();
         int xPos = (int)((x/width)*9);
         int yPos = (int)((y/height)*9);
-        PutPieceAction action = new PutPieceAction(this,xPos,yPos);
-        game.sendAction(action);
+
+        if(state==null){
+            return false;
+        }
+        //make move stage
+        if(state.getTurnsPassed()<2){
+            PutPieceAction action = new PutPieceAction(this,xPos,yPos);
+            game.sendAction(action);
+        }//select territory stage
+        else{
+            state.updateProposal(xPos, yPos);
+            GoSurfaceView.setProposal(GoGameState.boardDeepCopy(state.getTerritoryProposal()));
+        }
 
         surfaceView.invalidate();
         return true;

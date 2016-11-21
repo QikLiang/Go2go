@@ -21,7 +21,8 @@ import edu.up.cs301.game.R;
 
 public class GoSurfaceView extends SurfaceView
 {
-    public static int[][] goBoard;
+    private static int[][] goBoard;
+    private static int[][] proposal;
     public static double cWidth;
     public static double cHeight;
     public static Drawable background;
@@ -71,8 +72,12 @@ public class GoSurfaceView extends SurfaceView
     public static void setBoard(int[][] board)
     {
         goBoard = board;
-
     }
+
+    public static void setProposal(int[][] proposal){
+        GoSurfaceView.proposal=proposal;
+    }
+
     public void onDraw(Canvas c)
     {
         super.onDraw(c);
@@ -119,22 +124,18 @@ public class GoSurfaceView extends SurfaceView
                     case GoGameState.BLACK:
                         p.setColor(Color.BLACK);
                         c.drawCircle(nextX,nextY,goPieceSize,p);
-                        break;
-                    case GoGameState.WHITE_CAPTURED:
-                        p.setColor(Color.WHITE);
-                        c.drawCircle(nextX,nextY,goPieceSize,p);
-                        p.setColor(Color.BLACK);
-                        c.drawCircle(nextX,nextY,goPieceSize/3,p);
-                        break;
-                    case GoGameState.BLACK_CAPTURED:
-                        p.setColor(Color.BLACK);
-                        c.drawCircle(nextX,nextY,goPieceSize,p);
-                        p.setColor(Color.WHITE);
-                        c.drawCircle(nextX,nextY,goPieceSize/3,p);
-                        break;
                 }
 
-
+                if(proposal==null){
+                    continue;
+                }
+                if (proposal[i][k]>0){
+                    p.setColor(Color.BLACK);
+                    c.drawCircle(nextX,nextY,goPieceSize/3,p);
+                }else if (proposal[i][k]>0) {
+                    p.setColor(Color.WHITE);
+                    c.drawCircle(nextX, nextY, goPieceSize / 3, p);
+                }
             }
         }
     }
