@@ -52,6 +52,13 @@ public class GoComputerPlayer0 extends GameComputerPlayer {
                     moves.add(new PutPieceAction(this, i, j));
                 }
             }
+            if(moves.size() == 0)
+            {
+                //No legal moves, pass
+                game.sendAction(new PassAction(this));
+                return;
+            }
+
             PutPieceAction move;
             do {
                 int random = (int) (Math.random()*moves.size());

@@ -295,4 +295,33 @@ public class GoGameState extends GameState
         turnsPassed++;
     }
 
+
+    public int[][] getTerritorySuggestion(){
+        int[][] suggestion = new int[boardSize][boardSize];
+
+        final int undecided = 100;
+
+        //Initialize the array
+        for(int i = 0; i < boardSize; i++){
+            for(int j = 0; j < boardSize; j++){
+                if(board[i][j] == EMPTY) {
+                    suggestion[i][j] = undecided;
+                } else {
+                    suggestion[i][j] = EMPTY;
+                }
+            }
+        }
+        //Determine what the other spots should be
+        for(int i = 0; i < boardSize; i++){
+            for(int j = 0; j < boardSize; j++){
+                if(suggestion[i][j] == undecided)
+                {
+
+                }
+            }
+        }
+
+        return suggestion;
+    }
+
 }
