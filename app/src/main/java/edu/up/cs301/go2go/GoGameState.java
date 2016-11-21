@@ -82,6 +82,10 @@ public class GoGameState extends GameState
         return true;
     }
 
+    int [][] getInitTerritory(){
+        return boardDeepCopy(board);
+    }
+
     /**
      * alternate whose turn it is to move.
      */

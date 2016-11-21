@@ -86,6 +86,9 @@ public class GoHumanPlayer extends GameHumanPlayer implements View.OnTouchListen
 
         state = (GoGameState) info;
         if(state.getTurnsPassed()>=2){
+            if(state.getTurnsPassed()>=2){
+                state.setTerritoryProposal(state.getInitTerritory());
+            }
             GoSurfaceView.setBoard(state.getTerritoryProposal());
         }else{
             GoSurfaceView.setBoard(state.getBoard());
