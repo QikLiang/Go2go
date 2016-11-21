@@ -3,30 +3,30 @@
 
     <item
         is-multidex="true"
-        jar="/home/qi/Android/Sdk/extras/android/m2repository/com/android/support/support-v4/18.0.0/support-v4-18.0.0.jar"
+        jar="D:\workspace\Go2go\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="22.0.1"
+        sha1="20ccba264fc98727466f386cde4899ae18b75a5b">
+        <dex dex="D:\workspace\Go2go\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_e780a640065cb38f3ce7193b6a8910c13666bfb2\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\dukeo_000\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-v4\18.0.0\support-v4-18.0.0.jar"
         jumboMode="true"
         optimize="true"
         revision="22.0.1"
         sha1="44ec51e9d395a47aab135e5e1b556c0007442156">
-        <dex dex="/home/qi/programs/Go2go/app/build/intermediates/transforms/dex/debug/folders/1000/10/support-v4-18.0.0_4e0ab6ab71d10220f33911af3049fa0ff27fc356/classes.dex" />
+        <dex dex="D:\workspace\Go2go\app\build\intermediates\transforms\dex\debug\folders\1000\10\support-v4-18.0.0_71d4170cac08c47528c15c75a92050ccdfc3b064\classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="/home/qi/programs/Go2go/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jar="D:\workspace\Go2go\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
         jumboMode="true"
         optimize="true"
         revision="22.0.1"
-        sha1="33aa781c9a69cbf17b1df3dd8450f8299f0b287a">
-        <dex dex="/home/qi/programs/Go2go/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_6e1639e73fb02b6f2cefda2d20739409c86f633f/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/home/qi/programs/Go2go/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="22.0.1"
-        sha1="bc90dc31ed25de7cbf55f65f4c6b38391a9a22b4">
-        <dex dex="/home/qi/programs/Go2go/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_435c86b1bdbf644d72185f6c3493e2ad962d8f15/classes.dex" />
+        sha1="fca798ccc2846b0e86d263546a160577cd974711">
+        <dex dex="D:\workspace\Go2go\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_6f0a1e6f923fd1046cfaefd88e1a93c68e8960fe\classes.dex" />
     </item>
 
 </items>
