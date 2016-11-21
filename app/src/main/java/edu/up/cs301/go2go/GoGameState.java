@@ -27,7 +27,7 @@ public class GoGameState extends GameState
     public static final int BLACK = 1;
     public static final int EMPTY = 0;
     public static final int WHITE_CAPTURED = 2;
-    public static final int BLACK_CPATURED = -2;
+    public static final int BLACK_CAPTURED = -2;
 
     //size of the board
     public static final int boardSize = 9;
@@ -90,7 +90,7 @@ public class GoGameState extends GameState
      * alternate whose turn it is to move.
      */
     public void changeTurn(){
-        turn=1-turn;
+        Log.i("change of turn","");turn=1-turn;
     }
 
     /**

@@ -1,34 +1,18 @@
 [
     {
-        "merged": "/home/qi/programs/Go2go/app/build/intermediates/res/merged/debug/drawable-hdpi/ic_launcher.png",
-        "source": "/home/qi/programs/Go2go/app/src/main/res/drawable-hdpi/ic_launcher.png"
+        "merged": "D:\\workspace\\Go2go\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi\\go_board.png",
+        "source": "D:\\workspace\\Go2go\\app\\src\\main\\res\\drawable-hdpi\\go_board.png"
     },
     {
-        "merged": "/home/qi/programs/Go2go2/app/build/intermediates/res/merged/debug/drawable-hdpi/go_board.png",
-        "source": "/home/qi/programs/Go2go2/app/src/main/res/drawable-hdpi/go_board.png"
+        "merged": "D:\\workspace\\Go2go\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi\\ic_launcher.png",
+        "source": "D:\\workspace\\Go2go\\app\\src\\main\\res\\drawable-hdpi\\ic_launcher.png"
     },
     {
-        "merged": "/home/qi/programs/Go2go2/app/build/intermediates/res/merged/debug/drawable-hdpi/purple_delete_button.png",
-        "source": "/home/qi/programs/Go2go2/app/src/main/res/drawable-hdpi/purple_delete_button.png"
+        "merged": "D:\\workspace\\Go2go\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi\\purple_delete_button.png",
+        "source": "D:\\workspace\\Go2go\\app\\src\\main\\res\\drawable-hdpi\\purple_delete_button.png"
     },
     {
-        "merged": "/home/qi/programs/Go2go/app/build/intermediates/res/merged/debug/drawable-hdpi/ic_action_search.png",
-        "source": "/home/qi/programs/Go2go/app/src/main/res/drawable-hdpi/ic_action_search.png"
-    },
-    {
-        "merged": "/home/qi/programs/Go2go2/app/build/intermediates/res/merged/debug/drawable-hdpi/ic_launcher.png",
-        "source": "/home/qi/programs/Go2go2/app/src/main/res/drawable-hdpi/ic_launcher.png"
-    },
-    {
-        "merged": "/home/qi/programs/Go2go/app/build/intermediates/res/merged/debug/drawable-hdpi/purple_delete_button.png",
-        "source": "/home/qi/programs/Go2go/app/src/main/res/drawable-hdpi/purple_delete_button.png"
-    },
-    {
-        "merged": "/home/qi/programs/Go2go2/app/build/intermediates/res/merged/debug/drawable-hdpi/ic_action_search.png",
-        "source": "/home/qi/programs/Go2go2/app/src/main/res/drawable-hdpi/ic_action_search.png"
-    },
-    {
-        "merged": "/home/qi/programs/Go2go/app/build/intermediates/res/merged/debug/drawable-hdpi/go_board.png",
-        "source": "/home/qi/programs/Go2go/app/src/main/res/drawable-hdpi/go_board.png"
+        "merged": "D:\\workspace\\Go2go\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi\\ic_action_search.png",
+        "source": "D:\\workspace\\Go2go\\app\\src\\main\\res\\drawable-hdpi\\ic_action_search.png"
     }
 ]

@@ -9,14 +9,16 @@
 
     <edu.up.cs301.go2go.GoSurfaceView
         android:layout_width="match_parent"
-        android:layout_height="705dp"
         android:id="@+id/boardView"
-        android:background="?android:attr/windowContentOverlay" />
+        android:background="?android:attr/windowContentOverlay"
+        android:layout_weight="0.97"
+        android:layout_height="650dp" />
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:layout_weight="0.09">
 
         <LinearLayout
             android:orientation="vertical"
@@ -26,77 +28,42 @@
             android:weightSum="1">
 
             <TextView
-                android:text="PlayerScore"
+                android:text="player name"
                 android:layout_width="match_parent"
                 android:layout_height="67dp"
-                android:id="@+id/playerScore"
+                android:id="@+id/playerName"
                 android:textAllCaps="false"
                 android:textSize="30sp"
-                android:layout_weight="0.13" />
-
-            <TextView
-                android:text="stones placed"
-                android:layout_width="match_parent"
-                android:layout_height="51dp"
-                android:id="@+id/stonesPlacedText"
-                android:textSize="30sp"
-                android:layout_weight="0.35" />
+                android:layout_weight="0.20" />
 
             <TextView
                 android:text="stones captured"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:id="@+id/stonesCapturedText"
-                android:textSize="25sp"
-                android:layout_weight="0.46" />
+                android:textSize="25sp" />
 
         </LinearLayout>
 
         <LinearLayout
             android:orientation="horizontal"
-            android:layout_width="285dp"
+            android:layout_width="368dp"
             android:layout_height="match_parent"
             android:background="@color/blue">
 
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="147dp"
-                android:layout_height="match_parent">
+            <Button
+                android:text="Pass"
+                android:layout_width="169dp"
+                android:layout_height="match_parent"
+                android:id="@+id/passButton"
+                android:background="@android:drawable/btn_default" />
 
-                <Button
-                    android:text="Pass"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/passButton"
-                    android:layout_weight="1" />
-
-                <Button
-                    android:text="Resign"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:id="@+id/resignButton" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:orientation="vertical"
+            <Button
+                android:text="select territory"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <Button
-                    android:text="offer draw"
-                    android:layout_width="match_parent"
-                    android:layout_height="95dp"
-                    android:id="@+id/drawButton"
-                    android:layout_weight="0.03" />
-
-                <Button
-                    android:text="select territory"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/territorySelectButton"
-                    android:layout_weight="0.10" />
-            </LinearLayout>
+                android:layout_height="match_parent"
+                android:id="@+id/territorySelectButton"
+                android:background="@android:drawable/btn_default" />
 
         </LinearLayout>
 
@@ -107,19 +74,11 @@
             android:background="@color/red">
 
             <TextView
-                android:text="enemy score"
+                android:text="enemy name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/enemyScoreText"
+                android:id="@+id/enemyName"
                 android:layout_weight="0.42"
-                android:textSize="25sp" />
-
-            <TextView
-                android:text="stones placed"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/enemyStonesPlacedText"
-                android:layout_weight="0.57"
                 android:textSize="25sp" />
 
             <TextView

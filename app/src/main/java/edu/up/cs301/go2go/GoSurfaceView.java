@@ -1,11 +1,19 @@
 package edu.up.cs301.go2go;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.SurfaceView;
+
+import edu.up.cs301.game.R;
 
 /**
  * Created by Jenkin Schibel on 11/14/2016.
@@ -13,10 +21,10 @@ import android.view.SurfaceView;
 
 public class GoSurfaceView extends SurfaceView
 {
-
     public static int[][] goBoard;
     public static double cWidth;
     public static double cHeight;
+    public static Drawable background;
 
     public GoSurfaceView(Context context)
     {
@@ -34,12 +42,24 @@ public class GoSurfaceView extends SurfaceView
         init(context);
     }
 
+    public static void initBackground(Activity ac)
+    {
+        BitmapFactory.Options o = new BitmapFactory.Options();
+        o.inScaled = true;
+        Resources resources = ac.getResources();
+        Bitmap map;
+        map = BitmapFactory.decodeResource(resources, R.mipmap.good_wood,o);
+        background = new BitmapDrawable(resources,map);
+
+    }
     private void init(Context context)
     {
 
         setWillNotDraw(false);
         setBackgroundColor(Color.YELLOW);
+//        setBackground(background);
         goBoard = new int[9][9];
+
 
     }
 
@@ -83,13 +103,7 @@ public class GoSurfaceView extends SurfaceView
             c.drawLine((float)goStartX+nextLine,(float)goStartY,(float)goStartX+nextLine,(float)goEndY,p);
         }
 
-        /*for(int i=0; i < 9; i++)
-        {
-            for(int k=0; k < 9; k++)
-            {
-                goBoard[i][k] = GoGameState.WHITE;
-            }
-        }*/
+
         for(int i = 0; i < goBoard.length;i++)
         {
             for(int k = 0; k < goBoard[0].length; k++)
@@ -112,7 +126,7 @@ public class GoSurfaceView extends SurfaceView
                         p.setColor(Color.BLACK);
                         c.drawCircle(nextX,nextY,goPieceSize/3,p);
                         break;
-                    case GoGameState.BLACK_CPATURED:
+                    case GoGameState.BLACK_CAPTURED:
                         p.setColor(Color.BLACK);
                         c.drawCircle(nextX,nextY,goPieceSize,p);
                         p.setColor(Color.WHITE);
