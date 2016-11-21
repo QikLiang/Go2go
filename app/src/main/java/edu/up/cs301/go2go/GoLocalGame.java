@@ -47,6 +47,8 @@ public class GoLocalGame extends LocalGame {
                 return false;
             }
 
+            officialState.resetTurnsPassed();
+
             PutPieceAction move = (PutPieceAction) action;
             Log.i("Put Piece", ""+getPlayerIdx(move.getPlayer())+","+move.getX()+","+move.getY());
             //if move is legal
@@ -105,6 +107,7 @@ public class GoLocalGame extends LocalGame {
             Log.i("agreement", ""+((AgreeTerritoryAction)action).getPlayer()+","+agreement);
             gameEnded = agreement;
             if(!agreement){
+                officialState.resetTurnsPassed();
                 officialState.setStage(GoGameState.MAKE_MOVE_STAGE);
             }
             return true;

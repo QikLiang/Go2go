@@ -377,7 +377,7 @@ public class GoGameState extends GameState
                         Integer[] curr = currSquares.get(counter);
                         try{
                             Integer[] spot2 = {curr[0] - 1,curr[1]};
-                            if(!currSquares.contains(spot2)){
+                            if(suggestion[spot2[0]][spot2[1]] != deciding){
                                 if(suggestion[spot2[0]][spot2[1]] == undecided) {
                                     suggestion[spot2[0]][spot2[1]] = deciding;
                                     currSquares.add(spot2);
@@ -390,7 +390,7 @@ public class GoGameState extends GameState
                         }catch (ArrayIndexOutOfBoundsException e){}
                         try{
                             Integer[] spot2 = {curr[0] + 1,curr[1]};
-                            if(!currSquares.contains(spot2)){
+                            if(suggestion[spot2[0]][spot2[1]] != deciding){
                                 if(suggestion[spot2[0]][spot2[1]] == undecided) {
                                     suggestion[spot2[0]][spot2[1]] = deciding;
                                     currSquares.add(spot2);
@@ -403,7 +403,7 @@ public class GoGameState extends GameState
                         }catch (ArrayIndexOutOfBoundsException e){}
                         try{
                             Integer[] spot2 = {curr[0],curr[1] - 1};
-                            if(!currSquares.contains(spot2)){
+                            if(suggestion[spot2[0]][spot2[1]] != deciding){
                                 if(suggestion[spot2[0]][spot2[1]] == undecided) {
                                     suggestion[spot2[0]][spot2[1]] = deciding;
                                     currSquares.add(spot2);
@@ -416,7 +416,7 @@ public class GoGameState extends GameState
                         }catch (ArrayIndexOutOfBoundsException e){}
                         try{
                             Integer[] spot2 = {curr[0],curr[1] + 1};
-                            if(!currSquares.contains(spot2)){
+                            if(suggestion[spot2[0]][spot2[1]] != deciding){
                                 if(suggestion[spot2[0]][spot2[1]] == undecided) {
                                     suggestion[spot2[0]][spot2[1]] = deciding;
                                     currSquares.add(spot2);
@@ -435,6 +435,15 @@ public class GoGameState extends GameState
                         Integer[] curr = currSquares.remove(0);
                         suggestion[curr[0]][curr[1]] = knownColor;
                     }
+                }
+            }
+        }
+
+        //Error checking
+        for(int i = 0; i < boardSize; i++){
+            for(int j = 0; j < boardSize; j++){
+                if(suggestion[i][j] != EMPTY && suggestion[i][j] != WHITE && suggestion[i][j] != BLACK){
+                    Log.i("Suggestion", "Bad suggestion");
                 }
             }
         }
