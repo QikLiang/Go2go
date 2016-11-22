@@ -26,7 +26,7 @@ import edu.up.cs301.tictactoe.TTTState;
 
 public class GoHumanPlayer extends GameHumanPlayer implements View.OnTouchListener, View.OnClickListener {
 
-
+    boolean firstTime = true;
     GoSurfaceView surfaceView;
     Activity theActivity;
     GoGameState state;
@@ -69,6 +69,17 @@ public class GoHumanPlayer extends GameHumanPlayer implements View.OnTouchListen
     public void receiveInfo(GameInfo info)
     {
 
+        if(firstTime){
+            firstTime = false;
+            //Set name displays
+            ((TextView)theActivity.findViewById(R.id.playerName)).setText(name);
+            if(allPlayerNames[0] == name){
+                ((TextView)theActivity.findViewById(R.id.enemyName)).setText(allPlayerNames[1]);
+            } else {
+                ((TextView)theActivity.findViewById(R.id.enemyName)).setText(allPlayerNames[0]);
+            }
+        }
+
         if (surfaceView == null) return;
 
         if (info instanceof IllegalMoveInfo || info instanceof NotYourTurnInfo) {
@@ -77,11 +88,20 @@ public class GoHumanPlayer extends GameHumanPlayer implements View.OnTouchListen
             return;
         }
         else if (!(info instanceof GoGameState)) {
-            // if we do not have a TTTState, ignore
+            // if we do not have a GoGameState, ignore
             return;
         }
 
         state = (GoGameState) info;
+
+        //update gui for stage
+        if(state.getTurnsPassed()>=2) {
+            stage.setText("select territory");
+        } else {
+            stage.setText("make move stage");
+        }
+
+
         if(state.getTurnsPassed()>=2){
             if(state.getTerritoryProposal() == null){
                 state.setTerritoryProposal(state.getTerritorySuggestion());
@@ -97,30 +117,13 @@ public class GoHumanPlayer extends GameHumanPlayer implements View.OnTouchListen
             setCapturedText(state.getBlackCaptures(), playerStonesCaptured);
         }
 
-        switch (state.getStage())
-        {
-            case GoGameState.MAKE_MOVE_STAGE:
-                stage.setText("make move stage");
-                pass.setText("Pass");
-                territory.setText("select territory");
-                break;
-            case GoGameState.AGREE_TERRITORY_STAGE:
-                pass.setText("agree");
-                territory.setText("decline");
-                stage.setText("agree territory stage");
-                break;
-            case GoGameState.SELECT_TERRITORY_STAGE:
-                pass.setText("these are");
-                pass.setText("buttons");
-                stage.setText("select territory stage");
-                break;
-        }
         stage.invalidate();
         pass.invalidate();
         territory.invalidate();
         enemyStonesCaptured.invalidate();
         playerStonesCaptured.invalidate();
         surfaceView.invalidate();
+
     }
 
     private void setCapturedText(int num, TextView text){
