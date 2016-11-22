@@ -34,7 +34,7 @@ public class GoHumanPlayer extends GameHumanPlayer implements View.OnTouchListen
     public TextView playerScore,playerStonesCaptured,enemyScore,enemyStonesCaptured,stage;
 
 
-    public GoHumanPlayer(String name) {
+    public GoHumanPlayer(String name) {//made this change
         super(name);
     }
 
@@ -93,6 +93,7 @@ public class GoHumanPlayer extends GameHumanPlayer implements View.OnTouchListen
         }
 
         state = (GoGameState) info;
+		
 
         //update gui for stage
         if(state.getTurnsPassed()>=2) {
