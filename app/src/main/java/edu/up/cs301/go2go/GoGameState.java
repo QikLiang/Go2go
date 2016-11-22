@@ -40,6 +40,7 @@ public class GoGameState extends GameState
     private int turn;//which player's turn it is
     private int board [][];//representation of the board
     private int territoryProposal[][];//representation of the most recent proposal
+    private ArrayList<int[][]> pastBoards;
     
 
     /* METHODS FOR INTERACTING WITH GAME STATE */
@@ -71,11 +72,32 @@ public class GoGameState extends GameState
         
         ArrayList<int[]> removedPieces = getTaken(newboard,-piece[player]);
         if(removedPieces.size()!=0){
+            //if pieces would be removed, take them away from the new board
+            for(int i=0;i<removedPieces.size();i++){
+                newboard[removedPieces.get(i)[0]][removedPieces.get(i)[1]] = EMPTY;
+            }
+            //check to see if it's the same as a past board (check for Kos)
+            for(int i=0;i<pastBoards.size();i++){
+                outterloop:
+                for(int j=0;j<board.length;j++){
+                    for(int k=0;k<board[0].length;k++){
+                        if(pastBoards.get(i)[j][k]!=newboard[j][k]){
+                            break outterloop;
+                        }
+                        if(j=board.length && k=board.length){
+                            return false;
+                        }
+                    }
+                }
+            }
             return true;
         }
         
+        int[][] newboard2 = boardDeepCopy(board);
+        newboard2[moveX][moveY]=piece[player];
+        
         //checks for suicide
-        ArrayList<int[]> removedPieces2 = getTaken(newboard,piece[player]);
+        ArrayList<int[]> removedPieces2 = getTaken(newboard2,piece[player]);
         if(removedPieces2.size()!=0){
             return false;
         }
@@ -152,6 +174,8 @@ public class GoGameState extends GameState
             //this section deletes surrounded tiles
             ArrayList<int[]> removedPieces = getTaken(board,-piece[player]);
             for(int i=0;i<removedPieces.size();i++){
+                //resets the past boards if there were pieces taken
+                pastBoards = new ArrayList<int[][]>;
                 board[removedPieces.get(i)[0]][removedPieces.get(i)[1]] = EMPTY;
                 if(piece[player]==WHITE){
                     blackCaptures++;
@@ -160,6 +184,8 @@ public class GoGameState extends GameState
                     whiteCaptures++;
                 }
             }
+            //adds this board to the past boards
+            pastBoards.add(boardDeepCopy(board));
             //the 'in danger' section surrounded by these comments is not tested
             
             return true;
