@@ -6,6 +6,9 @@ import edu.up.cs301.game.GamePlayer;
 import edu.up.cs301.game.LocalGame;
 import edu.up.cs301.game.actionMsg.GameAction;
 
+import static edu.up.cs301.go2go.GoGameState.BLACK;
+import static edu.up.cs301.go2go.GoGameState.WHITE;
+
 /**
  * Created by qi on 10/29/16.
  */
@@ -27,10 +30,35 @@ public class GoLocalGame extends LocalGame {
     @Override
     protected String checkIfGameOver() {
         if(gameEnded){
-            return "game over";
+            return playerNames[0] + " score: " + calcScore(0) + "\n" + playerNames[1] + " score: " + calcScore(1);
         }else {
             return null;
         }
+    }
+
+    private int calcScore(int playerIdx) {
+        int score;
+        int playerColor;
+        if(playerIdx == 0)
+        {
+            score = officialState.getBlackCaptures();
+            playerColor = BLACK;
+        } else {
+            score = officialState.getWhiteCaptures();
+            playerColor = WHITE;
+        }
+
+        int[][] tempBoard = officialState.getTerritoryProposal();
+
+        for(int i = 0; i < officialState.boardSize; i++){
+            for(int j = 0; j < officialState.boardSize; j++){
+                if(tempBoard[i][j] == playerColor){
+                    score++;
+                }
+            }
+        }
+
+        return score;
     }
 
     @Override
