@@ -40,7 +40,7 @@ public class GoGameState extends GameState
     private int turn;//which player's turn it is
     private int board [][];//representation of the board
     private int territoryProposal[][];//representation of the most recent proposal
-    private ArrayList<int[][]> pastBoards;
+    private ArrayList<int[][]> pastBoards = new ArrayList<int[][]>();
     int pieceTakeInPast = 0;
     
 
@@ -85,7 +85,7 @@ public class GoGameState extends GameState
                         if(pastBoards.get(i)[j][k]!=newboard[j][k]){
                             break outterloop;
                         }
-                        if(j=board.length && k=board.length){
+                        if(j==board.length-1 && k==board.length-1){
                             return false;
                         }
                     }
@@ -176,11 +176,7 @@ public class GoGameState extends GameState
             ArrayList<int[]> removedPieces = getTaken(board,-piece[player]);
             for(int i=0;i<removedPieces.size();i++){
                 //resets the past boards if there were pieces taken
-                for(int i=0;i<pieceTakeInPast;i++){
-                    ArrayList.remove(i);
-                }
-                pieceTakeInPast = ArrayList.size();
-                
+
                 board[removedPieces.get(i)[0]][removedPieces.get(i)[1]] = EMPTY;
                 if(piece[player]==WHITE){
                     blackCaptures++;
@@ -188,6 +184,13 @@ public class GoGameState extends GameState
                 else{
                     whiteCaptures++;
                 }
+            }
+            if(removedPieces.size()>0) {
+                for(int j=0;j<pieceTakeInPast;j++){
+                    pastBoards.remove(0);
+                    pastBoards.trimToSize();
+                }
+                pieceTakeInPast = pastBoards.size();
             }
             //adds this board to the past boards
             pastBoards.add(boardDeepCopy(board));
