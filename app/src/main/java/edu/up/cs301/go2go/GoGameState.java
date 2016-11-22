@@ -41,6 +41,7 @@ public class GoGameState extends GameState
     private int board [][];//representation of the board
     private int territoryProposal[][];//representation of the most recent proposal
     private ArrayList<int[][]> pastBoards;
+    int pieceTakeInPast = 0;
     
 
     /* METHODS FOR INTERACTING WITH GAME STATE */
@@ -175,7 +176,11 @@ public class GoGameState extends GameState
             ArrayList<int[]> removedPieces = getTaken(board,-piece[player]);
             for(int i=0;i<removedPieces.size();i++){
                 //resets the past boards if there were pieces taken
-                pastBoards = new ArrayList<int[][]>;
+                for(int i=0;i<pieceTakeInPast;i++){
+                    ArrayList.remove(i);
+                }
+                pieceTakeInPast = ArrayList.size();
+                
                 board[removedPieces.get(i)[0]][removedPieces.get(i)[1]] = EMPTY;
                 if(piece[player]==WHITE){
                     blackCaptures++;
