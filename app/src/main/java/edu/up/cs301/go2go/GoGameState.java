@@ -1,13 +1,8 @@
 package edu.up.cs301.go2go;
 
 import android.util.Log;
-import android.view.SurfaceView;
-
 import java.util.ArrayList;
-
 import edu.up.cs301.game.Game;
-import edu.up.cs301.game.GamePlayer;
-import edu.up.cs301.game.actionMsg.GameAction;
 import edu.up.cs301.game.infoMsg.GameState;
 
 /**

@@ -97,6 +97,8 @@ public class GoHumanPlayer extends GameHumanPlayer implements View.OnTouchListen
         //update gui for stage
         if(state.getTurnsPassed()>=2) {
             stage.setText("select territory");
+            pass.setText("submit proposal");
+            territory.setText("");
         } else {
             stage.setText("make move stage");
         }
@@ -178,25 +180,27 @@ public class GoHumanPlayer extends GameHumanPlayer implements View.OnTouchListen
 		{
             if(state.getStage() == GoGameState.MAKE_MOVE_STAGE)
             {
+                Log.i("onclick","sending pass action");
                 PassAction action = new PassAction(this);
                 game.sendAction(action);
+                return;
             }
             if(state.getStage() == GoGameState.SELECT_TERRITORY_STAGE)
             {
                 game.sendAction(new SelectTerritoryAction(this,state.getTerritoryProposal()));
-            }
-            if(state.getStage() == GoGameState.AGREE_TERRITORY_STAGE)
-            {
-                game.sendAction(new AgreeTerritoryAction(this,true));
+                pass.setText("agree");
+                territory.setText("disagree");
+                pass.invalidate();
+                territory.invalidate();
             }
 		}
 		if(v == territory)
 		{
             if(state.getStage() == GoGameState.MAKE_MOVE_STAGE)
                 return;
-            if(state.getStage() == GoGameState.AGREE_TERRITORY_STAGE)
+            if(state.getStage() == GoGameState.SELECT_TERRITORY_STAGE)
             {
-                game.sendAction(new AgreeTerritoryAction(this,false));
+
             }
 		}
 	}
