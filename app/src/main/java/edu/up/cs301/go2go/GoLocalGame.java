@@ -6,6 +6,7 @@ import edu.up.cs301.game.GamePlayer;
 import edu.up.cs301.game.LocalGame;
 import edu.up.cs301.game.actionMsg.GameAction;
 
+import static edu.up.cs301.go2go.GoGameState.AGREE_TERRITORY_STAGE;
 import static edu.up.cs301.go2go.GoGameState.BLACK;
 import static edu.up.cs301.go2go.GoGameState.WHITE;
 
@@ -17,6 +18,7 @@ public class GoLocalGame extends LocalGame {
 
     GoGameState officialState = new GoGameState();
     private boolean gameEnded;
+    private boolean forfeit = false;
     @Override
     protected void sendUpdatedStateTo(GamePlayer p) {
         p.sendInfo(new GoGameState(officialState));
@@ -29,6 +31,9 @@ public class GoLocalGame extends LocalGame {
 
     @Override
     protected String checkIfGameOver() {
+        if(forfeit){
+            return "Game ended: " + playerNames[officialState.getTurn()] + " has yielded the match!";
+        }
         if(gameEnded){
             return playerNames[0] + " score: " + calcScore(0) + "\n" + playerNames[1] + " score: " + calcScore(1);
         }else {
@@ -41,10 +46,10 @@ public class GoLocalGame extends LocalGame {
         int playerColor;
         if(playerIdx == 0)
         {
-            score = officialState.getBlackCaptures();
+            score = officialState.getWhiteCaptures();
             playerColor = BLACK;
         } else {
-            score = officialState.getWhiteCaptures();
+            score = officialState.getBlackCaptures();
             playerColor = WHITE;
         }
 
@@ -107,10 +112,12 @@ public class GoLocalGame extends LocalGame {
         }
 
         if(action instanceof SelectTerritoryAction){
-            //both players must first pass before a proposal can be made
-            if(officialState.getTurnsPassed() < 2){
+            //determine if we are in the correct stage
+            if(officialState.getStage() != GoGameState.SELECT_TERRITORY_STAGE && officialState.getStage() != GoGameState.AGREE_TERRITORY_STAGE){
                 return false;
             }
+
+            officialState.setStage(AGREE_TERRITORY_STAGE);
 
             SelectTerritoryAction proposal = (SelectTerritoryAction) action;
             //reject if proposal is empty
@@ -126,7 +133,7 @@ public class GoLocalGame extends LocalGame {
 
         if(action instanceof AgreeTerritoryAction){
             //reject if not in right state of game
-            if(officialState.getStage() != GoGameState.SELECT_TERRITORY_STAGE){
+            if(officialState.getStage() != GoGameState.AGREE_TERRITORY_STAGE){
                 return false;
             }
 
@@ -138,6 +145,11 @@ public class GoLocalGame extends LocalGame {
                 officialState.resetTurnsPassed();
                 officialState.setStage(GoGameState.MAKE_MOVE_STAGE);
             }
+            return true;
+        }
+
+        if(action instanceof ForfeitAction){
+            forfeit = true;
             return true;
         }
 

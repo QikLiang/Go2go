@@ -96,16 +96,22 @@ public class GoHumanPlayer extends GameHumanPlayer implements View.OnTouchListen
 		
 
         //update gui for stage
-        if(state.getTurnsPassed()>=2) {
+        if(state.getStage() == GoGameState.SELECT_TERRITORY_STAGE) {
             stage.setText("select territory");
             pass.setText("submit proposal");
             territory.setText("");
+        } else if(state.getStage() == GoGameState.AGREE_TERRITORY_STAGE){
+            stage.setText("counterproposal");
+            pass.setText("submit proposal");
+            territory.setText("refuse proposal");
         } else {
             stage.setText("make move stage");
+            pass.setText("pass");
+            territory.setText("forfeit");
         }
 
 
-        if(state.getTurnsPassed()>=2){
+        if(state.getStage() == GoGameState.SELECT_TERRITORY_STAGE){
             if(state.getTerritoryProposal() == null){
                 state.setTerritoryProposal(state.getTerritorySuggestion());
             }
@@ -160,7 +166,7 @@ public class GoHumanPlayer extends GameHumanPlayer implements View.OnTouchListen
             return false;
         }
         //make move stage
-        if(state.getTurnsPassed()<2)
+        if(state.getStage() == GoGameState.MAKE_MOVE_STAGE)
         {
             PutPieceAction action = new PutPieceAction(this,xPos,yPos);
             game.sendAction(action);
@@ -186,22 +192,24 @@ public class GoHumanPlayer extends GameHumanPlayer implements View.OnTouchListen
                 game.sendAction(action);
                 return;
             }
-            if(state.getStage() == GoGameState.SELECT_TERRITORY_STAGE)
+            if(state.getStage() == GoGameState.SELECT_TERRITORY_STAGE) //Acts as submit proposal
             {
                 game.sendAction(new SelectTerritoryAction(this,state.getTerritoryProposal()));
-                pass.setText("agree");
-                territory.setText("disagree");
+                pass.setText("submit proposal");
+                territory.setText("return to play");
                 pass.invalidate();
                 territory.invalidate();
             }
 		}
 		if(v == territory)
 		{
-            if(state.getStage() == GoGameState.MAKE_MOVE_STAGE)
+            if(state.getStage() == GoGameState.MAKE_MOVE_STAGE) {
+                game.sendAction(new ForfeitAction(this));
                 return;
-            if(state.getStage() == GoGameState.SELECT_TERRITORY_STAGE)
-            {
-
+            }
+            if(state.getStage() == GoGameState.AGREE_TERRITORY_STAGE) {
+                game.sendAction(new AgreeTerritoryAction(this, false));
+                return;
             }
 		}
 	}

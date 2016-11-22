@@ -353,7 +353,7 @@ public class GoGameState extends GameState
         this.stage = stage;
     }
 
-    /* RESETTER? */
+    /* RESETTER */
 
     public void resetTurnsPassed(){ turnsPassed = 0; }
 
@@ -382,6 +382,9 @@ public class GoGameState extends GameState
 
     public void incrementPasses(){
         turnsPassed++;
+        if(turnsPassed >= 2){
+            stage = SELECT_TERRITORY_STAGE;
+        }
     }
 
     /**
