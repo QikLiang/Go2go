@@ -59,6 +59,9 @@ public class GoLocalGame extends LocalGame {
             for(int j = 0; j < officialState.boardSize; j++){
                 if(tempBoard[i][j] == playerColor){
                     score++;
+                    if(officialState.getBoard()[i][j] == 0 - playerColor){
+                        score++;
+                    }
                 }
             }
         }
