@@ -119,12 +119,17 @@ public class GoGameState extends GameState
                     //mark for change if it is next to a changing piece and it's not already
                     //that color
                     //don't mark for change if it's already marked
+                    if(board[i][j]!=board[x][y] || change[i][j]){
+                        continue;
+                    }
+
+                    /* agressive modification version
                     if(territoryProposal[i][j]==newColor || change[i][j]){
                         continue;
                     }//uncaptured pieces are empty instead of in their own color
                     if(board[i][j]!=0 && board[i][j]==newColor){
                         continue;
-                    }
+                    }*/
                     if(i>0 && change[i-1][j] ){
                         flag=true;
                         change[i][j]=true;
@@ -145,7 +150,16 @@ public class GoGameState extends GameState
         for(int i=0; i<boardSize; i++) {
             for (int j = 0; j < boardSize; j++) {
                 if(change[i][j]){
-                    territoryProposal[i][j] = newColor;
+                    //empty squares alternate between empty, black, and white
+                    if(board[i][j]==0){
+                        territoryProposal[i][j] = newColor;
+                    }else{//pieces squares alternate between captured and not captured
+                        if(territoryProposal[i][j]==0){
+                            territoryProposal[i][j]=-board[i][j];
+                        }else{
+                            territoryProposal[i][j]=0;
+                        }
+                    }
                 }
             }
         }
