@@ -43,6 +43,13 @@ public class GoMainActivity extends GameMainActivity{
 			}
 		});
 
+		playerTypes.add(new GamePlayerType("Computer Player (smart)") {
+            @Override
+            public GamePlayer createPlayer(String name) {
+                return new GoComputerPlayer1(name);
+            }
+        });
+
 		// Create a game configuration class for Tic-tac-toe
 		GameConfig defaultConfig = new GameConfig(playerTypes, 2,2, "Go2go", PORT_NUMBER);
 
