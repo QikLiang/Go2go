@@ -118,7 +118,7 @@ public final class R {
         public static final int game_main=0x7f090000;
     }
     public static final class mipmap {
-        public static final int good_wood=0x7f030000;
+        public static final int ic_launcher=0x7f030000;
     }
     public static final class string {
         public static final int add_player=0x7f080000;
