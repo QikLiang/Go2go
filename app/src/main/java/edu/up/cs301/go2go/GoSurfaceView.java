@@ -25,8 +25,8 @@ public class GoSurfaceView extends SurfaceView
 {
     private static int[][] goBoard;
     private static int[][] proposal;
-    public static double cWidth;
-    public static double cHeight;
+    public static double cWidth,cHeight,goBoardWidth,goBoardHeigth;
+
     public static BitmapDrawable background;
     public static GameMainActivity activity;
     private static android.graphics.Bitmap map;
@@ -66,7 +66,7 @@ public class GoSurfaceView extends SurfaceView
     {
         activity = GoHumanPlayer.getActivity();
         setWillNotDraw(false);
-        setBackgroundColor(Color.LTGRAY);
+        setBackgroundColor(Color.YELLOW);
 
         goBoard = new int[9][9];
 
@@ -99,18 +99,18 @@ public class GoSurfaceView extends SurfaceView
             this.invalidate();
             return;
         }
-        c.drawBitmap(map,0,0,null);
+//        c.drawBitmap(map,0,0,null);
         super.onDraw(c);
         Paint p = new Paint();
         p.setColor(Color.BLACK);
         p.setStrokeWidth(10);
 
-        double goStartX = cWidth*.1;
-        double goStartY = cHeight*.1;
-        double goEndX = cWidth*.9;
-        double goEndY = cHeight*.9;
-        double goBoardWidth = goEndX-goStartX;
-        double goBoardHeigth = goEndY-goStartY;
+        double goStartX = cWidth*.055555;
+        double goStartY = cHeight*.055555;
+        double goEndX = cWidth*.95;
+        double goEndY = cHeight*.95;
+        goBoardWidth = goEndX-goStartX;
+        goBoardHeigth = goEndY-goStartY;
         int goPieceSize = (int)(goBoardHeigth/GoGameState.boardSize/2);
 
 

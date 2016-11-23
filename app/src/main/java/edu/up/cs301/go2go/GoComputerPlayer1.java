@@ -16,7 +16,7 @@ public class GoComputerPlayer1 extends GameComputerPlayer {
     protected final int maxDepth;//the maximum recursion depth
     public GoComputerPlayer1(String name) {
         super(name);
-        maxDepth = 2;
+        maxDepth = 1;
     }
 
     /**
@@ -49,8 +49,8 @@ public class GoComputerPlayer1 extends GameComputerPlayer {
             }
 
             //make a list of all possible board positions after current turn
-            ArrayList<GoGameState> boards = new ArrayList<GoGameState>();
-            ArrayList<PutPieceAction> moves = new ArrayList<PutPieceAction>();
+            ArrayList<GoGameState> boards = new ArrayList<GoGameState>(GoGameState.boardSize*GoGameState.boardSize);
+            ArrayList<PutPieceAction> moves = new ArrayList<PutPieceAction>(GoGameState.boardSize*GoGameState.boardSize);
             //for each position on the board
             for(int i=0; i<GoGameState.boardSize; i++){
                 for(int j=0; j<GoGameState.boardSize; j++){
@@ -58,7 +58,9 @@ public class GoComputerPlayer1 extends GameComputerPlayer {
                     GoGameState temp = new GoGameState(state);
                     //if the move is possible
                     if(temp.updateBoard(state.getTurn(), i, j)){
+                        temp.changeTurn();
                         boards.add(temp);
+                        moves.add(new PutPieceAction(this, i, j));
                     }
                 }
             }
@@ -70,19 +72,28 @@ public class GoComputerPlayer1 extends GameComputerPlayer {
             }
 
             //select the best (least favorable to opponent) move and play it
-            double score = evauateScore(boards.get(0), maxDepth);
-            int index = 0;
+            double score = -evauateScore(boards.get(0), maxDepth);
             int moveX = moves.get(0).getX();
             int moveY = moves.get(0).getY();
+            double tempScore;
+            ArrayList<PutPieceAction> bestMoves = new ArrayList<PutPieceAction>();
             for(int i=1; i<boards.size(); i++){
-                if(score>evauateScore(boards.get(i), maxDepth)){
-                    index = i;
+                tempScore =-evauateScore(boards.get(i), maxDepth);
+                if(score>tempScore){
+                    bestMoves.clear();
+                    bestMoves.add(moves.get(i));
                     moveX = moves.get(i).getX();
                     moveY = moves.get(i).getY();
+                    score = tempScore;
+                }else if( score==tempScore ){
+                    bestMoves.add(moves.get(i));
+                    moveX = moves.get(i).getX();
+                    moveY = moves.get(i).getY();
+                    score = tempScore;
                 }
             }
 
-            game.sendAction(new PutPieceAction(this, moveX, moveY));
+            game.sendAction(bestMoves.get( (int)(Math.random()*bestMoves.size()) ));
             return;
         }
 
@@ -100,11 +111,11 @@ public class GoComputerPlayer1 extends GameComputerPlayer {
      */
     protected static double evauateScore(GoGameState board, int level){
         if(level<=0){
-            return evauateScore(board);
+            return -evauateScore(board);
         }
 
         //make a list of all possible board positions after current turn
-        ArrayList<GoGameState> boards = new ArrayList<GoGameState>();
+        ArrayList<GoGameState> boards = new ArrayList<GoGameState>(GoGameState.boardSize*GoGameState.boardSize);
         //for each position on the board
         for(int i=0; i<GoGameState.boardSize; i++){
             for(int j=0; j<GoGameState.boardSize; j++){
@@ -112,21 +123,26 @@ public class GoComputerPlayer1 extends GameComputerPlayer {
                 GoGameState temp = new GoGameState(board);
                 //if the move is possible
                 if(temp.updateBoard(board.getTurn(), i, j)){
+                    temp.changeTurn();
                     boards.add(temp);
                 }
             }
         }
 
         //evauate the score of each board in boards
-        double scores[] = new double[boards.size()];
-        for (int i=0; i<boards.size(); i++){
-            scores[i] = evauateScore(boards.get(i), level-1);
+        double score = -evauateScore(boards.get(0), level-1);
+        double tempScore;
+        for (int i=1; i<boards.size(); i++){
+            //what's good for enimy is bad for you
+            tempScore = -evauateScore(boards.get(i), level-1);
+            if(tempScore<score){
+                score=tempScore;
+            }
         }
 
         //evauate the score of each board
-        Arrays.sort(scores);
         //return the value of the score least favorable to opponent
-        return scores[0];
+        return score;
     }
 
     /**
