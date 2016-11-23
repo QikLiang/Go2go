@@ -9,16 +9,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import edu.up.cs301.game.GameHumanPlayer;
 import edu.up.cs301.game.GameMainActivity;
-import edu.up.cs301.game.GamePlayer;
 import edu.up.cs301.game.R;
 import edu.up.cs301.game.infoMsg.GameInfo;
 import edu.up.cs301.game.infoMsg.IllegalMoveInfo;
 import edu.up.cs301.game.infoMsg.NotYourTurnInfo;
-import edu.up.cs301.tictactoe.TTTState;
 
 /**
  * Created by qi on 10/29/16.
@@ -93,7 +89,8 @@ public class GoHumanPlayer extends GameHumanPlayer implements View.OnTouchListen
         }
 
         state = (GoGameState) info;
-		
+
+        surfaceView.setMyTurn(state.getTurn() == playerNum);
 
         //update gui for stage
         if(state.getStage() == GoGameState.SELECT_TERRITORY_STAGE) {
@@ -170,11 +167,13 @@ public class GoHumanPlayer extends GameHumanPlayer implements View.OnTouchListen
         {
             PutPieceAction action = new PutPieceAction(this,xPos,yPos);
             game.sendAction(action);
-        }//select territory stage
+        }//select/accept territory stage
         else
         {
-            state.updateProposal(xPos, yPos);
-            GoSurfaceView.setProposal(GoGameState.boardDeepCopy(state.getTerritoryProposal()));
+            if(state.getTurn() == playerNum) {
+                state.updateProposal(xPos, yPos);
+                GoSurfaceView.setProposal(GoGameState.boardDeepCopy(state.getTerritoryProposal()));
+            }
         }
 
         surfaceView.invalidate();

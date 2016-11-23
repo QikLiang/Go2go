@@ -8,6 +8,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.RectF;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
@@ -26,6 +27,12 @@ public class GoSurfaceView extends SurfaceView
     public static double cWidth;
     public static double cHeight;
     public static Drawable background;
+
+    private boolean myTurn = false;
+
+    public void setMyTurn(boolean myTurn) {
+        this.myTurn = myTurn;
+    }
 
     public GoSurfaceView(Context context)
     {
@@ -97,6 +104,8 @@ public class GoSurfaceView extends SurfaceView
         int goPieceSize = (int)(goBoardHeigth/GoGameState.boardSize/2);
 
 
+        //DRAW BOARD
+
         for(float i=0; i<=8; i++)//draws horizontal lines
         {
             float nextLine = (float)(goBoardHeigth*(i/8));
@@ -137,6 +146,14 @@ public class GoSurfaceView extends SurfaceView
                     c.drawCircle(nextX, nextY, goPieceSize / 3, p);
                 }
             }
+        }
+
+        p.setColor(0xFF0000FF);
+        //draw turn indicator
+        if(myTurn){
+            c.drawOval(new RectF(0f, 1545f, 470f, 1645f), p);
+        } else {
+            c.drawOval(new RectF(1083f, 1545f, 1537f, 1645f), p);
         }
     }
 }
