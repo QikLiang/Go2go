@@ -29,6 +29,8 @@ public class GoHumanPlayer extends GameHumanPlayer implements View.OnTouchListen
     public Button pass,territory;
     public TextView playerScore,playerStonesCaptured,enemyScore,enemyStonesCaptured,stage;
 
+    private int[][] originalTerritoryProposal;
+
 
     public GoHumanPlayer(String name) {//made this change
         super(name);
@@ -91,6 +93,8 @@ public class GoHumanPlayer extends GameHumanPlayer implements View.OnTouchListen
         state = (GoGameState) info;
 
         surfaceView.setMyTurn(state.getTurn() == playerNum);
+
+        originalTerritoryProposal = GoGameState.boardDeepCopy(state.getTerritoryProposal());
 
         //update gui for stage
         if(state.getStage() == GoGameState.SELECT_TERRITORY_STAGE) {
@@ -198,6 +202,26 @@ public class GoHumanPlayer extends GameHumanPlayer implements View.OnTouchListen
                 territory.setText("return to play");
                 pass.invalidate();
                 territory.invalidate();
+            }
+            if(state.getStage() == GoGameState.AGREE_TERRITORY_STAGE) //Acts as submit proposal
+            {
+                boolean diff = false;
+                for(int i = 0; i < GoGameState.boardSize; i++){
+                    for(int j = 0; j < GoGameState.boardSize; j++){
+                        if(originalTerritoryProposal[i][j] != state.getTerritoryProposal()[i][j]){
+                            diff = true;
+                        }
+                    }
+                }
+                if(diff){
+                    game.sendAction(new SelectTerritoryAction(this,state.getTerritoryProposal()));
+                    pass.setText("submit proposal");
+                    territory.setText("return to play");
+                    pass.invalidate();
+                    territory.invalidate();
+                } else {
+                    game.sendAction(new AgreeTerritoryAction(this, true));
+                }
             }
 		}
 		if(v == territory)
