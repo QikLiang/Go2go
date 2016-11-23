@@ -9,16 +9,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import edu.up.cs301.game.GameHumanPlayer;
 import edu.up.cs301.game.GameMainActivity;
-import edu.up.cs301.game.GamePlayer;
 import edu.up.cs301.game.R;
 import edu.up.cs301.game.infoMsg.GameInfo;
 import edu.up.cs301.game.infoMsg.IllegalMoveInfo;
 import edu.up.cs301.game.infoMsg.NotYourTurnInfo;
-import edu.up.cs301.tictactoe.TTTState;
 
 /**
  * Created by qi on 10/29/16.
@@ -34,7 +30,7 @@ public class GoHumanPlayer extends GameHumanPlayer implements View.OnTouchListen
     public TextView playerScore,playerStonesCaptured,enemyScore,enemyStonesCaptured,stage;
 
 
-    public GoHumanPlayer(String name) {
+    public GoHumanPlayer(String name) {//made this change
         super(name);
     }
 
@@ -94,15 +90,25 @@ public class GoHumanPlayer extends GameHumanPlayer implements View.OnTouchListen
 
         state = (GoGameState) info;
 
+        surfaceView.setMyTurn(state.getTurn() == playerNum);
+
         //update gui for stage
-        if(state.getTurnsPassed()>=2) {
+        if(state.getStage() == GoGameState.SELECT_TERRITORY_STAGE) {
             stage.setText("select territory");
+            pass.setText("submit proposal");
+            territory.setText("");
+        } else if(state.getStage() == GoGameState.AGREE_TERRITORY_STAGE){
+            stage.setText("counterproposal");
+            pass.setText("submit proposal");
+            territory.setText("refuse proposal");
         } else {
             stage.setText("make move stage");
+            pass.setText("pass");
+            territory.setText("forfeit");
         }
 
 
-        if(state.getTurnsPassed()>=2){
+        if(state.getStage() == GoGameState.SELECT_TERRITORY_STAGE){
             if(state.getTerritoryProposal() == null){
                 state.setTerritoryProposal(state.getTerritorySuggestion());
             }
@@ -157,15 +163,17 @@ public class GoHumanPlayer extends GameHumanPlayer implements View.OnTouchListen
             return false;
         }
         //make move stage
-        if(state.getTurnsPassed()<2)
+        if(state.getStage() == GoGameState.MAKE_MOVE_STAGE)
         {
             PutPieceAction action = new PutPieceAction(this,xPos,yPos);
             game.sendAction(action);
-        }//select territory stage
+        }//select/accept territory stage
         else
         {
-            state.updateProposal(xPos, yPos);
-            GoSurfaceView.setProposal(GoGameState.boardDeepCopy(state.getTerritoryProposal()));
+            if(state.getTurn() == playerNum) {
+                state.updateProposal(xPos, yPos);
+                GoSurfaceView.setProposal(GoGameState.boardDeepCopy(state.getTerritoryProposal()));
+            }
         }
 
         surfaceView.invalidate();
@@ -178,25 +186,29 @@ public class GoHumanPlayer extends GameHumanPlayer implements View.OnTouchListen
 		{
             if(state.getStage() == GoGameState.MAKE_MOVE_STAGE)
             {
+                Log.i("onclick","sending pass action");
                 PassAction action = new PassAction(this);
                 game.sendAction(action);
+                return;
             }
-            if(state.getStage() == GoGameState.SELECT_TERRITORY_STAGE)
+            if(state.getStage() == GoGameState.SELECT_TERRITORY_STAGE) //Acts as submit proposal
             {
                 game.sendAction(new SelectTerritoryAction(this,state.getTerritoryProposal()));
-            }
-            if(state.getStage() == GoGameState.AGREE_TERRITORY_STAGE)
-            {
-                game.sendAction(new AgreeTerritoryAction(this,true));
+                pass.setText("submit proposal");
+                territory.setText("return to play");
+                pass.invalidate();
+                territory.invalidate();
             }
 		}
 		if(v == territory)
 		{
-            if(state.getStage() == GoGameState.MAKE_MOVE_STAGE)
+            if(state.getStage() == GoGameState.MAKE_MOVE_STAGE) {
+                game.sendAction(new ForfeitAction(this));
                 return;
-            if(state.getStage() == GoGameState.AGREE_TERRITORY_STAGE)
-            {
-                game.sendAction(new AgreeTerritoryAction(this,false));
+            }
+            if(state.getStage() == GoGameState.AGREE_TERRITORY_STAGE) {
+                game.sendAction(new AgreeTerritoryAction(this, false));
+                return;
             }
 		}
 	}

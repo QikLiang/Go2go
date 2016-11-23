@@ -68,8 +68,13 @@ public class GoComputerPlayer0 extends GameComputerPlayer {
             game.sendAction(move);
         }
 
-        //always agree to other player's proposal
+        //send default territory suggestion
         if(state.getStage() == GoGameState.SELECT_TERRITORY_STAGE){
+            game.sendAction(new SelectTerritoryAction(this, state.getTerritorySuggestion()));
+        }
+
+        //always agree to other player's proposal
+        if(state.getStage() == GoGameState.AGREE_TERRITORY_STAGE){
             game.sendAction(new AgreeTerritoryAction(this, true));
         }
     }
