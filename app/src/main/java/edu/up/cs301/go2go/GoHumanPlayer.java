@@ -26,6 +26,7 @@ public class GoHumanPlayer extends GameHumanPlayer implements View.OnTouchListen
     GoSurfaceView surfaceView;
     Activity theActivity;
     GoGameState state;
+    public static GameMainActivity humanPlayerStatic;
     public Button pass,territory;
     public TextView playerScore,playerStonesCaptured,enemyScore,enemyStonesCaptured,stage;
 
@@ -44,6 +45,7 @@ public class GoHumanPlayer extends GameHumanPlayer implements View.OnTouchListen
     public void setAsGui(GameMainActivity activity) {
 
         theActivity = activity;
+        humanPlayerStatic = activity;
         activity.setContentView(R.layout.go_human_player);
         theActivity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         surfaceView = (GoSurfaceView)activity.findViewById(R.id.boardView);
@@ -236,4 +238,6 @@ public class GoHumanPlayer extends GameHumanPlayer implements View.OnTouchListen
             }
 		}
 	}
+
+    public static GameMainActivity getActivity(){return humanPlayerStatic;}
 }

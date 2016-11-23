@@ -14,6 +14,7 @@ import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.SurfaceView;
 
+import edu.up.cs301.game.GameMainActivity;
 import edu.up.cs301.game.R;
 
 /**
@@ -26,9 +27,11 @@ public class GoSurfaceView extends SurfaceView
     private static int[][] proposal;
     public static double cWidth;
     public static double cHeight;
-    public static Drawable background;
-
+    public static BitmapDrawable background;
+    public static GameMainActivity activity;
+    private static android.graphics.Bitmap map;
     private boolean myTurn = false;
+    private boolean firstTime = true;
 
     public void setMyTurn(boolean myTurn) {
         this.myTurn = myTurn;
@@ -50,22 +53,21 @@ public class GoSurfaceView extends SurfaceView
         init(context);
     }
 
-    public static void initBackground(Activity ac)
+    public void initBackground(GameMainActivity ac)
     {
         BitmapFactory.Options o = new BitmapFactory.Options();
-        o.inScaled = true;
         Resources resources = ac.getResources();
-        Bitmap map;
-        map = BitmapFactory.decodeResource(resources, R.mipmap.good_wood,o);
+        map = BitmapFactory.decodeResource(resources, R.mipmap.ic_launcher,o);
+        map = Bitmap.createScaledBitmap(map,(int)cWidth*(5/4),(int)cHeight*(5/4),false);
         background = new BitmapDrawable(resources,map);
 
     }
     private void init(Context context)
     {
-
+        activity = GoHumanPlayer.getActivity();
         setWillNotDraw(false);
-        setBackgroundColor(Color.YELLOW);
-//        setBackground(background);
+        setBackgroundColor(Color.LTGRAY);
+
         goBoard = new int[9][9];
 
 
@@ -87,18 +89,26 @@ public class GoSurfaceView extends SurfaceView
 
     public void onDraw(Canvas c)
     {
-        super.onDraw(c);
 
+        if(firstTime)
+        {
+            firstTime = false;
+            cWidth = c.getWidth();
+            cHeight = c.getHeight();
+            initBackground(activity);
+            this.invalidate();
+            return;
+        }
+        c.drawBitmap(map,0,0,null);
+        super.onDraw(c);
         Paint p = new Paint();
         p.setColor(Color.BLACK);
         p.setStrokeWidth(10);
 
-        cWidth = c.getWidth();
-        cHeight = c.getHeight();
-        double goStartX = cWidth*.055555;
-        double goStartY = cHeight*.055555;
-        double goEndX = cWidth*.95;
-        double goEndY = cHeight*.95;
+        double goStartX = cWidth*.1;
+        double goStartY = cHeight*.1;
+        double goEndX = cWidth*.9;
+        double goEndY = cHeight*.9;
         double goBoardWidth = goEndX-goStartX;
         double goBoardHeigth = goEndY-goStartY;
         int goPieceSize = (int)(goBoardHeigth/GoGameState.boardSize/2);
