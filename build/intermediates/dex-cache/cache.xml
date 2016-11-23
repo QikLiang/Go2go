@@ -7,7 +7,7 @@
         jumboMode="true"
         optimize="true"
         revision="22.0.1"
-        sha1="6698f556a026fe132fda93223c85327110705859">
+        sha1="e8d47fdf7e2136247b70675bd08df84f1d5ee2d9">
         <dex dex="D:\workspace\Go2go\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_e780a640065cb38f3ce7193b6a8910c13666bfb2\classes.dex" />
     </item>
     <item
@@ -25,7 +25,7 @@
         jumboMode="true"
         optimize="true"
         revision="22.0.1"
-        sha1="a27bd333c7a0cbc8e68a09efee14f291b2354bf8">
+        sha1="6a91158d27221dc96c4d33a65cf5bae9b7e6760c">
         <dex dex="D:\workspace\Go2go\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_6f0a1e6f923fd1046cfaefd88e1a93c68e8960fe\classes.dex" />
     </item>
 
