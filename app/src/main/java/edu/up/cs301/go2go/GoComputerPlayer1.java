@@ -73,21 +73,27 @@ public class GoComputerPlayer1 extends GameComputerPlayer {
 
             //select the best (least favorable to opponent) move and play it
             double score = -evauateScore(boards.get(0), maxDepth);
-            int index = 0;
             int moveX = moves.get(0).getX();
             int moveY = moves.get(0).getY();
             double tempScore;
+            ArrayList<PutPieceAction> bestMoves = new ArrayList<PutPieceAction>();
             for(int i=1; i<boards.size(); i++){
                 tempScore =-evauateScore(boards.get(i), maxDepth);
                 if(score>tempScore){
-                    index = i;
+                    bestMoves.clear();
+                    bestMoves.add(moves.get(i));
+                    moveX = moves.get(i).getX();
+                    moveY = moves.get(i).getY();
+                    score = tempScore;
+                }else if( score==tempScore ){
+                    bestMoves.add(moves.get(i));
                     moveX = moves.get(i).getX();
                     moveY = moves.get(i).getY();
                     score = tempScore;
                 }
             }
 
-            game.sendAction(new PutPieceAction(this, moveX, moveY));
+            game.sendAction(bestMoves.get( (int)(Math.random()*bestMoves.size()) ));
             return;
         }
 
