@@ -162,6 +162,20 @@ public class GoHumanPlayer extends GameHumanPlayer implements View.OnTouchListen
         double height = GoSurfaceView.cHeight;
         double x = (double)event.getX();
         double y = (double)event.getY();
+
+        double boundarySize = 0.05 * width;
+
+        //check for non-move positions
+        if(x < boundarySize || y < boundarySize || x > width - boundarySize || y > width - boundarySize){
+            return true;
+        }
+
+        x -= boundarySize;
+        y -= boundarySize;
+        width -= (2*boundarySize);
+        height -= (2*boundarySize);
+
+
         int xPos = (int)((x/width)*9);
         int yPos = (int)((y/height)*9);
 
