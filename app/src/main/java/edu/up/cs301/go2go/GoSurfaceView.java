@@ -25,13 +25,13 @@ public class GoSurfaceView extends SurfaceView
 {
     private static int[][] goBoard;
     private static int[][] proposal;
-    public static double cWidth,cHeight,goBoardWidth,goBoardHeigth;
-
-    public static BitmapDrawable background;
+    public static double cWidth,cHeight,goBoardWidth,goBoardHeigth,goStartX,goStartY,goEndX,goEndY;
+    public static int goPieceSize;
     public static GameMainActivity activity;
-    private static android.graphics.Bitmap map;
+    private static android.graphics.Bitmap background,vegdahl,nuxoll;
     private boolean myTurn = false;
-    private boolean firstTime = true;
+    private static boolean firstTime = true;
+    private static boolean drawVegW=false,drawNuxW=false,drawVegB=false,drawNuxB=false;
 
     public void setMyTurn(boolean myTurn) {
         this.myTurn = myTurn;
@@ -53,13 +53,18 @@ public class GoSurfaceView extends SurfaceView
         init(context);
     }
 
-    public void initBackground(GameMainActivity ac)
+    public void initImages(GameMainActivity ac)
     {
+        double size = (double)goPieceSize;
         BitmapFactory.Options o = new BitmapFactory.Options();
         Resources resources = ac.getResources();
-        map = BitmapFactory.decodeResource(resources, R.mipmap.ic_launcher,o);
-        map = Bitmap.createScaledBitmap(map,(int)cWidth*(5/4),(int)cHeight*(5/4),false);
-        background = new BitmapDrawable(resources,map);
+        background = BitmapFactory.decodeResource(resources, R.drawable.goodwood,o);
+        background = Bitmap.createScaledBitmap(background,(int)(cWidth*.86),(int)(cHeight*.86),false);
+        vegdahl = BitmapFactory.decodeResource(resources,R.drawable.vegdahl);
+        vegdahl = Bitmap.createScaledBitmap(vegdahl,(int)(size*1.75),(int)(size*1.75),false);
+        nuxoll = BitmapFactory.decodeResource(resources,R.drawable.nuxoll);
+        nuxoll = Bitmap.createScaledBitmap(nuxoll,(int)(size*1.75),(int)(size*1.75),false);
+
 
     }
     private void init(Context context)
@@ -95,24 +100,24 @@ public class GoSurfaceView extends SurfaceView
             firstTime = false;
             cWidth = c.getWidth();
             cHeight = c.getHeight();
-            initBackground(activity);
+            goStartX = cWidth*.1;
+            goStartY = cHeight*.1;
+            goEndX = cWidth*.9;
+            goEndY = cHeight*.9;
+            goBoardWidth = goEndX-goStartX;
+            goBoardHeigth = goEndY-goStartY;
+            goPieceSize = (int)(goBoardHeigth/GoGameState.boardSize/2);
+            initImages(activity);
             this.invalidate();
-            return;
+
         }
-        c.drawBitmap(map,0,0,null);
+        drawVegW=true;
+        drawNuxB=true;
         super.onDraw(c);
+        c.drawBitmap(background,(int)goStartX-50,(int)goStartY-50,null);
         Paint p = new Paint();
         p.setColor(Color.BLACK);
         p.setStrokeWidth(10);
-
-        double goStartX = cWidth*.1;
-        double goStartY = cHeight*.1;
-        double goEndX = cWidth*.9;
-        double goEndY = cHeight*.9;
-        goBoardWidth = goEndX-goStartX;
-        goBoardHeigth = goEndY-goStartY;
-        int goPieceSize = (int)(goBoardHeigth/GoGameState.boardSize/2);
-
 
         //DRAW BOARD
 
@@ -135,14 +140,30 @@ public class GoSurfaceView extends SurfaceView
                 float nextX = (float)(goBoardWidth*i/8 +goStartX);
                 float nextY = (float)(goBoardHeigth*k/8 +goStartY);
                 p.setStyle(Paint.Style.FILL);
-                switch (goBoard[i][k]){
+                switch (goBoard[i][k])
+                {
                     case GoGameState.WHITE:
-                        p.setColor(Color.WHITE);
-                        c.drawCircle(nextX,nextY,goPieceSize,p);
+                        if(drawVegW)
+                            c.drawBitmap(vegdahl,nextX-75,nextY-75,null);
+                        else if(drawNuxW)
+                            c.drawBitmap(nuxoll,nextX-75,nextY-75,null);
+                        else
+                        {
+                            p.setColor(Color.WHITE);
+                            c.drawCircle(nextX,nextY,goPieceSize,p);
+                        }
                         break;
                     case GoGameState.BLACK:
-                        p.setColor(Color.BLACK);
-                        c.drawCircle(nextX,nextY,goPieceSize,p);
+                        if(drawVegB)
+                            c.drawBitmap(vegdahl,nextX-75,nextY-75,null);
+                        else if(drawNuxB)
+                            c.drawBitmap(nuxoll,nextX-75,nextY-75,null);
+                        else
+                        {
+                            p.setColor(Color.BLACK);
+                            c.drawCircle(nextX,nextY,goPieceSize,p);
+                        }
+                        break;
                 }
 
                 if(proposal==null){
