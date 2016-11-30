@@ -29,6 +29,7 @@ import edu.up.cs301.game.config.GameConfig;
 import edu.up.cs301.game.config.GamePlayerType;
 import edu.up.cs301.game.util.IPCoder;
 import edu.up.cs301.game.util.MessageBox;
+import edu.up.cs301.go2go.GoSurfaceView;
 
 /**
  * class GameMainActivity
@@ -286,6 +287,20 @@ View.OnClickListener {
 			GamePlayerType[] availTypes = config.getAvailTypes(); // the available player types
 			players[i] = gpt.createPlayer(name); // create the player
 
+			//checks for setting nuxol and vegdahl head easter egg
+			if(name.contains("nux")||name.contains("Nux")){
+				if(i==0)
+					GoSurfaceView.drawNuxB=true;
+				if(i==1)
+					GoSurfaceView.drawNuxW=true;
+			}
+			if(name.contains("veg")||name.contains("Veg"))
+			{
+				if(i==0)
+					GoSurfaceView.drawVegB=true;
+				if(i==1)
+					GoSurfaceView.drawVegW=true;
+			}
 			// check that the player name is legal
 			if (name.length() <= 0 && gpt != availTypes[availTypes.length-1]) {
 				// disallow an empty player name, unless it's a dummy (proxy) player

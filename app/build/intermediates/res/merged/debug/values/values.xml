@@ -2,8 +2,8 @@
 <resources>
     <color name="black">#000</color>
     <color name="blue">#0000ff</color>
-    <color name="green">#00ff00</color>
-    <color name="red">#ff0000</color>
+    <color name="green">#45d245</color>
+    <color name="red">#e31919</color>
     <dimen name="config_horiz_margin">20dp</dimen>
     <dimen name="del_player_button_size">35dp</dimen>
     <dimen name="tab_height">75dp</dimen>

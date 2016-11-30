@@ -31,7 +31,7 @@ public class GoSurfaceView extends SurfaceView
     private static android.graphics.Bitmap background,vegdahl,nuxoll;
     private boolean myTurn = false;
     private static boolean firstTime = true;
-    private static boolean drawVegW=false,drawNuxW=false,drawVegB=false,drawNuxB=false;
+    public static boolean drawVegW=false,drawNuxW=false,drawVegB=false,drawNuxB=false;
 
     public void setMyTurn(boolean myTurn) {
         this.myTurn = myTurn;
@@ -111,8 +111,6 @@ public class GoSurfaceView extends SurfaceView
             this.invalidate();
 
         }
-        drawVegW=true;
-        drawNuxB=true;
         super.onDraw(c);
         c.drawBitmap(background,(int)goStartX-50,(int)goStartY-50,null);
         Paint p = new Paint();
@@ -180,6 +178,7 @@ public class GoSurfaceView extends SurfaceView
         }
 
         p.setColor(0xFF0000FF);
+
         //draw turn indicator
         if(myTurn){
             c.drawOval(new RectF(0f, 1545f, 470f, 1645f), p);

@@ -44,6 +44,7 @@ public class GoHumanPlayer extends GameHumanPlayer implements View.OnTouchListen
 
     public void setAsGui(GameMainActivity activity) {
 
+
         theActivity = activity;
         humanPlayerStatic = activity;
         activity.setContentView(R.layout.go_human_player);
