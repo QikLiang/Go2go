@@ -16,7 +16,7 @@ public class GoComputerPlayer1 extends GameComputerPlayer {
     protected final int maxDepth;//the maximum recursion depth
     public GoComputerPlayer1(String name) {
         super(name);
-        maxDepth = 1;
+        maxDepth = 2;
     }
 
     /**
@@ -98,7 +98,10 @@ public class GoComputerPlayer1 extends GameComputerPlayer {
         }
 
         //always agree to other player's proposal
-        if(state.getStage() == GoGameState.SELECT_TERRITORY_STAGE){
+        else if(state.getStage() == GoGameState.SELECT_TERRITORY_STAGE){
+            game.sendAction(new AgreeTerritoryAction(this, true));
+        }
+        else if(state.getStage() == GoGameState.AGREE_TERRITORY_STAGE){
             game.sendAction(new AgreeTerritoryAction(this, true));
         }
     }
