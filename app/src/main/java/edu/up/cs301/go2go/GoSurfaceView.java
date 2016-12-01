@@ -61,9 +61,9 @@ public class GoSurfaceView extends SurfaceView
         background = BitmapFactory.decodeResource(resources, R.drawable.goodwood,o);
         background = Bitmap.createScaledBitmap(background,(int)(cWidth*.86),(int)(cHeight*.86),false);
         vegdahl = BitmapFactory.decodeResource(resources,R.drawable.vegdahl);
-        vegdahl = Bitmap.createScaledBitmap(vegdahl,(int)(size*1.75),(int)(size*1.75),false);
+        vegdahl = Bitmap.createScaledBitmap(vegdahl,(int)(size*2),(int)(size*2),false);
         nuxoll = BitmapFactory.decodeResource(resources,R.drawable.nuxoll);
-        nuxoll = Bitmap.createScaledBitmap(nuxoll,(int)(size*1.75),(int)(size*1.75),false);
+        nuxoll = Bitmap.createScaledBitmap(nuxoll,(int)(size*2),(int)(size*2),false);
 
 
     }
