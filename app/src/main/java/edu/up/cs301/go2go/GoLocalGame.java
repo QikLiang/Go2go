@@ -145,6 +145,7 @@ public class GoLocalGame extends LocalGame {
             Log.i("agreement", ""+((AgreeTerritoryAction)action).getPlayer()+","+agreement);
             gameEnded = agreement;
             if(!agreement){
+                officialState.setTerritoryProposal(null);
                 officialState.resetTurnsPassed();
                 officialState.setStage(GoGameState.MAKE_MOVE_STAGE);
             }
