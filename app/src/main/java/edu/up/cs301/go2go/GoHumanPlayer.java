@@ -72,6 +72,9 @@ public class GoHumanPlayer extends GameHumanPlayer implements View.OnTouchListen
 
         if(firstTime){
             firstTime = false;
+
+            GoSurfaceView.setEasterEgg(allPlayerNames[0], allPlayerNames[1]);
+
             //Set name displays
             ((TextView)theActivity.findViewById(R.id.playerName)).setText(name);
             if(allPlayerNames[0] == name){
@@ -79,6 +82,8 @@ public class GoHumanPlayer extends GameHumanPlayer implements View.OnTouchListen
             } else {
                 ((TextView)theActivity.findViewById(R.id.enemyName)).setText(allPlayerNames[0]);
             }
+
+
         }
 
         if (surfaceView == null) return;
@@ -95,7 +100,11 @@ public class GoHumanPlayer extends GameHumanPlayer implements View.OnTouchListen
 
         state = (GoGameState) info;
 
+        GoSurfaceView.setProposal(state.getTerritoryProposal());
+
         surfaceView.setMyTurn(state.getTurn() == playerNum);
+
+        GoSurfaceView.setProposal(((GoGameState) info).getTerritoryProposal());
 
         originalTerritoryProposal = GoGameState.boardDeepCopy(state.getTerritoryProposal());
 
@@ -114,8 +123,7 @@ public class GoHumanPlayer extends GameHumanPlayer implements View.OnTouchListen
             territory.setText("forfeit");
         }
 
-
-        if(state.getStage() == GoGameState.SELECT_TERRITORY_STAGE){
+        if(state.getStage() == GoGameState.SELECT_TERRITORY_STAGE || state.getStage() == GoGameState.SELECT_TERRITORY_STAGE){
             if(state.getTerritoryProposal() == null){
                 state.setTerritoryProposal(state.getTerritorySuggestion());
             }
