@@ -70,7 +70,7 @@ public class GoHumanPlayer extends GameHumanPlayer implements View.OnTouchListen
     public void receiveInfo(GameInfo info)
     {
 
-        
+
         if(firstTime){
             firstTime = false;
 

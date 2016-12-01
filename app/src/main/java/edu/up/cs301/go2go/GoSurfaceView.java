@@ -198,6 +198,7 @@ public class GoSurfaceView extends SurfaceView
             }
         }
 
+        
         p.setColor(0xFF0000FF);
 
         //draw turn indicator
