@@ -31,7 +31,7 @@ public class GoSurfaceView extends SurfaceView
     private static android.graphics.Bitmap background,vegdahl,nuxoll;
     private boolean myTurn = false;
     private static boolean firstTime = true;
-    public static boolean drawVegW=false,drawNuxW=false,drawVegB=false,drawNuxB=false;
+    private static boolean drawVegW=false,drawNuxW=false,drawVegB=false,drawNuxB=false;
 
     public void setMyTurn(boolean myTurn) {
         this.myTurn = myTurn;
@@ -52,6 +52,27 @@ public class GoSurfaceView extends SurfaceView
         super(context,attrs,defStyleAttr);
         init(context);
     }
+
+    public static void setEasterEgg(String name1, String name2){
+        //checks for setting nuxol and vegdahl head easter egg
+        if(name1.contains("nux")||name1.contains("Nux")){
+            GoSurfaceView.drawNuxB=true;
+        }
+        if(name1.contains("veg")||name1.contains("Veg"))
+        {
+            GoSurfaceView.drawVegB=true;
+        }
+
+        //checks for setting nuxol and vegdahl head easter egg
+        if(name2.contains("nux")||name2.contains("Nux")){
+            GoSurfaceView.drawNuxW=true;
+        }
+        if(name2.contains("veg")||name2.contains("Veg"))
+        {
+            GoSurfaceView.drawVegW=true;
+        }
+    }
+
 
     public void initImages(GameMainActivity ac)
     {
@@ -177,6 +198,7 @@ public class GoSurfaceView extends SurfaceView
             }
         }
 
+        
         p.setColor(0xFF0000FF);
 
         //draw turn indicator
