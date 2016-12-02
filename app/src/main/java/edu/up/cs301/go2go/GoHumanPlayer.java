@@ -27,7 +27,7 @@ public class GoHumanPlayer extends GameHumanPlayer implements View.OnTouchListen
     Activity theActivity;
     GoGameState state;
     public static GameMainActivity humanPlayerStatic;
-    public Button pass,territory;
+    public Button leftButton,rightButton;
     public TextView playerScore,playerStonesCaptured,enemyScore,enemyStonesCaptured,stage;
 
     private int[][] originalTerritoryProposal;
@@ -52,10 +52,10 @@ public class GoHumanPlayer extends GameHumanPlayer implements View.OnTouchListen
         surfaceView = (GoSurfaceView)activity.findViewById(R.id.boardView);
         surfaceView.setOnTouchListener(this);
 
-        pass = (Button)activity.findViewById(R.id.passButton);
-        pass.setOnClickListener(this);
-        territory = (Button)activity.findViewById(R.id.territorySelectButton);
-        territory.setOnClickListener(this);
+        leftButton = (Button)activity.findViewById(R.id.passButton);
+        leftButton.setOnClickListener(this);
+        rightButton = (Button)activity.findViewById(R.id.territorySelectButton);
+        rightButton.setOnClickListener(this);
 
         playerScore = (TextView)activity.findViewById(R.id.playerScoreText);
         playerStonesCaptured = (TextView)activity.findViewById(R.id.stonesCapturedText);
@@ -103,7 +103,7 @@ public class GoHumanPlayer extends GameHumanPlayer implements View.OnTouchListen
 
         GoSurfaceView.setProposal(state.getTerritoryProposal());
 
-        surfaceView.setMyTurn(state.getTurn() == playerNum);
+        surfaceView.setMyTurn(state.getTurn() == playerNum,playerNum);
 
         GoSurfaceView.setProposal(((GoGameState) info).getTerritoryProposal());
 
@@ -111,17 +111,22 @@ public class GoHumanPlayer extends GameHumanPlayer implements View.OnTouchListen
 
         //update gui for stage
         if(state.getStage() == GoGameState.SELECT_TERRITORY_STAGE) {
-            stage.setText("select territory");
-            pass.setText("submit proposal");
-            territory.setText("");
+            stage.setText("select rightButton");
+            leftButton.setText("submit proposal");
+            rightButton.setText("");
         } else if(state.getStage() == GoGameState.AGREE_TERRITORY_STAGE){
-            stage.setText("counterproposal");
-            pass.setText("submit proposal");
-            territory.setText("refuse proposal");
-        } else {
+            stage.setText("counter-proposal");
+            leftButton.setText("submit proposal");
+            rightButton.setText("refuse proposal");
+        } else if(state.getStage() == GoGameState.MAKE_MOVE_STAGE) {
             stage.setText("make move stage");
-            pass.setText("pass");
-            territory.setText("forfeit");
+            leftButton.setText("pass");
+            rightButton.setText("forfeit");
+        }
+        else{
+            stage.setText("play again?");
+            leftButton.setText("yes");
+            rightButton.setText("no");
         }
 
         if(state.getStage() == GoGameState.SELECT_TERRITORY_STAGE || state.getStage() == GoGameState.SELECT_TERRITORY_STAGE){
@@ -140,8 +145,8 @@ public class GoHumanPlayer extends GameHumanPlayer implements View.OnTouchListen
         }
 
         stage.invalidate();
-        pass.invalidate();
-        territory.invalidate();
+        leftButton.invalidate();
+        rightButton.invalidate();
         enemyStonesCaptured.invalidate();
         playerStonesCaptured.invalidate();
         surfaceView.invalidate();
@@ -197,7 +202,7 @@ public class GoHumanPlayer extends GameHumanPlayer implements View.OnTouchListen
         {
             PutPieceAction action = new PutPieceAction(this,xPos,yPos);
             game.sendAction(action);
-        }//select/accept territory stage
+        }//select/accept rightButton stage
         else
         {
             if(state.getTurn() == playerNum) {
@@ -212,11 +217,11 @@ public class GoHumanPlayer extends GameHumanPlayer implements View.OnTouchListen
 
 	public void onClick(View v)
     {
-		if(v == pass)
+		if(v == leftButton)
 		{
             if(state.getStage() == GoGameState.MAKE_MOVE_STAGE)
             {
-                Log.i("onclick","sending pass action");
+                Log.i("onclick","sending leftButton action");
                 PassAction action = new PassAction(this);
                 game.sendAction(action);
                 return;
@@ -224,10 +229,10 @@ public class GoHumanPlayer extends GameHumanPlayer implements View.OnTouchListen
             if(state.getStage() == GoGameState.SELECT_TERRITORY_STAGE) //Acts as submit proposal
             {
                 game.sendAction(new SelectTerritoryAction(this,state.getTerritoryProposal()));
-                pass.setText("submit proposal");
-                territory.setText("return to play");
-                pass.invalidate();
-                territory.invalidate();
+                leftButton.setText("submit proposal");
+                rightButton.setText("return to play");
+                leftButton.invalidate();
+                rightButton.invalidate();
             }
             if(state.getStage() == GoGameState.AGREE_TERRITORY_STAGE) //Acts as submit proposal
             {
@@ -241,16 +246,16 @@ public class GoHumanPlayer extends GameHumanPlayer implements View.OnTouchListen
                 }
                 if(diff){
                     game.sendAction(new SelectTerritoryAction(this,state.getTerritoryProposal()));
-                    pass.setText("submit proposal");
-                    territory.setText("return to play");
-                    pass.invalidate();
-                    territory.invalidate();
+                    leftButton.setText("submit proposal");
+                    rightButton.setText("return to play");
+                    leftButton.invalidate();
+                    rightButton.invalidate();
                 } else {
                     game.sendAction(new AgreeTerritoryAction(this, true));
                 }
             }
 		}
-		if(v == territory)
+		if(v == rightButton)
 		{
             if(state.getStage() == GoGameState.MAKE_MOVE_STAGE) {
                 game.sendAction(new ForfeitAction(this));

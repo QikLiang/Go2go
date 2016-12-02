@@ -19,6 +19,7 @@ public class GoLocalGame extends LocalGame {
     GoGameState officialState = new GoGameState();
     private boolean gameEnded;
     private boolean forfeit = false;
+    private static boolean reset=false;
     @Override
     protected void sendUpdatedStateTo(GamePlayer p) {
         p.sendInfo(new GoGameState(officialState));
@@ -32,6 +33,7 @@ public class GoLocalGame extends LocalGame {
     @Override
     protected String checkIfGameOver() {
         if(forfeit){
+            reset=true;
             return "Game ended: " + playerNames[officialState.getTurn()] + " has yielded the match!";
         }
         if(gameEnded){
@@ -157,7 +159,9 @@ public class GoLocalGame extends LocalGame {
             return true;
         }
 
-        //if it gets to the end without matching any actions, something is wrong
-        return false;
-    }
+
+    //if it gets to the end without matching any actions, something is wrong
+    return false;
+}
+    public static boolean getReset(){return reset;}//returns value of reset to reset the game after completion
 }

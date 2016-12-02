@@ -28,13 +28,18 @@ public class GoSurfaceView extends SurfaceView
     public static double cWidth,cHeight,goBoardWidth,goBoardHeigth,goStartX,goStartY,goEndX,goEndY;
     public static int goPieceSize;
     public static GameMainActivity activity;
-    private static android.graphics.Bitmap background,vegdahl,nuxoll;
+    private static android.graphics.Bitmap background,vegdahl,nuxoll,whiteBowl,blackBowl;
     private boolean myTurn = false;
+    private boolean drawBlackBowl = false;
+    private boolean drawWhiteBowl = false;
     private static boolean firstTime = true;
     private static boolean drawVegW=false,drawNuxW=false,drawVegB=false,drawNuxB=false;
+    private int playerNum;
 
-    public void setMyTurn(boolean myTurn) {
+    public void setMyTurn(boolean myTurn, int player)
+    {
         this.myTurn = myTurn;
+        this.playerNum = player;
     }
 
     public GoSurfaceView(Context context)
@@ -85,6 +90,11 @@ public class GoSurfaceView extends SurfaceView
         vegdahl = Bitmap.createScaledBitmap(vegdahl,(int)(size*2),(int)(size*2),false);
         nuxoll = BitmapFactory.decodeResource(resources,R.drawable.nuxoll);
         nuxoll = Bitmap.createScaledBitmap(nuxoll,(int)(size*2),(int)(size*2),false);
+        blackBowl = BitmapFactory.decodeResource(resources,R.drawable.blackbowl);
+        blackBowl = Bitmap.createScaledBitmap(blackBowl,(int)(cWidth*.07),(int)(cHeight*.07),false);
+        whiteBowl = BitmapFactory.decodeResource(resources,R.drawable.whitebowl);
+        whiteBowl = Bitmap.createScaledBitmap(whiteBowl,(int)(cWidth*.07),(int)(cHeight*.07),false);
+
 
 
     }
@@ -203,9 +213,15 @@ public class GoSurfaceView extends SurfaceView
 
         //draw turn indicator
         if(myTurn){
-            c.drawOval(new RectF(0f, 1545f, 470f, 1645f), p);
+            if(playerNum==0)
+                c.drawBitmap(blackBowl,(float)(0),(float)(cHeight*.93),null);
+            else
+                c.drawBitmap(whiteBowl,(float)(0),(float)(cHeight*.93),null);
         } else {
-            c.drawOval(new RectF(1083f, 1545f, 1537f, 1645f), p);
+            if(playerNum==1)
+                c.drawBitmap(blackBowl,(float)(cWidth*.93),(float)(cHeight*.93),null);
+            else
+                c.drawBitmap(whiteBowl,(float)(cWidth*.93),(float)(cHeight*.93),null);
         }
     }
 }
