@@ -12,7 +12,6 @@ import android.graphics.RectF;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.SurfaceView;
 
 import edu.up.cs301.game.GameMainActivity;
@@ -217,10 +216,11 @@ public class GoSurfaceView extends SurfaceView
         }
 
         //draw previous move indicator
-        Log.i("prev Move", prevX+","+prevY);
-        p.setColor(Color.GRAY);
-        c.drawCircle((float)(goBoardWidth*prevX/8 +goStartX),
-                (float)(goBoardHeigth*prevY/8+goStartY),goPieceSize/3,p);
+        if(prevX!=-1){
+            p.setColor(Color.GRAY);
+            c.drawCircle((float)(goBoardWidth*prevX/8 +goStartX),
+                    (float)(goBoardHeigth*prevY/8+goStartY),goPieceSize/3,p);
+        }
 
         
         p.setColor(0xFF0000FF);

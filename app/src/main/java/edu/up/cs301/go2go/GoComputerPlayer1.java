@@ -1,9 +1,12 @@
 package edu.up.cs301.go2go;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
 import edu.up.cs301.game.GameComputerPlayer;
+import edu.up.cs301.game.actionMsg.GameAction;
 import edu.up.cs301.game.infoMsg.GameInfo;
 
 /**
@@ -13,20 +16,8 @@ import edu.up.cs301.game.infoMsg.GameInfo;
 
 //100% not tested, might not even compile
 public class GoComputerPlayer1 extends GameComputerPlayer {
-    protected final int maxDepth;//the maximum recursion depth
     public GoComputerPlayer1(String name) {
         super(name);
-        maxDepth = 1;
-    }
-
-    /**
-     * a constructor that specifies the maximum recursion depth
-     * @param name
-     * @param depth
-     */
-    public GoComputerPlayer1(String name, int depth) {
-        super(name);
-        maxDepth = depth;
     }
 
     //obvious start to this method copied from Qi's simple computer player
@@ -71,12 +62,23 @@ public class GoComputerPlayer1 extends GameComputerPlayer {
                 return;
             }
 
+            int numEvals = boards.size();
+            int maxDepth = -1;
+            //computation limit 10000 board positions
+            while (10000>numEvals){
+                maxDepth++;
+                numEvals*=boards.size();
+            }
+            Log.i("maxDepth", ""+maxDepth);
+
             //select the best (least favorable to opponent) move and play it
-            double score = -evauateScore(boards.get(0), maxDepth);
+            GoGameState temp = new GoGameState(state);
+            temp.changeTurn();//pass move as default
+            double score = -evauateScore(temp, maxDepth);
             double tempScore;
-            ArrayList<PutPieceAction> bestMoves = new ArrayList<PutPieceAction>();
-            bestMoves.add(moves.get(0));
-            for(int i=1; i<boards.size(); i++){
+            ArrayList<GameAction> bestMoves = new ArrayList<GameAction>();
+            bestMoves.add(new PassAction(this));
+            for(int i=0; i<boards.size(); i++){
                 tempScore =-evauateScore(boards.get(i), maxDepth);
                 if(score>tempScore){
                     bestMoves.clear();
@@ -88,13 +90,14 @@ public class GoComputerPlayer1 extends GameComputerPlayer {
                 }
             }
 
+            Log.i("eval score", ""+score);
             game.sendAction(bestMoves.get( (int)(Math.random()*bestMoves.size()) ));
             return;
         }
 
         //always agree to other player's proposal
         else if(state.getStage() == GoGameState.SELECT_TERRITORY_STAGE){
-            game.sendAction(new AgreeTerritoryAction(this, true));
+            game.sendAction(new SelectTerritoryAction(this, state.getTerritorySuggestion()));
         }
         else if(state.getStage() == GoGameState.AGREE_TERRITORY_STAGE){
             game.sendAction(new AgreeTerritoryAction(this, true));
@@ -127,10 +130,16 @@ public class GoComputerPlayer1 extends GameComputerPlayer {
             }
         }
 
+        if(boards.size()==0){
+            return evauateScore(board);
+        }
+
         //evauate the score of each board in boards
-        double score = -evauateScore(boards.get(0), level-1);
+        GoGameState temp = new GoGameState(board);
+        temp.changeTurn();
+        double score = -evauateScore(temp, level-1);
         double tempScore;
-        for (int i=1; i<boards.size(); i++){
+        for (int i=0; i<boards.size(); i++){
             //what's good for enimy is bad for you
             tempScore = -evauateScore(boards.get(i), level-1);
             if(tempScore<score){
