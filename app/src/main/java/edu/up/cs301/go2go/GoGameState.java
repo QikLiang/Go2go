@@ -35,7 +35,7 @@ public class GoGameState extends GameState
     private int turn;//which player's turn it is
     private int board [][];//representation of the board
     private int territoryProposal[][];//representation of the most recent proposal
-    private ArrayList<int[][]> pastBoards = new ArrayList<int[][]>();
+    private ArrayList<int[][]> pastBoards ;
     int pieceTakeInPast = 0;
     private int prevX=-1;
     private int prevY=-1;
@@ -294,6 +294,7 @@ public class GoGameState extends GameState
      */
     public GoGameState(){
         super();
+        pastBoards = new ArrayList<int[][]>();
         stage = MAKE_MOVE_STAGE;
         turnsPassed = 0;
         whiteCaptures = 0;
@@ -316,6 +317,10 @@ public class GoGameState extends GameState
         board = boardDeepCopy(original.board);
         prevX = original.prevX;
         prevY = original.prevY;
+        pastBoards = new ArrayList<int[][]>();
+        for(int i=0; i<original.pastBoards.size(); i++){
+            pastBoards.add( boardDeepCopy(original.pastBoards.get(i)) );
+        }
     }
 
     /* GETTERS */
