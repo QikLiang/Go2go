@@ -37,7 +37,9 @@ public class GoGameState extends GameState
     private int territoryProposal[][];//representation of the most recent proposal
     private ArrayList<int[][]> pastBoards = new ArrayList<int[][]>();
     int pieceTakeInPast = 0;
-    
+    private int prevX=-1;
+    private int prevY=-1;
+
 
     /* METHODS FOR INTERACTING WITH GAME STATE */
 
@@ -204,11 +206,12 @@ public class GoGameState extends GameState
             //adds this board to the past boards
             pastBoards.add(boardDeepCopy(board));
             //the 'in danger' section surrounded by these comments is not tested
-            
+
+            prevX = moveX;
+            prevY = moveY;
             return true;
         }
 
-//        GoSurfaceView.setBoard(board);
         return false;
     }
 
@@ -311,6 +314,8 @@ public class GoGameState extends GameState
         turn = original.turn;
         territoryProposal = boardDeepCopy(original.territoryProposal);
         board = boardDeepCopy(original.board);
+        prevX = original.prevX;
+        prevY = original.prevY;
     }
 
     /* GETTERS */
@@ -329,6 +334,20 @@ public class GoGameState extends GameState
 
     public int getBlackCaptures() {
         return blackCaptures;
+    }
+
+    public int getPrevX() {
+        if( turnsPassed>0 || stage!=MAKE_MOVE_STAGE ){
+            return -1;
+        }
+        return prevX;
+    }
+
+    public int getPrevY() {
+        if( turnsPassed>0 || stage!=MAKE_MOVE_STAGE ){
+            return -1;
+        }
+        return prevY;
     }
 
     public int getTurn() {

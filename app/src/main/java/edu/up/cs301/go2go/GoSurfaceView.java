@@ -12,6 +12,7 @@ import android.graphics.RectF;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.SurfaceView;
 
 import edu.up.cs301.game.GameMainActivity;
@@ -23,8 +24,10 @@ import edu.up.cs301.game.R;
 
 public class GoSurfaceView extends SurfaceView
 {
-    private static int[][] goBoard;
-    private static int[][] proposal;
+    private int[][] goBoard;
+    private int[][] proposal;
+    private int prevX;
+    private int prevY;
     public static double cWidth,cHeight,goBoardWidth,goBoardHeigth,goStartX,goStartY,goEndX,goEndY;
     public static int goPieceSize;
     public static GameMainActivity activity;
@@ -40,6 +43,11 @@ public class GoSurfaceView extends SurfaceView
     {
         this.myTurn = myTurn;
         this.playerNum = player;
+    }
+
+    public void setPrevMove( int x, int y ){
+        prevX = x;
+        prevY = y;
     }
 
     public GoSurfaceView(Context context)
@@ -114,13 +122,13 @@ public class GoSurfaceView extends SurfaceView
         goBoard = newBoard;
     }
 
-    public static void setBoard(int[][] board)
+    public void setBoard(int[][] board)
     {
         goBoard = board;
     }
 
-    public static void setProposal(int[][] proposal){
-        GoSurfaceView.proposal=proposal;
+    public void setProposal(int[][] proposal){
+        this.proposal=proposal;
     }
 
     public void onDraw(Canvas c)
@@ -207,6 +215,12 @@ public class GoSurfaceView extends SurfaceView
                 }
             }
         }
+
+        //draw previous move indicator
+        Log.i("prev Move", prevX+","+prevY);
+        p.setColor(Color.GRAY);
+        c.drawCircle((float)(goBoardWidth*prevX/8 +goStartX),
+                (float)(goBoardHeigth*prevY/8+goStartY),goPieceSize/3,p);
 
         
         p.setColor(0xFF0000FF);

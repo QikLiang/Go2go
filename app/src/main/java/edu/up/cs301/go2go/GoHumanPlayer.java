@@ -101,11 +101,7 @@ public class GoHumanPlayer extends GameHumanPlayer implements View.OnTouchListen
 
         state = (GoGameState) info;
 
-        GoSurfaceView.setProposal(state.getTerritoryProposal());
-
         surfaceView.setMyTurn(state.getTurn() == playerNum,playerNum);
-
-        GoSurfaceView.setProposal(((GoGameState) info).getTerritoryProposal());
 
         originalTerritoryProposal = GoGameState.boardDeepCopy(state.getTerritoryProposal());
 
@@ -133,9 +129,10 @@ public class GoHumanPlayer extends GameHumanPlayer implements View.OnTouchListen
             if(state.getTerritoryProposal() == null){
                 state.setTerritoryProposal(state.getTerritorySuggestion());
             }
-            GoSurfaceView.setProposal(state.getTerritoryProposal());
+            surfaceView.setProposal(state.getTerritoryProposal());
         }
-        GoSurfaceView.setBoard(state.getBoard());
+        surfaceView.setBoard(state.getBoard());
+        surfaceView.setPrevMove( state.getPrevX(), state.getPrevY() );
         if(playerNum==0){
             setCapturedText(state.getBlackCaptures(), enemyStonesCaptured);
             setCapturedText(state.getWhiteCaptures(), playerStonesCaptured);
@@ -207,7 +204,7 @@ public class GoHumanPlayer extends GameHumanPlayer implements View.OnTouchListen
         {
             if(state.getTurn() == playerNum) {
                 state.updateProposal(xPos, yPos);
-                GoSurfaceView.setProposal(GoGameState.boardDeepCopy(state.getTerritoryProposal()));
+                surfaceView.setProposal(GoGameState.boardDeepCopy(state.getTerritoryProposal()));
             }
         }
 
