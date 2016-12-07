@@ -24,6 +24,7 @@ public class GoComputerPlayer1 extends GameComputerPlayer {
     protected void receiveInfo(GameInfo info) {
         //returns if there's incorrect input
         if (!(info instanceof GoGameState)) {
+            Log.i( "message", info.toString() );
             return;
         }
         GoGameState state = (GoGameState) info;
