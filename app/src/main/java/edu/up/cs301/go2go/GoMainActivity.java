@@ -1,11 +1,14 @@
 package edu.up.cs301.go2go;
 
+import android.media.MediaPlayer;
+import android.media.SoundPool;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.SurfaceView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.media.AudioManager;
 
 import java.util.ArrayList;
 
@@ -19,6 +22,10 @@ import edu.up.cs301.game.config.GamePlayerType;
 public class GoMainActivity extends GameMainActivity{
 
 	public static final int PORT_NUMBER = 5213;
+
+	SoundPool mySoundPool = new SoundPool(20, AudioManager.STREAM_MUSIC, 0);
+    int placeNoise;
+	MediaPlayer musicPlayer;
 
 	/**
 	 * a tic-tac-toe game is for two players. The default is human vs. computer
@@ -71,6 +78,18 @@ public class GoMainActivity extends GameMainActivity{
 
 
 	}
+
+	public void initSounds() {
+		placeNoise = mySoundPool.load(this, R.raw.place_noise, 1);
+		musicPlayer = MediaPlayer.create(this, R.raw.music);
+        musicPlayer.setLooping(true);
+        musicPlayer.start();
+
+	}
+
+    public void pieceNoise(){
+        mySoundPool.play(placeNoise, 1f, 1f, 1, 0, 4f);
+    }
 
 	@Override
 	public LocalGame createLocalGame()

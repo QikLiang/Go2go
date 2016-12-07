@@ -3,6 +3,7 @@ package edu.up.cs301.go2go;
 import android.app.Activity;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
+import android.media.SoundPool;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -31,6 +32,7 @@ public class GoHumanPlayer extends GameHumanPlayer implements View.OnTouchListen
     public TextView playerScore,playerStonesCaptured,enemyScore,enemyStonesCaptured,stage;
 
     private int[][] originalTerritoryProposal;
+    private int[][] lastBoard;
 
 
     public GoHumanPlayer(String name) {//made this change
@@ -84,6 +86,7 @@ public class GoHumanPlayer extends GameHumanPlayer implements View.OnTouchListen
                 ((TextView)theActivity.findViewById(R.id.enemyName)).setText(allPlayerNames[0]);
             }
 
+            ((GoMainActivity)theActivity).initSounds();
 
         }
 
@@ -107,7 +110,7 @@ public class GoHumanPlayer extends GameHumanPlayer implements View.OnTouchListen
 
         //update gui for stage
         if(state.getStage() == GoGameState.SELECT_TERRITORY_STAGE) {
-            stage.setText("select rightButton");
+            stage.setText("select territory");
             leftButton.setText("submit proposal");
             rightButton.setText("");
         } else if(state.getStage() == GoGameState.AGREE_TERRITORY_STAGE){
@@ -124,6 +127,24 @@ public class GoHumanPlayer extends GameHumanPlayer implements View.OnTouchListen
             leftButton.setText("yes");
             rightButton.setText("no");
         }
+
+        //Play sound if needed
+        boolean didChange = false;
+        if(lastBoard != null) {
+            for (int i = 0; i < lastBoard.length; i++) {
+                for (int j = 0; j < lastBoard[0].length; j++){
+                    if(lastBoard[i][j] != state.getBoard()[i][j]){
+                        didChange = true;
+                    }
+                }
+            }
+        }
+        if(didChange){
+            ((GoMainActivity)theActivity).pieceNoise();
+        }
+        lastBoard = state.getBoard();
+
+
 
         if(state.getStage() == GoGameState.SELECT_TERRITORY_STAGE || state.getStage() == GoGameState.SELECT_TERRITORY_STAGE){
             if(state.getTerritoryProposal() == null){
