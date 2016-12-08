@@ -32,9 +32,6 @@ public class GoSurfaceView extends SurfaceView
     public static GameMainActivity activity;
     private static android.graphics.Bitmap background,vegdahl,nuxoll,whiteBowl,blackBowl;
     private boolean myTurn = false;
-    private boolean drawBlackBowl = false;
-    private boolean drawWhiteBowl = false;
-    private static boolean firstTime = true;
     private static boolean drawVegW=false,drawNuxW=false,drawVegB=false,drawNuxB=false;
     private int playerNum;
 
@@ -132,23 +129,16 @@ public class GoSurfaceView extends SurfaceView
 
     public void onDraw(Canvas c)
     {
-
-        if(firstTime)
-        {
-            firstTime = false;
-            cWidth = c.getWidth();
-            cHeight = c.getHeight();
-            goStartX = cWidth*.1;
-            goStartY = cHeight*.1;
-            goEndX = cWidth*.9;
-            goEndY = cHeight*.9;
-            goBoardWidth = goEndX-goStartX;
-            goBoardHeigth = goEndY-goStartY;
-            goPieceSize = (int)(goBoardHeigth/GoGameState.boardSize/2);
-            initImages(activity);
-            this.invalidate();
-
-        }
+        cWidth = c.getWidth();
+        cHeight = c.getHeight();
+        goStartX = cWidth*.1;
+        goStartY = cHeight*.1;
+        goEndX = cWidth*.9;
+        goEndY = cHeight*.9;
+        goBoardWidth = goEndX-goStartX;
+        goBoardHeigth = goEndY-goStartY;
+        goPieceSize = (int)(goBoardHeigth/GoGameState.boardSize/2);
+        initImages(activity);
         super.onDraw(c);
         c.drawBitmap(background,(int)goStartX-50,(int)goStartY-50,null);
         Paint p = new Paint();

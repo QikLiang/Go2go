@@ -100,7 +100,7 @@ public class GoComputerPlayer1 extends GameComputerPlayer {
         else if(state.getStage() == GoGameState.SELECT_TERRITORY_STAGE){
             game.sendAction(new SelectTerritoryAction(this, state.getTerritorySuggestion()));
         }
-        else if(state.getStage() == GoGameState.AGREE_TERRITORY_STAGE){
+        else {
             game.sendAction(new AgreeTerritoryAction(this, true));
         }
     }
