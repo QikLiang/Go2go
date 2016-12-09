@@ -63,22 +63,46 @@ public class GoComputerPlayer1 extends GameComputerPlayer {
                 return;
             }
 
-            int numEvals = boards.size();
+            //calculate how many layers of recursion the tablet can handle
+
+            //test how many legal moves the other player might have
+            int opponentMoves = 1;
+            for(int i=0; i<GoGameState.boardSize; i++) {
+                for (int j = 0; j < GoGameState.boardSize; j++) {
+                    if (state.isLeagalMove(1 - state.getTurn(), i, j)) {
+                        opponentMoves++;
+                    }
+                }
+            }
+
+            int yourMoves = boards.size()+1;
+            int numEvals = yourMoves;
+            boolean yourMove = true;
             int maxDepth = -1;
             //computation limit 10000 board positions
-            while (10000>numEvals){
+            while ( 10000>numEvals && yourMoves>0 && opponentMoves>0 ){
                 maxDepth++;
-                numEvals*=boards.size();
+                if (yourMove){
+                    numEvals*=yourMoves;
+                    yourMoves-=2;
+                }else{
+                    numEvals*=opponentMoves;
+                    opponentMoves-=2;
+                }
+                yourMove = !yourMove;
             }
             Log.i("maxDepth", ""+maxDepth);
 
+
             //select the best (least favorable to opponent) move and play it
+            //the default move is pass
+            //make it slightly less favorable than other moves so it is not played unless it has to
             GoGameState temp = new GoGameState(state);
             temp.changeTurn();//pass move as default
-            double score = -evauateScore(temp, maxDepth);
-            double tempScore;
+            double score = -evauateScore(temp, maxDepth)+0.1;
             ArrayList<GameAction> bestMoves = new ArrayList<GameAction>();
             bestMoves.add(new PassAction(this));
+            double tempScore;//check every legal move
             for(int i=0; i<boards.size(); i++){
                 tempScore =-evauateScore(boards.get(i), maxDepth);
                 if(score>tempScore){
