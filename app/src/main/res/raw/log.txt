@@ -1,0 +1,9 @@
+11/5/16
+http://stackoverflow.com/questions/21377034/how-to-initialize-the-bitmap-array-in-android
+used to help setup bitmaps for the game
+
+sometime in late october
+consulted Dr. Vegdahl in office hours for help setting up gui for game,
+determined that everything was suppose to be setup in goHumanPlayer not
+goMainActivity
+
