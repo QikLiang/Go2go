@@ -128,6 +128,10 @@ public class GoHumanPlayer extends GameHumanPlayer implements View.OnTouchListen
             rightButton.setText("no");
         }
 
+        //disable buttons when not player's turn
+        leftButton.setEnabled( state.getTurn() == playerNum );
+        rightButton.setEnabled( state.getTurn() == playerNum );
+
         //Play sound if needed
         boolean didChange = false;
         if(lastBoard != null) {
