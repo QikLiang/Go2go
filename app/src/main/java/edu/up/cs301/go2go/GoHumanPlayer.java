@@ -230,8 +230,21 @@ public class GoHumanPlayer extends GameHumanPlayer implements View.OnTouchListen
             if(state.getTurn() == playerNum) {
                 state.updateProposal(xPos, yPos);
                 if( state.getStage() == GoGameState.AGREE_TERRITORY_STAGE ){
-                    leftButton.setText("counter proposal");
+                    boolean diff = false;
+                    for(int i = 0; i < GoGameState.boardSize; i++){
+                        for(int j = 0; j < GoGameState.boardSize; j++){
+                            if(originalTerritoryProposal[i][j] != state.getTerritoryProposal()[i][j]){
+                                diff = true;
+                            }
+                        }
+                    }
+                    if(diff){
+                        leftButton.setText("counter proposal");
+                    } else {
+                        leftButton.setText("agree w/ proposal");
+                    }
                 }
+                leftButton.invalidate();
                 surfaceView.setProposal(GoGameState.boardDeepCopy(state.getTerritoryProposal()));
             }
         }
@@ -254,10 +267,6 @@ public class GoHumanPlayer extends GameHumanPlayer implements View.OnTouchListen
             if(state.getStage() == GoGameState.SELECT_TERRITORY_STAGE) //Acts as submit proposal
             {
                 game.sendAction(new SelectTerritoryAction(this,state.getTerritoryProposal()));
-                leftButton.setText("submit proposal");
-                rightButton.setText("return to play");
-                leftButton.invalidate();
-                rightButton.invalidate();
             }
             if(state.getStage() == GoGameState.AGREE_TERRITORY_STAGE) //Acts as submit proposal
             {
@@ -271,10 +280,6 @@ public class GoHumanPlayer extends GameHumanPlayer implements View.OnTouchListen
                 }
                 if(diff){
                     game.sendAction(new SelectTerritoryAction(this,state.getTerritoryProposal()));
-                    leftButton.setText("submit proposal");
-                    rightButton.setText("return to play");
-                    leftButton.invalidate();
-                    rightButton.invalidate();
                 } else {
                     game.sendAction(new AgreeTerritoryAction(this, true));
                 }
