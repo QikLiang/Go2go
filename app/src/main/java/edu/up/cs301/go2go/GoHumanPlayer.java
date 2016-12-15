@@ -150,7 +150,7 @@ public class GoHumanPlayer extends GameHumanPlayer implements View.OnTouchListen
 
 
 
-        if(state.getStage() == GoGameState.SELECT_TERRITORY_STAGE || state.getStage() == GoGameState.SELECT_TERRITORY_STAGE){
+        if(state.getStage() == GoGameState.SELECT_TERRITORY_STAGE || state.getStage() == GoGameState.AGREE_TERRITORY_STAGE){
             if(state.getTerritoryProposal() == null){
                 state.setTerritoryProposal(state.getTerritorySuggestion());
             }

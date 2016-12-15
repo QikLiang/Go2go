@@ -138,7 +138,7 @@ public class GoSurfaceView extends SurfaceView
     }
 
     public void setProposal(int[][] proposal){
-        this.proposal=proposal;
+        this.proposal=GoGameState.boardDeepCopy(proposal);
     }
 
     public void onDraw(Canvas c)
