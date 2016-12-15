@@ -99,24 +99,32 @@ public class GoComputerPlayer1 extends GameComputerPlayer {
             //make it slightly less favorable than other moves so it is not played unless it has to
             GoGameState temp = new GoGameState(state);
             temp.changeTurn();//pass move as default
-            double score = -evauateScore(temp, maxDepth)+0.1;
-            ArrayList<GameAction> bestMoves = new ArrayList<GameAction>();
-            bestMoves.add(new PassAction(this));
-            double tempScore;//check every legal move
+            double score = -evauateScore(temp, maxDepth)+0.8;
+            GameAction bestMove = new PassAction(this);
+
+            //variables to skew moves to favor center of board
+            int center = (GoGameState.boardSize)/2;
+
+            //check every legal move
+            double tempScore;
             for(int i=0; i<boards.size(); i++){
                 tempScore =-evauateScore(boards.get(i), maxDepth);
+                //favor moves that are closer to the center of the board
+                double offset = Math.sqrt( (moves.get(i).getX()-center)*(moves.get(i).getX()-center)+
+                        (moves.get(i).getY()-center)*(moves.get(i).getY()-center) ) /
+                        GoGameState.boardSize * Math.random();
+                tempScore+=offset;
                 if(score>tempScore){
-                    bestMoves.clear();
-                    bestMoves.add(moves.get(i));
+                    bestMove = moves.get(i);
                     score = tempScore;
                 }else if( score==tempScore ){
-                    bestMoves.add(moves.get(i));
+                    bestMove = moves.get(i);
                     score = tempScore;
                 }
             }
 
             Log.i("eval score", ""+score);
-            game.sendAction(bestMoves.get( (int)(Math.random()*bestMoves.size()) ));
+            game.sendAction( bestMove );
             return;
         }
 
