@@ -41,7 +41,8 @@ public class GoSurfaceView extends SurfaceView
         this.playerNum = player;
     }
 
-    public void setPrevMove( int x, int y ){
+    public void setPrevMove( int x, int y )
+    {
         prevX = x;
         prevY = y;
     }
@@ -62,6 +63,11 @@ public class GoSurfaceView extends SurfaceView
         init(context);
     }
 
+    /**
+     * sets the drawing of the heads for the vegdahl and nuxoll heads in place of the stones
+     * @param name1 name of one of the players
+     * @param name2 name of the other player
+     */
     public static void setEasterEgg(String name1, String name2){
         //checks for setting nuxol and vegdahl head easter egg
         if(name1.contains("nux")||name1.contains("Nux")){
@@ -83,6 +89,11 @@ public class GoSurfaceView extends SurfaceView
     }
 
 
+    /**
+     * creates the images used  during the game such as the easter egg heads
+     * the game board texture, and the player indicator icons
+     * @param ac the game activity where resources are pulled from
+     */
     public void initImages(GameMainActivity ac)
     {
         double size = (double)goPieceSize;
@@ -102,6 +113,11 @@ public class GoSurfaceView extends SurfaceView
 
 
     }
+
+    /**
+     * initialization of the GoSurfaceView
+     * @param context
+     */
     private void init(Context context)
     {
         activity = GoHumanPlayer.getActivity();
@@ -109,8 +125,6 @@ public class GoSurfaceView extends SurfaceView
         setBackgroundColor(Color.LTGRAY);
 
         goBoard = new int[9][9];
-
-
     }
 
     public void getBoard(int[][] newBoard)
