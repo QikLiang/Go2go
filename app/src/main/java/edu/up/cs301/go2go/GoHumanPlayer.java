@@ -115,7 +115,7 @@ public class GoHumanPlayer extends GameHumanPlayer implements View.OnTouchListen
             rightButton.setText("");
         } else if(state.getStage() == GoGameState.AGREE_TERRITORY_STAGE){
             stage.setText("counter-proposal");
-            leftButton.setText("submit proposal");
+            leftButton.setText("agree w/ proposal");
             rightButton.setText("refuse proposal");
         } else if(state.getStage() == GoGameState.MAKE_MOVE_STAGE) {
             stage.setText("make move stage");
@@ -229,6 +229,7 @@ public class GoHumanPlayer extends GameHumanPlayer implements View.OnTouchListen
         {
             if(state.getTurn() == playerNum) {
                 state.updateProposal(xPos, yPos);
+                leftButton.setText("counter proposal");
                 surfaceView.setProposal(GoGameState.boardDeepCopy(state.getTerritoryProposal()));
             }
         }
